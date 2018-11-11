@@ -40,8 +40,8 @@ export const checkForExpiredToken = () => {
 
 export const login = (userData, history) => {
   return dispatch => {
-    axios
-      .post("https://the-index-api.herokuapp.com/login/", userData)
+    instance
+      .post("/login/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
@@ -55,23 +55,8 @@ export const login = (userData, history) => {
 
 export const signup = (userData, history) => {
   return dispatch => {
-    axios
-      .post("https://the-index-api.herokuapp.com/signup/", userData)
-      .then(res => res.data)
-      .then(user => {
-        const decodedUser = jwt_decode(user.token);
-        setAuthToken(user.token);
-        dispatch(setCurrentUser(decodedUser));
-        history.goBack();
-      })
-      .catch(err => console.error(err.response));
-  };
-};
-
-export const signup = (userData, history) => {
-  return dispatch => {
-    axios
-      .post("https://the-index-api.herokuapp.com/signup/", userData)
+    instance
+      .post("/signup/", userData)
       .then(res => res.data)
       .then(user => {
         const decodedUser = jwt_decode(user.token);
