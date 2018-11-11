@@ -1,23 +1,32 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Welcome extends Component {
+
   render() {
+    let message=()=>(this.props.user? `Welcome ${this.props.user.username}` : "You're gonna need to login to see the messages")
     return (
       <header className="masthead d-flex">
         <div className="container text-center my-auto z-1">
           <h1 className="mb-1">WELCOME TO CHATR</h1>
           <h3 className="mb-5">
-            <em>You're gonna need to login to see the messages</em>
-          </h3>
-          <Link to="/login" className="btn btn-primary btn-lg">
+    <em>{this.props.user? `${this.props.user.username}` : <div>"You're gonna need to login to see the messages"<div><Link to="/login" className="btn btn-primary btn-lg">
             Login
-          </Link>
+          </Link></div></div>}</em>
+          </h3>
+          
         </div>
         <div className="overlay z-0" />
       </header>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.rootAuth.user,
+  };
+};
 
-export default Welcome;
+export default connect(mapStateToProps)(Welcome);
+
