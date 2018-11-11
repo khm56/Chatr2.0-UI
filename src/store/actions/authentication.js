@@ -18,6 +18,7 @@ export const checkForExpiredToken = () => {
   return dispatch => {
     // Get token
     const token = localStorage.token;
+    console.log(token)
 
     if (token) {
       const currentTime = Date.now() / 1000;
