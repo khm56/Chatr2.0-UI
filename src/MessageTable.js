@@ -25,9 +25,9 @@ class MessageTable extends Component {
       <table className="mt-3 table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Username</th>
             <th>Message</th>
+            <th>TimeStamp</th>
           </tr>
         </thead>
         <tbody>{messageRows}</tbody>

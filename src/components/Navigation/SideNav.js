@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
+import Loading from "../../Loading";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,9 +11,6 @@ import {
   faAngleRight,
   faPlusCircle
 } from "@fortawesome/free-solid-svg-icons";
-
-import * as actionCreators from "../../store/actions";
-import Loading from "../../Loading";
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
@@ -36,11 +35,6 @@ class SideNav extends React.Component {
   render() {
     let channelLinks = [];
     if (this.props.user) {
-      if (this.props.loading) {
-        return <Loading />;
-      }
-    }
-    if (this.props.user) {
       channelLinks = this.props.channels.map(channel => (
         <ChannelNavLink key={channel.name} channel={channel} />
       ));
@@ -51,7 +45,7 @@ class SideNav extends React.Component {
         <ul
           className="navbar-nav navbar-sidenav"
           id="exampleAccordion"
-          style={{ overflowY: "auto" }}
+          style={{ overflowY: "scroll" }}
         >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/createChannel">
