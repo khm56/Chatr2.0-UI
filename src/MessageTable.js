@@ -10,12 +10,15 @@ class MessageTable extends Component {
   componentDidMount() {
     console.log(this.props.channel);
   }
+  componentDidUpdate() {
+    console.log(this.props.channel);
+  }
   render() {
     if (this.props.loading) {
       return <Loading />;
     }
     const messageRows = this.props.channel.map(message => (
-      <MessageRow key={message.id} message={message} />
+      <MessageRow key={message.message + message.id} message={message} />
     ));
 
     return (

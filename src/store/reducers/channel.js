@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  channel: {},
+  channel: [],
   messages: [],
   loading: true
 };
@@ -12,13 +12,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         channel: action.payload,
+        messages: action.payload,
         loading: false
       };
 
     case actionTypes.POST_MESSAGE:
       return {
         ...state,
-
+        channel: state.channel.concat(action.payload),
         messages: state.messages.concat(action.payload)
       };
     case actionTypes.FETCH_CHANNEL_MESSAGES:

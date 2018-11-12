@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 
 // Actions
 import * as actionCreators from "./store/actions";
@@ -11,7 +10,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
-import ChannelsList from "./ChannelsList";
 import ChannelDetail from "./ChannelDetail";
 import ChannelForm from "./ChannelForm";
 class App extends Component {

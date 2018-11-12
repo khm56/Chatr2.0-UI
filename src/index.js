@@ -6,8 +6,6 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { checkForExpiredToken } from "./store/actions/authentication";
-import { fetchChannels } from "./store/actions/channels";
-
 // Components
 import App from "./App";
 
@@ -30,7 +28,6 @@ const store = createStore(
 );
 
 store.dispatch(checkForExpiredToken());
-store.dispatch(fetchChannels());
 
 ReactDOM.render(
   <Provider store={store}>

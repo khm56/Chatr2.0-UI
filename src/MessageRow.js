@@ -5,9 +5,9 @@ class MessageRow extends Component {
     const message = this.props.message;
     return (
       <tr>
-        <td>{message.id}</td>
         <td>{message.username}</td>
         <td>{message.message}</td>
+        <td>{message.timestamp}</td>
         {/* <td>
           {book.authors.map(author => (
             <div key={author.name}>{author.name}</div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 // Actions
 import * as actionCreators from "./store/actions";
@@ -8,7 +9,8 @@ class MessageForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ""
+      message: "",
+      username: this.props.user.username
     };
     this.onTextChange = this.onTextChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,10 +21,19 @@ class MessageForm extends Component {
   }
 
   onSubmit(event) {
+    event.preventDefault();
     this.props.postMessage(this.props.channel, this.state);
   }
 
+  componentDidUpdate() {
+    if (this.props.user) {
+    }
+  }
+
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -36,6 +47,11 @@ class MessageForm extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.rootAuth.user
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -45,6 +61,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(MessageForm);

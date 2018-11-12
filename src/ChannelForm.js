@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 // Actions
 import * as actionCreators from "./store/actions";
@@ -19,6 +19,10 @@ class ChannelForm extends Component {
   submitChannel(event) {
     event.preventDefault();
     this.props.postChannel(this.state);
+    this.redirect();
+  }
+
+  redirect() {
     document.location.replace("/");
   }
 
@@ -27,6 +31,9 @@ class ChannelForm extends Component {
   }
 
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/" />;
+    }
     return (
       <form onSubmit={this.submitChannel}>
         <div className="input-group mb-3">
@@ -58,6 +65,11 @@ class ChannelForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.rootAuth.user
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     postChannel: newChannel => dispatch(actionCreators.postChannel(newChannel))
@@ -65,6 +77,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ChannelForm);
