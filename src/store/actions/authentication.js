@@ -11,14 +11,20 @@ const instance = axios.create({
 
 const setAuthToken = token => {
   console.log(token);
-  localStorage.setItem("token", token);
-  axios.defaults.headers.common.Authorization = `jwt ${token}`;};
+  if (token) {
+    localStorage.setItem("token", token);
+    axios.defaults.headers.common.Authorization = `jwt ${token}`;
+  } else {
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
 
 export const checkForExpiredToken = () => {
   return dispatch => {
     // Get token
     const token = localStorage.token;
-    console.log(token)
+    console.log(token);
 
     if (token) {
       const currentTime = Date.now() / 1000;
@@ -69,7 +75,10 @@ export const signup = (userData, history) => {
   };
 };
 
-export const logout = () => setCurrentUser();
+export const logout = () => {
+  setAuthToken();
+  return setCurrentUser();
+};
 
 const setCurrentUser = user => ({
   type: actionTypes.SET_CURRENT_USER,

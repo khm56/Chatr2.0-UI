@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,9 @@ import {
   faAngleRight,
   faPlusCircle
 } from "@fortawesome/free-solid-svg-icons";
+
+import * as actionCreators from "../../store/actions";
+import Loading from "../../Loading";
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
@@ -19,7 +23,10 @@ class SideNav extends React.Component {
   }
 
   render() {
-    const channelLinks = [{ name: "all" }].map(channel => (
+    if (this.props.loading) {
+      return <Loading />;
+    }
+    const channelLinks = this.props.channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
@@ -55,4 +62,15 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+const mapStateToProps = state => {
+  return {
+    user: state.rootAuth.user,
+    loading: state.rootChans.loading,
+    channels: state.rootChans.channels
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(SideNav);
