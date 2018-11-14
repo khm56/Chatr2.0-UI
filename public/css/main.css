@@ -24,6 +24,28 @@ body.fixed-nav {
   padding-top: 1rem;
 }
 
+.h1 {
+  color: rgb(122, 164, 193);
+  font-family: "Great Vibes", cursive;
+  font-size: 70px;
+  line-height: 160px;
+  font-weight: normal;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+}
+
+.p {
+  color: #7a7c7f;
+  font-size: 29px;
+  font-family: "Libre Baskerville", serif;
+  line-height: 45px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+  padding-top: 20px;
+}
+
 .scroll-to-top {
   position: fixed;
   right: 15px;
@@ -336,9 +358,89 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
   -ms-filter: "FlipH";
 }
 
+.speech-bubble {
+  position: relative;
+  background: #b3dced; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ); /* IE6-9 */
+  border-radius: 0.9em;
+  width: fit-content;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #00aabb;
+  border-left: 0;
+  margin-top: -4px;
+  margin-left: -4px;
+}
+
+.speech-bubble-right {
+  position: relative;
+  background: #b3dced; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #b3dced 0%,
+    #29b8e5 50%,
+    #bce0ee 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ); /* IE6-9 */
+  border-radius: 0.9em;
+  width: fit-content;
+}
+
+.speech-bubble-right:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #00aabb;
+  border-left: 0;
+  margin-top: -4px;
+  margin-left: -4px;
+}
+
 .content-wrapper {
   overflow-x: hidden;
-  background: white;
+  background-color: white;
 }
 
 @media (min-width: 992px) {

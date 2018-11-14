@@ -22,14 +22,7 @@ class MessageTable extends Component {
     ));
 
     return (
-      <table className="mt-3 table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Message</th>
-            <th>TimeStamp</th>
-          </tr>
-        </thead>
+      <table className="table">
         <tbody>{messageRows}</tbody>
       </table>
     );

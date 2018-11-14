@@ -4,18 +4,38 @@ class MessageRow extends Component {
   render() {
     const message = this.props.message;
     return (
-      <tr>
-        <td>{message.username}</td>
-        <td>{message.message}</td>
-        <td>{message.timestamp}</td>
-        {/* <td>
-          {book.authors.map(author => (
-            <div key={author.name}>{author.name}</div>
-          ))}
+      <tr className="border-0">
+        <td
+          className="border-0 p"
+          style={{
+            color: "#6495ed",
+            fontFamily: "Georgia",
+            fontWeight: "Bold",
+            fontSize: "20px"
+          }}
+        >
+          {message.username}
         </td>
-        <td>
-          <button className="btn" style={{ backgroundColor: book.color }} />
-        </td> */}
+        <td className="border-0">
+          <div className="row ">
+            <div className="col-6" style={{ color: "#191970" }}>
+              <div className="col-9 speech-bubble">{message.message}</div>
+            </div>
+
+            <div className="col-6">
+              <td
+                className="border-0"
+                style={{
+                  fontStyle: "italic",
+                  fontSize: "8px",
+                  textAlign: "right"
+                }}
+              >
+                {message.timestamp}
+              </td>
+            </div>
+          </div>
+        </td>
       </tr>
     );
   }
