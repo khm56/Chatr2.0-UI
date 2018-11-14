@@ -1,5 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions";
+import Loading from "../../Loading";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,13 +21,32 @@ class SideNav extends React.Component {
     this.state = { collapsed: false };
   }
 
+  componentDidMount() {
+    if (this.props.user) {
+      this.props.getChannels();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.user) {
+    }
+  }
+
   render() {
-    const channelLinks = [{ name: "all" }].map(channel => (
-      <ChannelNavLink key={channel.name} channel={channel} />
-    ));
+    let channelLinks = [];
+    if (this.props.user) {
+      channelLinks = this.props.channels.map(channel => (
+        <ChannelNavLink key={channel.name} channel={channel} />
+      ));
+    }
+
     return (
       <div>
-        <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <ul
+          className="navbar-nav navbar-sidenav"
+          id="exampleAccordion"
+          style={{ overflowY: "scroll" }}
+        >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/createChannel">
               <span className="nav-link-text mr-2">Channels</span>
@@ -55,4 +77,22 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+const mapStateToProps = state => {
+  return {
+    user: state.rootAuth.user,
+    loading: state.rootChans.loading,
+    channels: state.rootChans.channels
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    getChannels: () => dispatch(actionCreators.fetchChannels())
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SideNav)
+);
