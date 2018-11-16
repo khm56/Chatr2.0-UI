@@ -19,7 +19,6 @@ class ChannelForm extends Component {
   submitChannel(event) {
     event.preventDefault();
     this.props.postChannel(this.state);
-    this.redirect();
   }
 
   redirect() {

@@ -13,7 +13,7 @@ class NavBar extends Component {
         id="mainNav"
       >
         <Link className="navbar-brand" to="/welcome">
-          Chatr2.0
+          The Most Randon Channel List You'll Ever Pass By
         </Link>
         <button
           className="navbar-toggler navbar-toggler-right"
