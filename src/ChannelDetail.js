@@ -45,7 +45,7 @@ class ChannelDetail extends Component {
       this.props.channels.find(channel => channel.id === +channelID) || {};
     console.log(channelCont);
     return (
-      <div className="channel stage" style={{ textAlign: "center" }}>
+      <div className="channel" style={{ textAlign: "center" }}>
         <img
           src={channelCont.image_url}
           className="img-thumbnail img-fluid border rounded-circle border-0"
@@ -56,8 +56,12 @@ class ChannelDetail extends Component {
           }}
           alt=""
         />
-        <h3 className="h1">{channelCont.name}</h3>
-        <div className="container">
+        <br />
+        <br />
+        <div className="container borderx bgbg">
+          <div className="border-bottom border-status ">
+            <h3 className="h1">{channelCont.name}</h3>
+          </div>
           <div
             style={{
               textAlign: "center",
@@ -80,9 +84,14 @@ class ChannelDetail extends Component {
               }}
             >
               <MessageForm channel={channelID} />
+              <br />
+              <br />
             </div>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
