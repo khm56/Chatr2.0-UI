@@ -67,7 +67,7 @@ class ChannelDetail extends Component {
               textAlign: "center",
               overflowY: "scroll",
               width: "auto",
-              height: "200px"
+              height: "400px"
             }}
             className="col-12"
           >
