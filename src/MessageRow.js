@@ -39,7 +39,10 @@ class MessageRow extends Component {
                         float: "right"
                       }}
                     >
-                      {message.timestamp}
+                      {`${message.timestamp.slice(
+                        0,
+                        10
+                      )} | ${message.timestamp.slice(11, 19)} `}
                     </td>
                   </div>
                 </div>
@@ -95,7 +98,10 @@ class MessageRow extends Component {
                         float: "left"
                       }}
                     >
-                      {message.timestamp}
+                      {`${message.timestamp.slice(
+                        0,
+                        10
+                      )} | ${message.timestamp.slice(11, 19)} `}
                     </td>
                   </div>
                 </div>
