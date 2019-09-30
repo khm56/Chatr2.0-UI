@@ -21,6 +21,23 @@ export const fetchChannels = () => {
   };
 };
 
+export const getChannel = channelID => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/`
+      );
+      const channel = res.data;
+      dispatch({
+        type: actionTypes.GET_CHANNEL,
+        payload: channel
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
 export const createChannel = channel_name => {
   return async dispatch => {
     try {

@@ -3,44 +3,24 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import TextingArea from "./TextingArea";
-import { checkForExpiredToken } from "../redux/actions";
-const instance = axios.create({
-  baseURL: "https://api-chatr.herokuapp.com/"
-});
+import { getChannel } from "../redux/actions";
 
 class SuperSecretPage extends Component {
-  state = {
-    channel: null
-  };
   componentDidMount() {
-    this.getChannel();
+    this.props.getChannel(this.props.match.params.channelID);
   }
   componentDidUpdate(prevProps) {
     if (
       prevProps.match.params.channelID !== this.props.match.params.channelID
     ) {
-      this.getChannel();
+      this.props.getChannel(this.props.match.params.channelID);
     }
   }
 
-  getChannel = async () => {
-    const channelID = this.props.match.params.channelID;
-    try {
-      const res = await axios.get(
-        `https://api-chatr.herokuapp.com/channels/${channelID}/`
-      );
-      const channel = res.data;
-      this.setState({ channel: channel });
-      console.log(this.state.channel);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   render() {
     const msgs = () => {
-      if (this.state.channel)
-        return this.state.channel.map(text => (
+      if (this.props.channel)
+        return this.props.channel.map(text => (
           <div key={text.id}>
             {" "}
             username: {text.username} - message: {text.message}
@@ -51,16 +31,22 @@ class SuperSecretPage extends Component {
     if (!this.props.user) return <Redirect to="/login" />;
     return (
       <div className="ml-4 text-center">
-        {/* <p>{this.state.channel}</p> */}
         {msgs()}
         <TextingArea />
       </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  getChannel: channelID => dispatch(getChannel(channelID))
+});
 const mapStateToProps = state => ({
   user: state.user,
-  channels: state.channels
+  channel: state.channels.channel
 });
 
-export default connect(mapStateToProps)(SuperSecretPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SuperSecretPage);
