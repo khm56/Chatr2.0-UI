@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login, signup } from "../redux/actions/";
 
 class RegistationForm extends Component {
   state = {
@@ -13,11 +15,32 @@ class RegistationForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    alert("I don't work yet");
+    let checkurl = this.props.match.url.substring(1);
+    if (checkurl === "login")
+      return this.props.login(this.state, this.props.history);
+    else this.props.signup(this.state, this.props.history);
   };
 
   render() {
+    if (this.props.user) return <Redirect to="/channels/" />;
     const type = this.props.match.url.substring(1);
+    const errors = this.props.errors;
+    console.log("Broken things " + errors);
+
+    // errors = {
+    //   username: ["the username exits"]
+    // };
+    // <>
+    //   <input
+    //     type="text"
+    //     className={`form-control ${errors.username && "is-invalid"}`}
+    //     name="alias"
+    //     value={this.state.user.username}
+    //     onChange={this.handleChange}
+    //   />
+    //   <div className="invalid-feedback">{errors.username}</div>
+    // </>;
+
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
@@ -29,7 +52,7 @@ class RegistationForm extends Component {
           <form onSubmit={this.submitHandler}>
             <div className="form-group">
               <input
-                className="form-control"
+                className={`form-control ${errors && "is-invalid"}`}
                 type="text"
                 placeholder="Username"
                 name="username"
@@ -38,18 +61,26 @@ class RegistationForm extends Component {
             </div>
             <div className="form-group">
               <input
-                className="form-control"
+                className={`form-control ${errors && "is-invalid"}`}
                 type="password"
                 placeholder="Password"
                 name="password"
                 onChange={this.changeHandler}
               />
+              {errors && errors.non_field_errors && (
+                <div className="invalid-feedback">
+                  {errors.non_field_errors[0]}
+                </div>
+              )}
             </div>
+
             <input
               className="btn btn-primary"
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
+
+            {/* <div className="invalid-feedback">{errors.username}</div> */}
           </form>
         </div>
         <div className="card-footer">
@@ -67,4 +98,15 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+const mapDispatchToProps = dispatch => ({
+  login: (userData, history) => dispatch(login(userData, history)),
+  signup: (userData, history) => dispatch(signup(userData, history))
+});
+const mapStateToProps = state => ({
+  user: state.user,
+  errors: state.errors
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegistationForm);
