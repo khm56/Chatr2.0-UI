@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login, signup } from "../redux/actions";
 
 class RegistationForm extends Component {
   state = {
@@ -11,9 +13,13 @@ class RegistationForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = e => {
+  submitHandler = (e, type) => {
     e.preventDefault();
-    alert("I don't work yet");
+    if (type === "login") {
+      this.props.login(this.state, this.props.history);
+    } else {
+      this.props.signup(this.state, this.props.history);
+    }
   };
 
   render() {
@@ -26,8 +32,11 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          <form onSubmit={this.submitHandler}>
+          <form onSubmit={event => this.submitHandler(event, type)}>
             <div className="form-group">
+              <p className="color">
+                {this.props.errors ? this.props.errors : ""}
+              </p>
               <input
                 className="form-control"
                 type="text"
@@ -37,6 +46,9 @@ class RegistationForm extends Component {
               />
             </div>
             <div className="form-group">
+              <p className="color">
+                {this.props.errors ? this.props.errors : ""}
+              </p>
               <input
                 className="form-control"
                 type="password"
@@ -45,6 +57,9 @@ class RegistationForm extends Component {
                 onChange={this.changeHandler}
               />
             </div>
+            <p className="color">
+              {/* {this.props.errors ? this.props.errors : ""} */}
+            </p>
             <input
               className="btn btn-primary"
               type="submit"
@@ -52,6 +67,7 @@ class RegistationForm extends Component {
             />
           </form>
         </div>
+        {/* <p className="color">{this.props.errors ? this.props.errors : ""}</p> */}
         <div className="card-footer">
           <Link
             to={type === "login" ? "/signup" : "/login"}
@@ -67,4 +83,19 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    errors: state.errors
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (userData, history) => dispatch(login(userData, history)),
+    signup: (userData, history) => dispatch(signup(userData, history))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegistationForm);

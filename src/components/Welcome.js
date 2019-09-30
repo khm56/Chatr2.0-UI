@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const Welcome = () => {
   return (
@@ -9,6 +10,7 @@ const Welcome = () => {
         <h3 className="mb-5">
           <em>You're gonna need to login to see the messages</em>
         </h3>
+
         <Link to="/login" className="btn btn-primary btn-lg">
           Login
         </Link>
@@ -17,5 +19,4 @@ const Welcome = () => {
     </header>
   );
 };
-
 export default Welcome;

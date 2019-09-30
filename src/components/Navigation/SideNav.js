@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,6 +19,7 @@ class SideNav extends React.Component {
     const channelLinks = [{ name: "all" }].map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
+    if (!this.props.user) return <Redirect to="/welcome" />;
     return (
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -51,5 +52,9 @@ class SideNav extends React.Component {
     );
   }
 }
-
-export default SideNav;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+export default connect(mapStateToProps)(SideNav);
