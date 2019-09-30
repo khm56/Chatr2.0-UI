@@ -1,3 +1,4 @@
 export { login, logout, signup, checkForExpiredToken } from "./authentication";
+export { fetchChannels } from "./channels";
 
-export { setErrors } from "./errors";
+export { setErrors, resetErrors } from "./errors";

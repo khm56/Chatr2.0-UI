@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import * as actionCreators from "./redux/actions";
 
 // Scripts
 import main from "./assets/js/main";
+import { connect } from "react-redux";
 
 // Components
 import NavBar from "./components/Navigation/NavBar";
@@ -15,6 +17,8 @@ import LoginForm from "./components/LoginForm";
 class App extends Component {
   componentDidMount() {
     main();
+    this.props.fetchChannels();
+
   }
 
   render() {
@@ -34,4 +38,10 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchChannels: () => dispatch(actionCreators.fetchChannels())
+  };
+};
+export default withRouter(connect(null, mapDispatchToProps)(App));

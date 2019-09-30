@@ -3,11 +3,8 @@ import jwt_decode from "jwt-decode";
 
 import * as actionTypes from "./actionTypes";
 
-import { setErrors } from "./errors";
+import { setErrors, resetErrors } from "./errors";
 
-const instance = axios.create({
-  baseURL: "https://api-chatr.herokuapp.com/"
-});
 
 
 
@@ -29,7 +26,7 @@ const setCurrentUser = token => {
   };
 };
 
-export const login = userData => {
+export const login = (userData, history) => {
   return async dispatch => {
     try {
       const response = await axios.post(
@@ -38,13 +35,25 @@ export const login = userData => {
       );
       const user = response.data;
       dispatch(setCurrentUser(user.token));
-    } catch (err) {
-      console.log("An error occurred.", err);
+      dispatch(resetErrors());
+
+      history.replace("/")
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: error.response.data
+      });
+      // console.log("An error occurred.", error);
+      // dispatch(setErrors(error.response.data));
+      // console.error(error.response.data);
+      // //must use setErrors
+
     }
   };
 };
 
-export const signup = userData => {
+export const signup = (userData, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
@@ -53,8 +62,15 @@ export const signup = userData => {
       );
       const user = res.data;
       dispatch(setCurrentUser(user.token));
+      dispatch(resetErrors());
+
+      history.replace("/")
     } catch (error) {
+      //another possible solution for catching errors
       console.error(error.response.data);
+      console.log(error.response.data);
+
+      dispatch(setErrors(error.response.data));
     }
   };
 };

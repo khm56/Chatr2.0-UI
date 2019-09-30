@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as actionCreators from "../redux/actions";
 import { connect } from "react-redux";
 
@@ -9,6 +9,11 @@ class LoginForm extends Component {
         password: ""
     };
 
+
+    componentWillUnmount() {
+        if (this.props.errors.length) this.props.resetErrors();
+    }
+
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value });
     };
@@ -16,12 +21,18 @@ class LoginForm extends Component {
     submitHandler = e => {
         e.preventDefault();
 
-        this.props.login(this.state);
+        this.props.login(this.state, this.props.history);
 
     };
 
     render() {
         const type = this.props.match.url.substring(1);
+
+
+        if (this.props.user) return <Redirect to="/" />
+
+        const errors = this.props.errors;
+
         return (
             <div className="card col-6 mx-auto p-0 mt-5">
                 <div className="card-body">
@@ -29,6 +40,16 @@ class LoginForm extends Component {
                         Login
           </h5>
                     <form onSubmit={this.submitHandler}>
+
+
+                        {!!errors.length && (
+                            <div className="alert alert-danger" role="alert">
+                                {errors.map(error => (
+                                    <p key={error}>{error}</p>
+                                ))}
+                            </div>
+                        )}
+
                         <div className="form-group">
                             <input
                                 className="form-control"
@@ -46,6 +67,7 @@ class LoginForm extends Component {
                                 name="password"
                                 onChange={this.changeHandler}
                             />
+
                         </div>
                         <input
                             className="btn btn-primary"
@@ -68,12 +90,18 @@ class LoginForm extends Component {
     }
 }
 
-
+const mapStateToProps = state => {
+    return {
+        errors: state.errors.errors,
+        user: state.user
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
-        login: userData => dispatch(actionCreators.login(userData))
+        login: (userData, history) => dispatch(actionCreators.login(userData, history)),
+        resetErrors: () => dispatch(actionCreators.resetErrors())
 
     };
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
