@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../redux/actions";
 
 class RegistationForm extends Component {
   state = {
@@ -7,17 +9,28 @@ class RegistationForm extends Component {
     password: ""
   };
 
+  
+  componentWillUnmount() {
+    if (this.props.errors) return this.props.resetErrors();
+  }
+
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = e => {
+  submitHandler = (e,type) => {
     e.preventDefault();
-    alert("I don't work yet");
+    if(type==="signup")
+    this.props.signup(this.state, this.props.history);
+    else 
+    this.props.login(this.state, this.props.history)
   };
 
   render() {
+    if (this.props.user) return <Redirect to="/welcome" /> 
     const type = this.props.match.url.substring(1);
+    console.log(this.props.errors)
+
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
@@ -26,7 +39,11 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          <form onSubmit={this.submitHandler}>
+          <form onSubmit={event=>this.submitHandler(event,type)}>
+          <p style={{color: "red" }}>  {this.props.errors.username}</p>
+          <p style={{color: "red" }}>  {this.props.errors.non_field_errors}</p>
+        
+
             <div className="form-group">
               <input
                 className="form-control"
@@ -67,4 +84,25 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    errors: state.errors
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signup: (userData, history) =>
+      dispatch(actionCreators.signup(userData, history)),
+    login: (userData, history) =>
+      dispatch(actionCreators.login(userData, history)),
+    resetErrors: () => dispatch(actionCreators.resetErrors())
+  };
+};
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegistationForm);
