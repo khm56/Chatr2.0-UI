@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import Logout from "../Logout"
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -28,11 +28,9 @@ const AuthButton = ({ user }) => {
     buttons = (
       <>
         <span className="navbar-text">{user.username}</span>
-        <li className="nav-item">
-          <span className="nav-link">
-            <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-          </span>
-        </li>
+
+        <Logout />
+
       </>
     );
   }

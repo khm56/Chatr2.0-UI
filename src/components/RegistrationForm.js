@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import * as actionCreators from "../redux/actions";
+import { connect } from "react-redux";
 
 class RegistationForm extends Component {
   state = {
@@ -13,7 +15,10 @@ class RegistationForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    alert("I don't work yet");
+
+    this.props.signup(this.state);
+
+
   };
 
   render() {
@@ -22,9 +27,7 @@ class RegistationForm extends Component {
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
           <h5 className="card-title mb-4">
-            {type === "login"
-              ? "Login to send messages"
-              : "Register an account"}
+            Register an account
           </h5>
           <form onSubmit={this.submitHandler}>
             <div className="form-group">
@@ -54,12 +57,10 @@ class RegistationForm extends Component {
         </div>
         <div className="card-footer">
           <Link
-            to={type === "login" ? "/signup" : "/login"}
-            className="btn btn-small btn-link"
-          >
-            {type === "login"
-              ? "register an account"
-              : "login with an existing account"}
+            to="/login"
+            className="btn btn-small btn-link">
+
+            Already have an account? Login
           </Link>
         </div>
       </div>
@@ -67,4 +68,13 @@ class RegistationForm extends Component {
   }
 }
 
-export default RegistationForm;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signup: userData => dispatch(actionCreators.signup(userData)),
+    login: userData => dispatch(actionCreators.login(userData))
+
+  };
+};
+
+export default connect(null, mapDispatchToProps)(RegistationForm);
