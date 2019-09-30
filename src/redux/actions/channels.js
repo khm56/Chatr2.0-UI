@@ -19,25 +19,29 @@ export const fetchChannels = () => {
 
 // use it to post channel
 
-// //POST THE AUTHOR TO https://the-index-api.herokuapp.com/api/authors/
-// export const postAuthor = (newAuthor, resetForm, closeModal) => {
-//   return async dispatch => {
-//     try {
-//       const res = await instance.post("/api/authors/", newAuthor);
-//       const author = res.data;
-//       dispatch(resetErrors());
-//       dispatch({
-//         type: actionTypes.POST_AUTHOR,
-//         payload: author
-//       });
-//       dispatch(filterAuthors(""));
-//       resetForm();
-//       closeModal();
-//     } catch (err) {
-//       dispatch({
-//         type: actionTypes.SET_ERRORS,
-//         payload: err.response.data
-//       });
-//     }
-//   };
-// };
+// //POST THE Channel TO https://api-chatr.herokuapp.com/channels/create/
+export const postChannel = (newChannelName, resetForm, history) => {
+    return async dispatch => {
+        try {
+            const res = await axios.post("https://api-chatr.herokuapp.com/channels/create/", newChannelName);
+            const channel = res.data;
+            dispatch(resetErrors());
+            dispatch({
+                type: actionTypes.POST_CHANNEL,
+                payload: channel
+            });
+            //check the next line
+
+            //   dispatch(filterAuthors(""));
+
+            resetForm();
+            history.replace("/") // NOTE!!! this must redirect to the new channel url not home 
+
+        } catch (err) {
+            dispatch({
+                type: actionTypes.SET_ERRORS,
+                payload: err.response.data
+            });
+        }
+    };
+};

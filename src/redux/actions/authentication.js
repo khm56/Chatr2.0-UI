@@ -68,7 +68,6 @@ export const signup = (userData, history) => {
     } catch (error) {
       //another possible solution for catching errors
       console.error(error.response.data);
-      console.log(error.response.data);
 
       dispatch(setErrors(error.response.data));
     }

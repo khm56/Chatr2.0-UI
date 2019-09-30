@@ -12,11 +12,13 @@ const channelsReducer = (state = initialState, action) => {
                 channels: action.payload,
             };
 
-        // case actionTypes.POST_AUTHOR:
-        //   return {
-        //     ...state,
-        //     authors: [action.payload].concat(state.authors)
-        //   };
+        case actionTypes.POST_CHANNEL:
+            return {
+                ...state,
+                channels: [action.payload].concat(state.channels)
+            };
+
+
         default:
             return state;
     }

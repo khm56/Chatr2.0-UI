@@ -8,8 +8,8 @@ class Welcome extends Component {
 
     return (
       <header className="masthead d-flex">
-        <div className="container text-center my-auto z-1">
-          <h1 className="mb-1">WELCOME TO CHATR</h1>
+        <div className="container text-center text-white my-auto z-1">
+          <h1 className="m-5">WELCOME TO CHATR</h1>
           {!this.props.user &&
             <>
               <h3 className="mb-5">
