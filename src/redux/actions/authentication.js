@@ -5,9 +5,9 @@ import { SET_CURRENT_USER } from "./actionTypes";
 
 import { setErrors } from "./errors";
 
-const instance = axios.create({
-  baseURL: "https://api-chatr.herokuapp.com/"
-});
+// const instance = axios.create({
+//   baseURL: "https://api-chatr.herokuapp.com/"
+// });
 
 export const checkForExpiredToken = () => {
   // Check for token expiration
