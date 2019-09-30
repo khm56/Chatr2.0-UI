@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addChannel } from "../../redux/actions";
 
-// Fontawesome
+// Fontawesomes
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -25,7 +27,10 @@ class SideNav extends React.Component {
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/createChannel">
               <span className="nav-link-text mr-2">Channels</span>
-              <FontAwesomeIcon icon={faPlusCircle} />
+              <FontAwesomeIcon
+                icon={faPlusCircle}
+                onClick={this.props.addChannel}
+              />
             </Link>
           </li>
           {channelLinks}
@@ -52,4 +57,11 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+const mapDispatchToProps = dispatch => ({
+  addChannel: userData => dispatch(addChannel(userData))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SideNav);

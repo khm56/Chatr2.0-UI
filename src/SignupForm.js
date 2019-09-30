@@ -22,7 +22,7 @@ class Signup extends Component {
     const { username, email, password } = this.state;
     if (this.props.user)
       return (
-        <div id="sidebar">
+        <div>
           <Redirect to="/" />;
         </div>
       );

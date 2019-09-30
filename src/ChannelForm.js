@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { login } from "./redux/actions/authentication";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { addChannel } from "./redux/actions/channel";
+// import { Link } from "react-router-dom";
 
-class Login extends Component {
+class ChannelForm extends Component {
   state = {
-    username: "",
-    password: ""
+    name: "",
+    image_url: ""
   };
 
   handleChange = event =>
@@ -14,53 +15,41 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.login(this.state, this.props.history);
+    this.props.addChannel(this.state, this.props.history);
   };
 
   render() {
-    const { username, password } = this.state;
-    if (this.props.user)
-      return (
-        <div>
-          <Redirect to="/" />;
-        </div>
-      );
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">
           <div className="card-body">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="title">Channel Title</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="username"
-                  value={username}
-                  name="username"
-                  placeholder="Username"
+                  //value={this.name}
+                  name="name"
+                  placeholder="name"
                   onChange={this.handleChange}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="image_url">Image Url</label>
                 <input
-                  type="password"
+                  type="image_url"
                   className="form-control"
-                  id="password"
-                  value={password}
-                  name="password"
-                  placeholder="Password"
+                  //value={this.image_url}
+                  name="image_url"
+                  placeholder="image_url"
                   onChange={this.handleChange}
                 />
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Login
+                Add New Channel
               </button>
-              <Link to="/signup" className="btn btn-link my-2 my-sm-0">
-                Signup for an account
-              </Link>
             </form>
           </div>
         </div>
@@ -70,7 +59,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (userData, history) => dispatch(login(userData, history))
+  addChannel: (userData, history) => dispatch(addChannel(userData, history))
 });
 
 const mapStateToProps = state => ({
@@ -80,4 +69,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(ChannelForm);
