@@ -35,32 +35,48 @@ class ChannelForm extends Component {
         const errors = this.props.errors;
 
         return (
-            <div className="mt-5 p-5">
-                <form onSubmit={this.submitChannel}>
-                    {!!errors.length && (
-                        <div className="alert alert-danger" role="alert">
-                            {errors.map(error => (
-                                <p key={error}>{error}</p>
-                            ))}
-                        </div>
-                    )}
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"> Channel Name</span>
-                        </div>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.textChangeHandler} />
+            <div className="card col-6 mx-auto p-0 mt-5">
+                <div className="card-body">
+                    <h2 className="card-title mt-5 text-center"> Create a new Channel </h2>
+                    <div className="mt-5 p-5">
+                        <form onSubmit={this.submitChannel}>
+                            {!!errors.length && (
+                                <div className="alert alert-danger" role="alert">
+                                    {errors.map(error => (
+                                        <p key={error}>{error}</p>
+                                    ))}
+                                </div>
+                            )}
+                            <div className="input-group mb-3 border border-primary border-5 rounded-pill">
+                                <div className="input-group-prepend ">
+                                    <span className="input-group-text bg-dark text-white rounded-pill"> Channel Name</span>
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Type channel name here.."
+                                    className="form-control border-0"
+                                    style={{ backgroundColor: 'transparent' }}
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.textChangeHandler} />
+
+
+
+                            </div>
+                            <div className="text-center">
+                                <button
+                                    type="submit"
+                                    className=" btn btn-primary rounded-pill ">
+                                    Create
+                            </button>
+
+                            </div>
+
+                        </form>
                     </div>
 
-
-                    <input
-                        type="submit" />
-                </form>
-            </div>
+                </div>
+            </div >
         );
     }
 }

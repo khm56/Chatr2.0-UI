@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+// import main from "../assets/js/main";
 
 class Welcome extends Component {
+  // componentDidMount() {
+  //   main();
 
+  // }
   render() {
 
     return (
@@ -13,9 +17,9 @@ class Welcome extends Component {
           {!this.props.user &&
             <>
               <h3 className="mb-5">
-                <em>You're gonna need to login to see the messages</em>
+                <em>Login to see the messages</em>
               </h3>
-              <Link to="/login" className="btn btn-primary btn-lg">
+              <Link to="/login" className="btn btn-primary btn-lg rounded-pill">
                 Login
         </Link>
             </>

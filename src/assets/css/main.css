@@ -665,6 +665,10 @@ footer.sticky-footer {
   line-height: 55px;
 }
 
+.rounded-pill {
+  border-radius: 5rem;
+}
+
 @media (min-width: 992px) {
   footer.sticky-footer {
     width: calc(100% - 250px);
