@@ -14,6 +14,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import LoginForm from "./components/LoginForm";
 import ChannelForm from "./components/ChannelForm";
+import SendMessageForm from "./components/MessageForm";
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
           <Route path="/signup" component={RegistrationForm} />
           <Route path="/createChannel" component={ChannelForm} />
           <Route path="/private" component={SuperSecretPage} />
+          <Route path="/channels/:channelID" component={SendMessageForm} />
           <Redirect to="/welcome" />
         </Switch>
         <Footer />

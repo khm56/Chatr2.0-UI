@@ -18,7 +18,11 @@ class SideNav extends React.Component {
 
   render() {
     const channelLinks = this.props.channels.map(channel => (
-      <ChannelNavLink key={channel.name} channel={channel} />
+      <ChannelNavLink
+        selectChannel={this.props.selectChannel}
+        key={channel.name}
+        channel={channel}
+      />
     ));
     {
       if (this.props.user) {
