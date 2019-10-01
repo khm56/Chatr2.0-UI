@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
 
-const NavBar = () => {
+const NavBar = props => {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
@@ -33,4 +33,8 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(NavBar);

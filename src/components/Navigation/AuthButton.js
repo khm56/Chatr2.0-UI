@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import { logout } from "../../redux/actions";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +10,7 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
-const AuthButton = ({ user }) => {
+const AuthButton = props => {
   let buttons = [
     <li key="loginButton" className="nav-item">
       <Link to="/login" className="nav-link">
@@ -24,12 +24,12 @@ const AuthButton = ({ user }) => {
     </li>
   ];
 
-  if (user) {
+  if (props.user) {
     buttons = (
       <>
-        <span className="navbar-text">{user.username}</span>
+        <span className="navbar-text">{props.user.username}</span>
         <li className="nav-item">
-          <span className="nav-link">
+          <span className="nav-link" onClick={() => props.logout()}>
             <FontAwesomeIcon icon={faSignOutAlt} /> Logout
           </span>
         </li>
@@ -44,4 +44,11 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(AuthButton);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthButton);
