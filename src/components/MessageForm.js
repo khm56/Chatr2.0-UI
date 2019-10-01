@@ -20,7 +20,7 @@ class SendMessageForm extends Component {
     query = query.toLowerCase();
 
     let filteredMessages = channel.filter(messageItem =>
-      `${messageItem.message}`.toLowerCase().includes(query)
+      `${messageItem.message} ${messageItem.username} `.toLowerCase().includes(query)
     );
     this.setState({
       filteredMessages: filteredMessages,
@@ -29,10 +29,9 @@ class SendMessageForm extends Component {
   };
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      if (this.props.match.params.channelID !== undefined)
-        this.props.fetchChannelDetail(this.props.match.params.channelID);
-    }, 5000);
+
+    if (this.props.match.params.channelID !== undefined)
+      this.props.fetchChannelDetail(this.props.match.params.channelID);
   }
 
 
@@ -44,10 +43,7 @@ class SendMessageForm extends Component {
       ) {
         this.props.fetchChannelDetail(this.props.match.params.channelID);
       } else {
-        clearInterval(this.interval);
-        this.interval = setInterval(() => {
-          this.props.fetchChannelDetail(this.props.match.params.channelID);
-        }, 5000);
+        this.props.fetchChannelDetail(this.props.match.params.channelID);
       }
     }
   }

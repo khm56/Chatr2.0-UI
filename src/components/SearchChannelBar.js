@@ -22,6 +22,7 @@ class SearchChannelBar extends Component {
                         type="text"
                         value={this.state.query}
                         onChange={this.handleChange}
+                        placeholder="search for messages"
                     />
                     <div className="input-group-append">
                         <span className="input-group-text">
