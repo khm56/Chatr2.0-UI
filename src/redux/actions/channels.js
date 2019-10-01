@@ -17,6 +17,16 @@ export const fetchChannels = () => {
     };
 };
 
+
+export const filterChannels = query => {
+    return {
+        type: actionTypes.FILTER_CHANNELS,
+        payload: query
+    };
+};
+
+
+
 // use it to post channel
 
 // //POST THE Channel TO https://api-chatr.herokuapp.com/channels/create/
@@ -32,7 +42,7 @@ export const postChannel = (newChannelName, resetForm, history) => {
             });
             //check the next line
 
-            //   dispatch(filterAuthors(""));
+            dispatch(filterChannels(""));
 
             resetForm();
             history.replace("/") // NOTE!!! this must redirect to the new channel url not home 
@@ -45,3 +55,6 @@ export const postChannel = (newChannelName, resetForm, history) => {
         }
     };
 };
+
+
+

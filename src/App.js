@@ -17,11 +17,34 @@ import ChannelForm from "./components/ChannelForm";
 import SendMessageForm from "./components/MessageForm";
 
 class App extends Component {
+  // state = {
+  //   channel: this.props.match.params.channelID,
+  //   changed: false
+  // }
+
   componentDidMount() {
     main();
     this.props.fetchChannels();
+    // this.props.fetchChannelDetail(this.props.match.params.channelID);
 
   }
+  // componentDidUpdate(prevProps) {
+  //   const channelID = this.props.match.params.channelID;
+  //   if (prevProps.match.params.channelID !== channelID) {
+  //     this.props.fetchChannelDetail(channelID);
+  //   }
+
+  // }
+
+
+
+  // componentDidUpdate(prevState) {
+  //   if (this.state.channel !== prevState.channel) {
+  //     this.setState({ changed: true, channel: this.state.channel })
+
+  //   }
+  // }
+
 
   render() {
     return (
@@ -34,6 +57,7 @@ class App extends Component {
           <Route path="/createChannel" component={ChannelForm} />
           <Route path="/private" component={SuperSecretPage} />
           <Route path="/channels/:channelID" component={SendMessageForm} />
+
           <Redirect to="/welcome" />
         </Switch>
         <Footer />
@@ -45,7 +69,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchChannels: () => dispatch(actionCreators.fetchChannels())
+    fetchChannels: () => dispatch(actionCreators.fetchChannels()),
+    // fetchChannelDetail: channelID => dispatch(actionCreators.fetchChannelDetail(channelID))
+
   };
 };
 export default withRouter(connect(null, mapDispatchToProps)(App));
