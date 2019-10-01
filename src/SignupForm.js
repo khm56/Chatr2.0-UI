@@ -42,6 +42,7 @@ class Signup extends Component {
                   placeholder="Username"
                   onChange={this.handleChange}
                 />
+                {this.props.errors ? this.props.errors : ""}
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -54,6 +55,7 @@ class Signup extends Component {
                   placeholder="Email"
                   onChange={this.handleChange}
                 />
+                {this.props.errors ? this.props.errors : ""}
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -87,7 +89,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  errors: state.errors
 });
 
 export default connect(

@@ -1,6 +1,6 @@
 import { SET_ERRORS } from "../actions/actionTypes";
 
-const initialState = {};
+const initialState = null;
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {

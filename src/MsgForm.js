@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 //import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { addChannel } from "./redux/actions/channel";
+import { addMsg } from "./redux/actions/channel";
 // import { Link } from "react-router-dom";
 
-class ChannelForm extends Component {
+class MsgForm extends Component {
   state = {
-    name: "",
-    image_url: ""
+    message: ""
   };
 
   handleChange = event =>
@@ -15,7 +14,8 @@ class ChannelForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addChannel(this.state, this.props.history);
+    this.props.addMsg(this.state, this.props.channelID);
+    this.setState({ message: "" });
   };
 
   render() {
@@ -23,32 +23,21 @@ class ChannelForm extends Component {
       <div className="col-6 mx-auto">
         <div className="card my-5">
           <div className="card-body">
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={event => this.handleSubmit(event)}>
               <div className="form-group">
-                <label htmlFor="title">Channel Title</label>
+                <label htmlFor="title">Message</label>
                 <input
                   type="text"
                   className="form-control"
-                  //value={this.name}
-                  name="name"
-                  placeholder="name"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="image_url">Image Url</label>
-                <input
-                  type="image_url"
-                  className="form-control"
-                  //value={this.image_url}
-                  name="image_url"
-                  placeholder="image_url"
-                  onChange={this.handleChange}
+                  value={this.state.message}
+                  name="message"
+                  placeholder="message"
+                  onChange={event => this.handleChange(event)}
                 />
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Add New Channel
+                Send Message
               </button>
             </form>
           </div>
@@ -59,7 +48,7 @@ class ChannelForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addChannel: (userData, history) => dispatch(addChannel(userData, history))
+  addMsg: (msg, channelID) => dispatch(addMsg(msg, channelID))
 });
 
 const mapStateToProps = state => ({
@@ -69,4 +58,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChannelForm);
+)(MsgForm);

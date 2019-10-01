@@ -32,6 +32,8 @@ class Login extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
+                <br></br>
+
                 <input
                   type="text"
                   className="form-control"
@@ -41,6 +43,7 @@ class Login extends Component {
                   placeholder="Username"
                   onChange={this.handleChange}
                 />
+                {this.props.errors ? this.props.errors : ""}
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -53,6 +56,7 @@ class Login extends Component {
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
+                {this.props.errors ? this.props.errors : ""}
               </div>
 
               <button type="submit" className="btn btn-primary">
@@ -74,7 +78,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  errors: state.errors
 });
 
 export default connect(

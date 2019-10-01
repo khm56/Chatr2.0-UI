@@ -1,4 +1,4 @@
-import { ADD_CHANNEL } from "./actionTypes";
+import { ADD_CHANNEL, FETCH_CHANNEL, FETCH_MSGS, ADD_MSG } from "./actionTypes";
 import axios from "axios";
 // import jwt_decode from "jwt-decode";
 
@@ -14,6 +14,7 @@ export const addChannel = (channel, history) => {
         channel
       );
       const object = res.data;
+      console.log("hii", object);
       dispatch({
         type: ADD_CHANNEL,
         payload: object
@@ -21,7 +22,58 @@ export const addChannel = (channel, history) => {
       history.push("/");
     } catch (err) {
       console.error(err);
-      //console.error(err.response.data);
+      console.error(err.response.data);
+    }
+  };
+};
+
+export const fetchChannels = () => {
+  return async dispatch => {
+    try {
+      const res = await axios.get("https://api-chatr.herokuapp.com/channels/");
+      const channels = res.data;
+      console.log("hiiiii", channels);
+      dispatch({ type: FETCH_CHANNEL, payload: channels });
+    } catch (err) {
+      console.error(err);
+      console.error(err.response.data);
+    }
+  };
+};
+
+export const fetchMsgs = channelID => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/`
+      );
+      const msgs = res.data;
+      console.log("msgs!!!!!!!!!!!", msgs);
+      dispatch({ type: FETCH_MSGS, payload: msgs });
+    } catch (err) {
+      console.error(err);
+      console.error(err.response.data);
+    }
+  };
+};
+
+export const addMsg = (msg, channelID) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
+        msg
+      );
+      const object = res.data;
+      console.log("My Message!!!!!!!!!!!!!!!!!!!!", object);
+      dispatch({
+        type: ADD_MSG,
+        payload: msg
+      });
+      //history.push("/");
+    } catch (err) {
+      console.error(err);
+      console.error(err.response.data);
     }
   };
 };

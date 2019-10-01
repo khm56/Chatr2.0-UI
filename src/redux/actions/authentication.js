@@ -2,8 +2,9 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import { SET_CURRENT_USER } from "./actionTypes";
+import { fetchChannels } from "./channel";
 
-//import { setErrors } from "./errors";
+import { setErrors } from "./errors";
 
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
@@ -19,9 +20,11 @@ export const login = (userData, history) => {
       const user = res.data;
       dispatch(setCurrentUser(user.token));
       console.log(user);
-      history.push("/");
+      history.push("/private");
     } catch (err) {
       console.error(err);
+      console.error(err.response.data);
+      dispatch(setErrors("Invalid"));
     }
   };
 };
@@ -38,6 +41,7 @@ export const signup = (userData, history) => {
       history.push("/");
     } catch (err) {
       console.error(err);
+      console.error(err.response.data);
     }
   };
 };
@@ -45,20 +49,26 @@ export const signup = (userData, history) => {
 export const logout = () => setCurrentUser();
 
 const setCurrentUser = token => {
-  let user;
-  if (token) {
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
-    user = jwt_decode(token);
-  } else {
-    localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
-    user = null;
-  }
-
-  return {
-    type: SET_CURRENT_USER,
-    payload: user
+  return async dispatch => {
+    try {
+      let user;
+      if (token) {
+        localStorage.setItem("token", token);
+        axios.defaults.headers.common.Authorization = `jwt ${token}`;
+        user = jwt_decode(token);
+        dispatch(fetchChannels());
+      } else {
+        localStorage.removeItem("token");
+        delete axios.defaults.headers.common.Authorization;
+        user = null;
+      }
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: user
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
