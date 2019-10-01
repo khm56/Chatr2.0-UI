@@ -17,9 +17,9 @@ import ChannelNavLink from "./ChannelNavLink";
 class SideNav extends React.Component {
   state = { collapsed: false };
 
-  componentDidMount() {
-    this.props.fetchChannels();
-  }
+  // componentDidMount() {
+  //   this.props.fetchChannels();
+  // }
   render() {
     const channelLinks = this.props.channels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />

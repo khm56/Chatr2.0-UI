@@ -2,7 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import { SET_CURRENT_USER } from "./actionTypes";
-
+import { fetchChannels } from "./channels";
 import { setErrors } from "./errors";
 
 // const instance = axios.create({
@@ -29,22 +29,30 @@ export const checkForExpiredToken = () => {
 };
 
 const setCurrentUser = token => {
-  let user;
-  if (token) {
-    localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = `jwt ${token}`;
-    user = jwt_decode(token);
-  } else {
-    localStorage.removeItem("token");
-    delete axios.defaults.headers.common.Authorization;
-    user = null;
-  }
+  return async dispatch => {
+    try {
+      let user;
+      if (token) {
+        localStorage.setItem("token", token);
+        axios.defaults.headers.common.Authorization = `jwt ${token}`;
+        user = jwt_decode(token);
+        dispatch(fetchChannels());
+      } else {
+        localStorage.removeItem("token");
+        delete axios.defaults.headers.common.Authorization;
+        user = null;
+      }
 
-  return {
-    type: SET_CURRENT_USER,
-    payload: user
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: user
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
+
 export const signup = (userData, history) => {
   return async dispatch => {
     try {
@@ -76,8 +84,8 @@ export const login = (userData, history) => {
       dispatch(setCurrentUser(token));
       dispatch(setErrors());
       history.replace("/private");
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       dispatch(setErrors("Input is Invalid"));
     }
   };

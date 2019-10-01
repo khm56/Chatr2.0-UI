@@ -1,9 +1,10 @@
 import { FETCH_CHANNELS } from "./actionTypes";
 import axios from "axios";
 import { setErrors } from "./errors";
+
 export const fetchChannels = () => {
   return async dispatch => {
-    console.log("hello");
+    // console.log("hello");
     try {
       const res = await axios.get("https://api-chatr.herokuapp.com/channels/");
       const channels = res.data;
