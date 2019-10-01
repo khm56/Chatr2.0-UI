@@ -1,4 +1,4 @@
-import { FETCH_SELECTED_CHANNELS } from "./actionTypes";
+import { FETCH_SELECTED_CHANNELS, POST_ON_CHANNEL } from "./actionTypes";
 import axios from "axios";
 import { setErrors } from "./errors";
 
@@ -10,6 +10,25 @@ export const fetchSelectedChannel = channelID => {
       );
       const currentChannel = response.data;
       dispatch({ type: FETCH_SELECTED_CHANNELS, payload: currentChannel });
+    } catch (error) {
+      console.error(error);
+      dispatch(setErrors(error));
+    }
+  };
+};
+
+export const postOnChannel = (messages, channelID) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
+        messages
+      );
+      const currentchannel = res.data;
+      dispatch({
+        type: POST_ON_CHANNEL,
+        payload: currentchannel
+      });
     } catch (error) {
       console.error(error);
       dispatch(setErrors(error));

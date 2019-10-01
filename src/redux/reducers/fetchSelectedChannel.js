@@ -1,5 +1,8 @@
 // import * as actionTypes from "../actions/actionTypes";
-import { FETCH_SELECTED_CHANNELS } from "../actions/actionTypes";
+import {
+  FETCH_SELECTED_CHANNELS,
+  POST_ON_CHANNEL
+} from "../actions/actionTypes";
 
 const initialState = {
   messages: [],
@@ -14,6 +17,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         messages: selectedChannel,
         loading: false
+      };
+    case POST_ON_CHANNEL:
+      const createChannel = payload;
+      return {
+        ...state,
+        messages: [createChannel, ...state.messages]
       };
     default:
       return state;

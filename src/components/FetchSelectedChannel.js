@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSelectedChannel } from "../redux/actions";
-
+import AddMessages from "./AddMessages";
 class FetchSelectedChannel extends React.Component {
   state = { collapsed: false };
 
@@ -14,11 +14,11 @@ class FetchSelectedChannel extends React.Component {
       this.props.fetchSelectedChannel(this.props.match.params.channelID);
   }
   render() {
-    console.log(this.props.messages);
-    console.log(this.props.channels);
-    console.log(this.props.user);
+    // console.log(this.props.messages);
+    // console.log(this.props.channels);
+    // console.log(this.props.user);
 
-    if (!this.props.user) return <Redirect to="/welcome" />;
+    // if (!this.props.user) return <Redirect to="/welcome" />;
     return (
       <div>
         {this.props.messages.map(channel => {
@@ -30,6 +30,7 @@ class FetchSelectedChannel extends React.Component {
             </ul>
           );
         })}
+        <AddMessages channelID={this.props.match.params.channelID} />
       </div>
     );
   }

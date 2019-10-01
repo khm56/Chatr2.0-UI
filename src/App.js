@@ -12,6 +12,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import { connect } from "react-redux";
 import AddChannel from "./components/AddChannel";
+import AddMessages from "./components/AddMessages";
 import FetchSelectedChannel from "./components/FetchSelectedChannel";
 // import fetchSelectedChannel from "./components/FetchSelectedChannel";
 class App extends Component {
@@ -35,6 +36,9 @@ class App extends Component {
           {!!this.props.user && (
             <Route path="/createChannel" component={AddChannel} />
           )}
+          {/* {!!this.props.user && (
+            <Route path="/addMessages" component={AddMessages} />
+          )} */}
           {!!this.props.user && (
             <Route
               path="/fetchSelectedChannel/:channelID"
