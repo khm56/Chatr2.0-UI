@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-import {} from "./actionTypes";
+import { SET_CURRENT_USER } from "./actionTypes";
 
 import { setErrors } from "./errors";
 
@@ -9,12 +9,54 @@ const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
 
-export const checkForExpiredToken = () => {};
+const setCurrentUser = token => {
+  let user;
+  if (token) {
+    localStorage.setItem("token", token);
+    axios.defaults.headers.common.Authorization = `jwt ${token}`;
+    user = jwt_decode(token);
+  } else {
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common.Authorization;
+    user = null;
+  }
 
-export const login = userData => {};
+  return {
+    type: SET_CURRENT_USER,
+    payload: user
+  };
+};
 
-export const signup = userData => {};
+export const checkForExpiredToken = () => {
+  const token = localStorage.getItem("token");
+  let user = null;
+  if (token) {
+    const currentTimeInSeconds = Date.now() / 1000;
+    user = jwt_decode(token);
+    if (user.exp >= currentTimeInSeconds) {
+      return setCurrentUser(token);
+    }
+  }
+  return logout();
+};
 
-export const logout = () => {};
+export const auth = (userData, type, history) => {
+  return async dispatch => {
+    try {
+      let response = await axios.post(
+        `https://api-chatr.herokuapp.com/${type}/`,
+        userData
+      );
+      let user = response.data;
+      dispatch(setCurrentUser(user.token));
+      history.replace("/private");
+    } catch (error) {
+      console.error(error);
+      dispatch(setErrors("Invalid Input!!"));
+    }
+  };
+};
 
-const setCurrentUser = token => {};
+export const logout = () => {
+  return setCurrentUser();
+};

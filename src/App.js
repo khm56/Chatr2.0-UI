@@ -10,6 +10,9 @@ import Footer from "./components/Footer";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
+import AddChannel from "./components/AddChannel";
+import ChannelMsg from "./components/ChannelMsg";
+import ChannelNavLink from "./components/Navigation/ChannelNavLink";
 
 class App extends Component {
   componentDidMount() {
@@ -22,8 +25,15 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route path="/welcome" component={Welcome} />
+
           <Route path="/(login|signup)" component={RegistrationForm} />
+
           <Route path="/private" component={SuperSecretPage} />
+
+          <Route path="/channels/create" component={AddChannel} />
+
+          <Route path="/channels/:channelID" component={ChannelMsg} />
+
           <Redirect to="/welcome" />
         </Switch>
         <Footer />

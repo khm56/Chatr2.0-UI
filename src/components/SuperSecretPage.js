@@ -3,8 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 const SuperSecretPage = ({ user }) => {
-  if (!user) return <Redirect to="/login" />;
-
+  if (!user) return <Redirect to="/welcome" />;
   return (
     <div>
       <h1>this page has all the secrets</h1>
