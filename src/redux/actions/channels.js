@@ -41,11 +41,33 @@ export const getChannel = channelID => {
 export const createChannel = channel_name => {
   return async dispatch => {
     try {
-      const res = await instance.post("/channels/create/", channel_name);
+      const res = await axios.post(
+        "https://api-chatr.herokuapp.com/channels/create/",
+        channel_name
+      );
       const newChannel = res.data;
       dispatch({
         type: actionTypes.CREATE_CHANNEL,
         payload: newChannel
+      });
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+};
+
+export const postMsg = (channelID, msg, user) => {
+  return async dispatch => {
+    try {
+      const res = await axios.post(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
+        msg
+      );
+      const newMsg = res.data;
+      newMsg.username = user;
+      dispatch({
+        type: actionTypes.POST_MSG,
+        payload: newMsg
       });
     } catch (error) {
       console.error(error.response.data);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchChannels } from "../../redux/actions/";
+import { createChannel } from "../../redux/actions/";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +13,7 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import ChannelForm from "../ChannelForm";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
@@ -37,7 +38,7 @@ class SideNav extends React.Component {
               data-toggle="tooltip"
               data-placement="right"
             >
-              <Link className="nav-link heading" to="/createChannel">
+              <Link className="nav-link heading" to="/channels/create">
                 <span className="nav-link-text mr-2">Channels</span>
                 <FontAwesomeIcon icon={faPlusCircle} />
               </Link>

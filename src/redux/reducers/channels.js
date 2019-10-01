@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   channels: [],
   channel: null
+  // msgs: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         channel: action.payload
+      };
+    case actionTypes.CREATE_CHANNEL:
+      console.log(action.payload);
+      return {
+        ...state,
+        channels: state.channels.concat(action.payload)
+      };
+    case actionTypes.POST_MSG:
+      return {
+        ...state,
+        channel: state.channel.concat(action.payload)
       };
 
     default:

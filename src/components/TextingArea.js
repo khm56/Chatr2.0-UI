@@ -1,75 +1,58 @@
 import React, { Component } from "react";
-// import "./App.css";
+import { connect } from "react-redux";
 
-const styles = {
-  bold: { fontWeight: "bold" },
-  italic: { fontStyle: "italic" },
-  underline: { textDecorationLine: "underline" }
-};
+// Actions
+import { postMsg } from "../redux/actions/";
 
 class TextingArea extends Component {
   state = {
-    color: "black",
-    bold: false,
-    italic: false,
-    underline: false
+    message: ""
   };
 
-  setStyle(style) {
-    this.setState(prevState => ({ [style]: !prevState[style] }));
-  }
+  submitMsg = event => {
+    this.props.postMsg(
+      this.props.channelID,
+      this.state,
+      this.props.user.username
+    );
+    console.log(this.props);
+  };
 
-  setColor(color) {
-    this.setState({ color });
-  }
-
-  getStyle() {
-    let style = {
-      color: this.state.color
-    };
-
-    if (this.state.bold) style = { ...style, ...styles.bold };
-    if (this.state.italic) style = { ...style, ...styles.italic };
-    if (this.state.underline) style = { ...style, ...styles.underline };
-
-    return style;
-  }
+  onTextchange = event =>
+    this.setState({ [event.target.name]: event.target.value });
 
   render() {
-    let styleNames = ["bold", "italic", "underline"];
-    let colors = ["yellow", "blue", "red", "black", "purple"];
-
-    let stylingBoxes = styleNames.map(style => {
-      return (
-        <button
-          className={`btn ${this.state[style] && "btn-primary"}`}
-          onClick={() => this.setStyle(style)}
-          style={styles[style]}
-          key={style}
-        >
-          {style}
-        </button>
-      );
-    });
-
-    let colorBoxes = colors.map(color => {
-      return (
-        <button
-          onClick={() => this.setColor(color)}
-          style={{ backgroundColor: color, height: 30, width: 30 }}
-          key={color}
-        />
-      );
-    });
-
     return (
-      <div className="App">
-        <div className="my-3">{stylingBoxes}</div>
-        <textarea style={this.getStyle()} />
-        <div className="my-3">{colorBoxes}</div>
+      <div
+        className="texted bg-dark text-center fixed-bottom  p-3 "
+        style={{ marginLeft: "15%", width: "85.75%" }}
+      >
+        <form onSubmit={this.submitMsg}>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              name="message"
+              className="form-control rounded-pill "
+              placeholder="Type a message..."
+              onChange={this.onTextchange}
+            />
+            <div className="input-group-append ">
+              <input type="submit" />
+            </div>
+          </div>
+        </form>
       </div>
     );
   }
 }
 
-export default TextingArea;
+const mapDispatchToProps = dispatch => ({
+  postMsg: (channelID, msg, user) => dispatch(postMsg(channelID, msg, user))
+});
+const mapStateToProps = state => ({
+  user: state.user
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TextingArea);

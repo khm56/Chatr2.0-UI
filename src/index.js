@@ -6,6 +6,7 @@ import registerServiceWorker from "./registerServiceWorker";
 
 // Styling
 import "./assets/css/main.css";
+import "./assets/css/text.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
