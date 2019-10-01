@@ -11,7 +11,10 @@ class RegistationForm extends Component {
 
   
   componentWillUnmount() {
-    if (this.props.errors) return this.props.resetErrors();
+    if (this.props.errors){
+      this.props.resetErrors();
+    } 
+    this.props.fetchChannels()
   }
 
   changeHandler = e => {
@@ -29,7 +32,12 @@ class RegistationForm extends Component {
   render() {
     if (this.props.user) return <Redirect to="/welcome" /> 
     const type = this.props.match.url.substring(1);
-    console.log(this.props.errors)
+  
+
+    const submit = (event) =>{
+      this.submitHandler(event,type);
+      
+    }
 
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
@@ -39,7 +47,7 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          <form onSubmit={event=>this.submitHandler(event,type)}>
+          <form onSubmit={submit}>
           <p style={{color: "red" }}>  {this.props.errors.username}</p>
           <p style={{color: "red" }}>  {this.props.errors.non_field_errors}</p>
         
@@ -97,7 +105,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionCreators.signup(userData, history)),
     login: (userData, history) =>
       dispatch(actionCreators.login(userData, history)),
-    resetErrors: () => dispatch(actionCreators.resetErrors())
+    resetErrors: () => dispatch(actionCreators.resetErrors()),
+    fetchChannels: () => dispatch(actionCreators.fetchChannels())
   };
 };
 

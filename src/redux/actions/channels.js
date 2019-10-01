@@ -18,6 +18,12 @@ export const fetchChannels = () => {
   };
 };
 
+export const resetChannels = () => {
+  return {
+    type: actionTypes.FETCH_CHANNELS,
+    payload: []
+  };
+};
 
 export const filterChannels = query => {
   return {
@@ -31,8 +37,8 @@ export const addChannel= channel => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        "https://api-chatr.herokuapp.com/channels/create",
-        channel
+        "https://api-chatr.herokuapp.com/channels/create/",
+        {name: channel}
       );
       const newChannel = res.data;
       dispatch({

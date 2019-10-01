@@ -25,7 +25,9 @@ class App extends Component {
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/private" component={SuperSecretPage} />
-          <Route path="/messages" component={MessagesList} />
+          <Route path="/channels/:ChannelID" component={MessagesList} />
+          <Route path="/supersecretpage" component={SuperSecretPage} />
+          <Route path="/CreateChannel/" component={MessagesList} />
           <Redirect to="/welcome" />
         </Switch>
         <Footer />

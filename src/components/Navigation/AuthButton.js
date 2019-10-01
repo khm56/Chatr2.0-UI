@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{Component} from "react";
+import { Link , Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions";
 
@@ -11,35 +11,52 @@ import {
   faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
-const AuthButton = ({ user,logout}) => {
-  let buttons = [
-    <li key="loginButton" className="nav-item">
+class AuthButton extends Component {
+  render(){
+    if(!this.props.user) return (
+    
+      <>
+      <div key="loginButton" className="nav-item">
       <Link to="/login" className="nav-link">
         <FontAwesomeIcon icon={faSignInAlt} /> Login
       </Link>
-    </li>,
-    <li key="signupButton" className="nav-item">
+      </div>
+    <div key="signupButton" className="nav-item">
       <Link to="/signup" className="nav-link">
         <FontAwesomeIcon icon={faUserPlus} /> Signup
       </Link>
-    </li>
-  ];
+    </div>
+    <Redirect to="/Welcome"/>
+    </>
+    )
+  const logoutAndReset = () =>{
+  {this.props.logout()};
+  {this.props.resetChannels()};
+  }
 
-  if (user) {
-    buttons = (
+
+
+  if (this.props.user) {
+    return (
       <>
-        <span className="navbar-text">{user.username}</span>
-        <li className="nav-item">
-          <span className="nav-link">
-            <FontAwesomeIcon icon={faSignOutAlt}  onClick={logout}/> Logout
-          </span>
-        </li>
+      <div key="signupButton" className="nav-item" onClick={logoutAndReset}>
+      <Link to="/signout" className="nav-link">
+        <FontAwesomeIcon icon={faSignOutAlt} /> SignOut {this.props.user.username}
+      </Link>
+     </div>
+
       </>
     );
   }
 
-  return <ul className="navbar-nav ml-auto">{buttons}</ul>;
+  return (
+    <>
+  
+  <Redirect to="/Welcome" />
+    </>
+  )
 };
+}
 
 const mapStateToProps = state => ({
   user: state.user
@@ -49,6 +66,7 @@ const mapDispatchToProps = dispatch => {
   return {
     logout: () =>
       dispatch(actionCreators.logout()),
+    resetChannels: () => dispatch(actionCreators.resetChannels())
   };
 };
 

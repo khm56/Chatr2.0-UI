@@ -1,24 +1,42 @@
-import React from "react";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../redux/actions";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
-const ChannelNavLink = ({ channel }) => {
+class ChannelNavLink extends Component {
+  render(){
   return (
+    <>
     <li
       className="nav-item"
       data-toggle="tooltip"
       data-placement="right"
-      title={channel.name}
+      title={this.props.channel.name}
     >
-      <NavLink className="nav-link" to={`/channels/${channel.name}`}>
+      <NavLink className="nav-link"  onClick = {() => this.props.fetchMessages(this.props.channel.id)} to={`/channels/${this.props.channel.id}`}>
         <FontAwesomeIcon icon={faHashtag} />
-        <span className="nav-link-text"> {channel.name}</span>
+        <span className="nav-link-text" > {this.props.channel.name}</span>
       </NavLink>
     </li>
+    </>
   );
 };
+}
 
-export default ChannelNavLink;
+
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+      fetchMessages: ChannelID => dispatch(actionCreators.fetchMessages(ChannelID))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ChannelNavLink);
