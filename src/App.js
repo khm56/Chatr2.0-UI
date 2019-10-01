@@ -11,6 +11,9 @@ import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import { connect } from "react-redux";
+import AddChannel from "./components/AddChannel";
+import FetchSelectedChannel from "./components/FetchSelectedChannel";
+// import fetchSelectedChannel from "./components/FetchSelectedChannel";
 class App extends Component {
   componentDidMount() {
     main();
@@ -29,6 +32,21 @@ class App extends Component {
           {!!this.props.user && (
             <Route path="/private" component={SuperSecretPage} />
           )}
+          {!!this.props.user && (
+            <Route path="/createChannel" component={AddChannel} />
+          )}
+          {!!this.props.user && (
+            <Route
+              path="/fetchSelectedChannel/:channelID"
+              component={FetchSelectedChannel}
+            />
+          )}
+          {/* {!!this.props.user && (
+            <Route
+              path="/channel/:channelID"
+              component={fetchSelectedChannel}
+            />
+          )} */}
           {!this.props.user ? (
             <Redirect to="/welcome" />
           ) : (

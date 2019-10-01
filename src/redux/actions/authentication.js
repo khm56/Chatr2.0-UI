@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 
 import { SET_CURRENT_USER } from "./actionTypes";
 import { fetchChannels } from "./channels";
+// import { fetchSelectedChannel } from "./channels";
 import { setErrors } from "./errors";
 
 // const instance = axios.create({
@@ -37,6 +38,7 @@ const setCurrentUser = token => {
         axios.defaults.headers.common.Authorization = `jwt ${token}`;
         user = jwt_decode(token);
         dispatch(fetchChannels());
+        // dispatch(fetchSelectedChannel(token));
       } else {
         localStorage.removeItem("token");
         delete axios.defaults.headers.common.Authorization;

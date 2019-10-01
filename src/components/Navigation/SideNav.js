@@ -18,11 +18,11 @@ class SideNav extends React.Component {
   state = { collapsed: false };
 
   // componentDidMount() {
-  //   this.props.fetchChannels();
+  //   this.props.fetchSelectedChannel(this.props.match.params.channelID);
   // }
   render() {
     const channelLinks = this.props.channels.map(channel => (
-      <ChannelNavLink key={channel.name} channel={channel} />
+      <ChannelNavLink key={channel.id} channel={channel} />
     ));
     if (!this.props.user) return <Redirect to="/welcome" />;
     return (
@@ -30,7 +30,7 @@ class SideNav extends React.Component {
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/createChannel">
-              <span className="nav-link-text mr-2">Channels</span>
+              <span className="nav-link-text mr-2">AddChannel</span>
               <FontAwesomeIcon icon={faPlusCircle} />
             </Link>
           </li>
