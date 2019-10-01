@@ -19,6 +19,24 @@ export const fetchChannelDetail = channelID => {
     };
 };
 
+
+
+// export const filterChannelMessages = channelID => {
+//     return async dispatch => {
+//         try {
+//             const res = await axios.get(
+//                 `https://api-chatr.herokuapp.com/channels/${channelID}/`
+//             );
+//             const channelMessages = res.data;// need to specify that we want messages
+//             dispatch({
+//                 type: actionTypes.FILTER_MESSAGES,
+//                 payload: channelMessages
+//             });
+//         } catch (err) {
+//             console.error(err);
+//         }
+//     };
+// };
 // export const postMessage = (message, channelID, user) => {
 //   message = {
 //     ...message,

@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    channel: []
+    channel: [],
+    // filteredMessages: [],
 };
 
 const channelReducer = (state = initialState, action) => {

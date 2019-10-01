@@ -3,37 +3,87 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChannelDetail } from "../redux/actions";
 import Messages from "./Messages";
-
+import SearchChannelBar from "./SearchChannelBar"
 class SendMessageForm extends Component {
   //   state = {
   //     channel:"",
   //     changed:false
   // }
+
+  state = {
+    filteredMessages: [],
+    searchIsUsed: false,
+  };
+
+  filterMessages = query => {
+    const channel = this.props.channel;
+    query = query.toLowerCase();
+
+    let filteredMessages = channel.filter(messageItem =>
+      `${messageItem.message}`.toLowerCase().includes(query)
+    );
+    this.setState({
+      filteredMessages: filteredMessages,
+      searchIsUsed: true
+    });
+  };
+
   componentDidMount() {
-    this.props.fetchChannelDetail(this.props.match.params.channelID);
+    this.interval = setInterval(() => {
+      if (this.props.match.params.channelID !== undefined)
+        this.props.fetchChannelDetail(this.props.match.params.channelID);
+    }, 5000);
   }
+
 
 
   componentDidUpdate(prevProps) {
-    const channelID = this.props.match.params.channelID;
-    if (prevProps.match.params.channelID !== channelID) {
-      this.props.fetchChannelDetail(channelID);
+    if (this.props.match.params.channelID !== undefined) {
+      if (
+        this.props.match.params.channelID !== prevProps.match.params.channelID
+      ) {
+        this.props.fetchChannelDetail(this.props.match.params.channelID);
+      } else {
+        clearInterval(this.interval);
+        this.interval = setInterval(() => {
+          this.props.fetchChannelDetail(this.props.match.params.channelID);
+        }, 5000);
+      }
     }
+  }
 
+  myView = () => {
+    const channel = this.props.channel;
+
+    if (!!channel) {
+      if (this.state.searchIsUsed) {
+        const resultedMessages = this.state.filteredMessages.map(message => (
+          <Messages key={message.id} messages={message} />));
+        return <div>{resultedMessages}</div>
+      }
+      else //search is not used
+      {
+        const messages = channel.map(message => (
+          <Messages key={message.id} messages={message} />));
+        return <div>{messages}</div>
+      }
+      ;
+    }
   }
 
 
-
   render() {
-    if (!this.props.user) return <Redirect to="/login" />;
-    const channel = this.props.channel;
-    if (!!channel) {
-      const messages = channel.map(message => (
-        <Messages key={message.id} messages={message} />
-      ));
-      return <div>{messages}</div>;
+    if (!this.props.user) {
+      return <Redirect to="/login" />;
     }
-    return <div></div>;
+
+    return (
+      <>
+        <SearchChannelBar onChange={this.filterMessages} />
+        <div className="content col-10">{this.myView()}</div>
+      </>
+
+    )
   }
 }
 
@@ -50,7 +100,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SendMessageForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMessageForm);
