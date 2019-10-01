@@ -9,38 +9,24 @@ import { getChannel } from "../redux/actions";
 import MsgsBox from "./MessagesArea";
 
 class SuperSecretPage extends Component {
-  state = {
-    msgs: []
-  };
-  msges = [];
-
-  getmsgs = () => {
-    this.msgs();
-    return this.state.msgs.map(text => <MsgsBox text={text} />);
-  };
   componentDidMount() {
     this.props.getChannel(this.props.match.params.channelID);
-    this.setState({ msgs: this.msges });
-
-    // this.getmsgs();
   }
   componentDidUpdate(prevProps) {
     if (
       prevProps.match.params.channelID !== this.props.match.params.channelID
     ) {
-      this.props.getChannel(this.props.match.params.channelID);
+      setInterval(
+        this.props.getChannel(this.props.match.params.channelID),
+        3000
+      );
     }
   }
 
-  msgs = () => {
-    if (this.props.channel) {
-      const msgarr = this.props.channel.map(text => {
-        this.msges.concat(text);
-      });
-      return msgarr;
-    }
-  };
   render() {
+    const msgs = () => this.props.channel.map(text => <MsgsBox text={text} />);
+    console.log("dem Msgs" + msgs);
+
     const getColor = () => {
       if (this.props.channel) return this.props.channel.image_url;
       else return "";
@@ -55,7 +41,7 @@ class SuperSecretPage extends Component {
         }}
       >
         <div className="mesgs">
-          <div className="msg_history">{setInterval(this.getmsgs(), 3000)}</div>
+          <div className="msg_history">{msgs()}</div>
           <TextingArea channelID={this.props.match.params.channelID} />
         </div>
       </div>
