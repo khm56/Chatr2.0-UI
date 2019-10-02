@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class AddMessage extends Component {
+
+
+
+
     render() {
         return (
             <div className="mt-5 p-2">

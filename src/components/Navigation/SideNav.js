@@ -31,20 +31,10 @@ class SideNav extends React.Component {
     return this.props.channels.filter(channel => {
       return `${channel.name}`.toLowerCase().includes(query);
 
-      // return this.props.authors.filter(author => {
-      //   return `${author.first_name} ${author.last_name}`
-      //     .toLowerCase()
-      //     .includes(query);
     });
 
   };
 
-  // componentDidUpdate(prevState) {
-  //   if (this.state.channel !== prevState.channel) {
-  //     this.setState({ changed: true, channel: this.state.channel })
-
-  //   }
-  // }
 
   render() {
     const channelLinks = this.props.filteredChannels.map(channel => (
@@ -54,11 +44,12 @@ class SideNav extends React.Component {
       />
     ));
     {
+      {
+        // console.log("Side nav this.state.filteredChannels", this.props.filteredChannels)
+      }
       if (this.props.user) {
         return (
           <div>
-            {console.log("this.state.filteredChannels", this.state.filteredChannels)
-            }
             <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
 
               <SearchBar />

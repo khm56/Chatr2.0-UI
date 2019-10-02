@@ -14,16 +14,16 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 
 class SendMessageForm extends Component {
-  //   state = {
-  //     channel:"",
-  //     changed:false
-  // }
-
   state = {
     filteredMessages: [],
     searchIsUsed: false,
+    message: "",
   };
 
+  //used to reset the form 
+  resetForm = () => this.setState({
+    message: "",
+  })
   filterMessages = query => {
     const channel = this.props.channel;
     query = query.toLowerCase();
@@ -39,10 +39,14 @@ class SendMessageForm extends Component {
 
   componentDidMount() {
     // const timeStamp = this.props.match.params.channelID.latest;
+    this.props.changeLoading();
+
     this.interval = setInterval(
       () => {
-        if (this.props.match.params.channelID !== undefined)
+        if (this.props.match.params.channelID !== undefined) {
+
           this.props.fetchChannelDetail(this.props.match.params.channelID);
+        }
       },
       1000
       // timeStamp
@@ -80,8 +84,12 @@ class SendMessageForm extends Component {
     this.props.sendMessage(
       this.props.match.params.channelID,
       this.state,
-      this.props.user
+      this.props.user,
+      this.resetForm
     );
+    this.setState({
+      message: "",
+    })
     let text = document.messageForm.message;
     text.value = "";
   };
@@ -92,49 +100,54 @@ class SendMessageForm extends Component {
 
     if (!!channel) {
       const ChannelIDfromURL = this.props.match.params.channelID
+      console.log("ChannelIDfromURL", ChannelIDfromURL)
+
+
       //get the background 
       // console.log("this.state.filteredChannels", this.state.filteredChannels)
-      // let findChannel = this.state.channels.filter(channel => channel.id === ChannelIDfromURL)
-      // let background = findChannel.image_url;
+
+
+      let findChannel = this.props.channels.find(channel => channel.id === +ChannelIDfromURL)
+
       let background = ""
+      console.log("findChannel", findChannel)
+
+
+      if (findChannel) {
+        background = findChannel.image_url;
+        console.log("findChannel.image_url", findChannel.image_url)
+
+      }
 
       // set the background of the channel to be the "image_url" of the channel
       if (this.state.searchIsUsed) {
         const resultedMessages = this.state.filteredMessages.map(message => (
-          <Messages key={message.id} messages={message} />));
+          <Messages key={message.id} messages={message} background={background} />));
         return <div style={{
           backgroundImage: `url(${background})`
         }}>
           {resultedMessages}
         </div>
+        {/* <div style={{
+          
+          backgroundImage: `url(${background})`
+        }}>
+          {resultedMessages}
+        </div> */}
       }
       else //search is not used
       {
         const messages = channel.map(message => (
-          <Messages key={message.id} messages={message} />));
+          <Messages key={message.id} messages={message} background={background} />));
         return <div style={{
           backgroundImage: `url(${background})`
         }}>
-          {messages}
-          <div style={{ textAlign: "center" }} className="mt-5 p-2">
-            <form name="messageForm" onSubmit={this.submitHandler}>
-              <div className="row" id="scroller">
-                <div className="col-12">
-                  <input
-                    name="message"
-                    value={this.state.message}
-                    placeholder="Write your message..."
-                    onChange={this.changeHandler}
-                    className="input"
-                  ></input>
-                </div>
 
-                <button id="send" type="submit" value="Send">
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                </button>
-              </div>
-            </form>
-          </div>
+          {/* style={{
+          backgroundImage: `url(${background})`
+        }}> */}
+          {messages}
+
         </div>
 
 
@@ -155,9 +168,39 @@ class SendMessageForm extends Component {
             })`
         }}> */}
 
-        <div >
+        <div style={{
+          backgroundImage: `url(${this.props.channel.image_url
+            })`
+        }}>
           <SearchChannelBar onChange={this.filterMessages} />
-          <div className="content col-10" >{this.myView()}</div>
+          <div className=" ml-5 content col-10"  >{this.myView()}</div>
+
+
+          {/* style={{
+
+backgroundImage: `url(${this.background})`
+}} */}
+          <div style={{ textAlign: "center" }} className="mt-5 p-2">
+            <form name="messageForm" onSubmit={this.submitHandler}>
+              <div className="row" id="scroller">
+                <div className="col-12">
+                  <input
+                    name="message"
+                    value={this.state.message}
+                    placeholder="Write your message..."
+                    onChange={this.changeHandler}
+                    className="input"
+                  ></input>
+                </div>
+
+                <button id="send" type="submit" value="Send">
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                </button>
+              </div>
+            </form>
+          </div>
+
+
         </div>
       </>
 
@@ -180,8 +223,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendMessage: (channelID, message, user) =>
-      dispatch(sendMessage(channelID, message, user)),
+    sendMessage: (channelID, message, user, resetForm) =>
+      dispatch(sendMessage(channelID, message, user, resetForm)),
 
     fetchChannelDetail: channelID => dispatch(fetchChannelDetail(channelID)),
     changeLoading: () => dispatch(setLoading())

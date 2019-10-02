@@ -25,7 +25,7 @@ export const fetchChannelDetail = channelID => {
 };
 
 
-export const sendMessage = (channelID, message, user) => {
+export const sendMessage = (channelID, message, user, resetForm) => {
     return async dispatch => {
         try {
             const res = await axios.post(
@@ -42,6 +42,8 @@ export const sendMessage = (channelID, message, user) => {
                 type: actionTypes.SEND_MESSAGE,
                 payload: messageObject
             });
+            resetForm();
+
         } catch (error) {
             console.error(error);
         }

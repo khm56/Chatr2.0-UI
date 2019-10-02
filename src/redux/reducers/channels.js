@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     channels: [],
     filteredChannels: [],
-    loading: true
+    loading: true,
 
 };
 
