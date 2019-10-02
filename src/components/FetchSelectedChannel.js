@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSelectedChannel } from "../redux/actions";
 import AddMessages from "./AddMessages";
@@ -7,11 +7,26 @@ class FetchSelectedChannel extends React.Component {
   state = { collapsed: false };
 
   componentDidMount() {
-    this.props.fetchSelectedChannel(this.props.match.params.channelID);
+    this.interval = setInterval(
+      () => this.props.fetchSelectedChannel(this.props.match.params.channelID),
+      500
+    );
   }
   componentDidUpdate(prevProps) {
     if (this.props.match.params.channelID != prevProps.match.params.channelID)
       this.props.fetchSelectedChannel(this.props.match.params.channelID);
+    else {
+      clearInterval(this.interval);
+      this.interval = setInterval(
+        () =>
+          this.props.fetchSelectedChannel(this.props.match.params.channelID),
+        500
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
   render() {
     // console.log(this.props.messages);

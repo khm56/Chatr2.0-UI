@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const AuthButton = ({ user, logout }) => {
-  console.log("hi" + user);
+  // console.log("hi" + user);
   let buttons = [
     <li key="loginButton" className="nav-item">
       <Link to="/login" className="nav-link">

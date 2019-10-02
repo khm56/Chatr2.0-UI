@@ -29,7 +29,7 @@ export const postChannel = (channel, history) => {
         type: POST_CHANNEL,
         payload: createdchannel
       });
-      history.replace("/private");
+      history.replace(`/fetchSelectedChannel/${createdchannel.id}`);
     } catch (error) {
       console.error(error);
       dispatch(setErrors(error));

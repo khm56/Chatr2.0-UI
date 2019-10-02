@@ -17,18 +17,19 @@ export const fetchSelectedChannel = channelID => {
   };
 };
 
-export const postOnChannel = (messages, channelID) => {
+export const postOnChannel = (message, channelID, history) => {
   return async dispatch => {
     try {
       const res = await axios.post(
         `https://api-chatr.herokuapp.com/channels/${channelID}/send/`,
-        messages
+        message
       );
       const currentchannel = res.data;
       dispatch({
         type: POST_ON_CHANNEL,
         payload: currentchannel
       });
+      history.replace("/private");
     } catch (error) {
       console.error(error);
       dispatch(setErrors(error));

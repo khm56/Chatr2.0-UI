@@ -1,9 +1,5 @@
 // import * as actionTypes from "../actions/actionTypes";
-import {
-  FETCH_CHANNELS,
-  FETCH_SELECTED_CHANNELS,
-  POST_CHANNEL
-} from "../actions/actionTypes";
+import { FETCH_CHANNELS, POST_CHANNEL } from "../actions/actionTypes";
 
 const initialState = {
   channels: [],
