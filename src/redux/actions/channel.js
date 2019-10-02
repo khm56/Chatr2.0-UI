@@ -1,4 +1,10 @@
-import { ADD_CHANNEL, FETCH_CHANNEL, FETCH_MSGS, ADD_MSG } from "./actionTypes";
+import {
+  ADD_CHANNEL,
+  FETCH_CHANNEL,
+  FETCH_MSGS,
+  ADD_MSG,
+  FETCH_CHANNEL_DETAIL
+} from "./actionTypes";
 import axios from "axios";
 // import jwt_decode from "jwt-decode";
 
@@ -36,7 +42,24 @@ export const fetchChannels = () => {
       dispatch({ type: FETCH_CHANNEL, payload: channels });
     } catch (err) {
       console.error(err);
-      console.error(err.response.data);
+      //console.error(err.response.data);
+    }
+  };
+};
+
+export const fetchChannelDetail = channelID => {
+  return async dispatch => {
+    try {
+      const res = await instance.get(
+        `https://api-chatr.herokuapp.com/channels/${channelID}/`
+      );
+      const channel = res.data;
+      dispatch({
+        type: FETCH_CHANNEL_DETAIL,
+        payload: channel
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 };

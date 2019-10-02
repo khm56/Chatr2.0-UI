@@ -38,7 +38,7 @@ class App extends Component {
             <Route path="/private" component={SuperSecretPage} />
           )}
           {!!this.props.user && (
-            <Route path="/msgs/:channelID?" component={ChannelPage} />
+            <Route path="/msgs/:channelID" component={ChannelPage} />
           )}
 
           <Redirect to="/welcome" />

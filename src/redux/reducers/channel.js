@@ -1,11 +1,13 @@
 import {
   ADD_CHANNEL,
   FETCH_CHANNEL,
+  FETCH_CHANNEL_DETAIL,
   FETCH_MSGS,
   ADD_MSG
 } from "../actions/actionTypes";
 
 const initialState = {
+  channel: null,
   channels: [],
   msgs: []
 };
@@ -23,6 +25,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         channels: payload
       };
+    case FETCH_CHANNEL_DETAIL:
+      return {
+        ...state,
+        channel: payload
+      };
     case FETCH_MSGS:
       return {
         ...state,
@@ -31,7 +38,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case ADD_MSG:
       return {
         ...state,
-        msgs: [payload, ...state.msgs]
+        msgs: [payload].concat(state.msgs)
       };
     default:
       return state;
