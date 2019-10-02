@@ -23,16 +23,11 @@ class App extends Component {
     return (
       <>
         <NavBar />
-        <div className="row">
-          <div className="col-3" style={{ backgroundColor: "blue" }}>
+        <div className="row siteBg">
+          <div className="col-3">
             <SideNav />
           </div>
-          <div
-            className=" col-9 "
-            style={{
-              backgroundColor: "red"
-            }}
-          >
+          <div className=" col-9 " id="content">
             <Switch>
               <Route path="/welcome" component={Welcome} />
               <Route path="/(login|signup)" component={RegistrationForm} />

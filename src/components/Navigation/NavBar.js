@@ -7,7 +7,7 @@ import AuthButton from "./AuthButton";
 
 const NavBar = () => {
   return (
-    <nav className="navbar  navbar-dark bg-dark fixed-top" id="mainNav">
+    <nav className="navbar navbar-dark bg-dark fixed-top" id="mainNav">
       <Link className="navbar-brand" to="/welcome">
         Chatr2.0
       </Link>

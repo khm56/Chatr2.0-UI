@@ -7,14 +7,7 @@ function MsgsBox(props) {
   // 2019-09-30T10:45:22.708241Z
   let date = moment(timestamp).fromNow();
   return (
-    <div key={text.id} className="incoming_msg">
-      <div className="incoming_msg_img">
-        {" "}
-        <img
-          src="https://icons-for-free.com/iconfiles/png/512/bot+chat+message+telegram+icon-1320168256174387607.png"
-          alt="msg_avatar"
-        />{" "}
-      </div>
+    <div className="incoming_msg">
       <div className="received_msg">
         <div className="received_withd_msg">
           <p className="pb-3">
@@ -22,7 +15,7 @@ function MsgsBox(props) {
             <br></br>
             <span className="text-dark">{text.message}</span>
           </p>
-          <span className="time_date mb-5">{date}</span>
+          <span className="time_date">{date}</span>
         </div>
       </div>
     </div>

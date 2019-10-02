@@ -68,14 +68,14 @@ class SuperSecretPage extends Component {
         "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg";
     return (
       <div
-        className="container ml-5 text-left   "
+        className="container  text-left  "
         style={{
           backgroundImage: `url(${background})`
           // backgroundRepeat: " no-repeat"
           // opacity: "0.5",
         }}
       >
-        <div className=" ">{msgs()}</div>
+        <div>{msgs()}</div>
         <div className="">
           <TextingArea channelID={this.props.match.params.channelID} />
         </div>
