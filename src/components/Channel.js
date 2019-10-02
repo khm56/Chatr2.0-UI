@@ -133,7 +133,9 @@ class Channel extends Component {
     return (
       <div
         style={{
-          backgroundImage: `url(${this.getChannel().image_url})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
+            this.getChannel().image_url
+          })`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundSize: "1365px 1000px"

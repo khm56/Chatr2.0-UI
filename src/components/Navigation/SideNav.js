@@ -13,7 +13,11 @@ import { createChannel } from "../../redux/actions";
 import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
-  state = { collapsed: false, channelName: "" };
+  state = {
+    collapsed: false,
+    channelName: "",
+    filteredChannels: this.props.channels
+  };
   handleClick() {
     // e.preventDefault();
     alert("fdas");
@@ -24,6 +28,13 @@ class SideNav extends React.Component {
     this.setState({
       channelName: e.target.value
     });
+  }
+  componentDidMount() {}
+  componentDidUpdate(prevProps) {
+    if (this.props.channels.length != prevProps.channels.length) {
+      console.log("inside did upudate");
+      this.setState({ filteredChannels: this.props.channels });
+    }
   }
   renderCreateField() {
     if (this.props.user) {
@@ -49,10 +60,16 @@ class SideNav extends React.Component {
       );
     }
   }
+  handleSearch(e) {
+    let filtered = this.props.channels.filter(chn =>
+      chn.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    this.setState({ filteredChannels: filtered });
+  }
   render() {
     let channelLinks;
     if (this.props.user) {
-      channelLinks = this.props.channels.map(channel => (
+      channelLinks = this.state.filteredChannels.map(channel => (
         <ChannelNavLink key={channel.name} channel={channel} />
       ));
     }
@@ -91,6 +108,13 @@ class SideNav extends React.Component {
               {this.renderCreateField()}
             </Link>
           </li>
+          <div className="container mb-3">
+            <input
+              className="form-control rounded-pill border border-danger"
+              placeholder="Search for channels.."
+              onChange={e => this.handleSearch(e)}
+            ></input>
+          </div>
           {channelLinks}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
