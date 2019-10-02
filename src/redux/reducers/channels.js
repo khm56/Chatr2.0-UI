@@ -3,6 +3,8 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     channels: [],
     filteredChannels: [],
+    loading: true
+
 };
 
 const channelsReducer = (state = initialState, action) => {
@@ -29,7 +31,11 @@ const channelsReducer = (state = initialState, action) => {
                 ...state,
                 channels: [action.payload].concat(state.channels)
             };
-
+        case actionTypes.SET_CHANNELS_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
 
         default:
             return state;

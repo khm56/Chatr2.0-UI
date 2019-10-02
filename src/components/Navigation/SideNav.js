@@ -57,7 +57,8 @@ class SideNav extends React.Component {
       if (this.props.user) {
         return (
           <div>
-
+            {console.log("this.state.filteredChannels", this.state.filteredChannels)
+            }
             <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
 
               <SearchBar />

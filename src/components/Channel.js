@@ -3,7 +3,7 @@ import * as actionCreators from "../redux/actions";
 import { connect } from "react-redux";
 
 class Channel extends Component {
-    // im not using this
+    // im not using this file 
 
     componentDidMount() {
 

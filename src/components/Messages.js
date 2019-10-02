@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-
-class Messages extends Component {
-
-  render() {
-    return (
-      <div className="m-5">
-        <div style={{ textAlign: "center" }} className="card">
-          <h4>
-            <span style={{ color: "blue" }}> Timestamp: </span>{" "}
-            {this.props.messages.timestamp} <br />
-            <span style={{ color: "red" }}> Username:</span>{" "}
-            {this.props.messages.username} <br />
-            <span style={{ color: "green" }}> Message: </span>
-            {this.props.messages.message}{" "}
-          </h4>
-        </div>
+import React from "react";
+import "../assets/css/main.css";
+const Messages = props => {
+  return (
+    <div className="container">
+      <img
+        src="https://image.flaticon.com/icons/svg/17/17004.svg"
+        alt="Avatar"
+        className="image"
+      ></img>
+      <span className="username">
+        <b>From: </b>
+        {props.messages.username}
+      </span>
+      <div className="messages">
+        <p>{props.messages.message}</p>
       </div>
-    );
-  };
-}
+      <span className="timestamp">{props.messages.timestamp}</span>
+    </div>
+  );
+};
 
 export default Messages;
