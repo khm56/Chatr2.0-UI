@@ -6,6 +6,7 @@ import main from "./assets/js/main";
 
 // Components
 import NavBar from "./components/Navigation/NavBar";
+import Test from "./components/Navigation/test";
 import Footer from "./components/Footer";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
@@ -20,7 +21,9 @@ class App extends Component {
   render() {
     return (
       <div className="content-wrapper">
+        {/* <Test /> */}
         <NavBar />
+
         <Switch>
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />
@@ -30,7 +33,7 @@ class App extends Component {
           <Route path="/CreateChannel/" component={MessagesList} />
           <Redirect to="/welcome" />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

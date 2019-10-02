@@ -16,11 +16,10 @@ import {
 import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
-  
-  state = { 
-  collapsed: false,
-  channelName: "",
-  addMode: false
+  state = {
+    collapsed: false,
+    channelName: "",
+    addMode: false
   };
 
   render() {
@@ -29,45 +28,45 @@ class SideNav extends React.Component {
     ));
 
     const sign = () => {
-      if(this.state.addMode) return faMinusCircle
-      else return faPlusCircle
-    }
+      if (this.state.addMode) return faMinusCircle;
+      else return faPlusCircle;
+    };
 
     const addSign = () => {
-      if (this.props.user) return (
-        <>
-        <span className="nav-link-text mr-2">Channels</span>
-        <FontAwesomeIcon icon={sign()} />
-        </>
-      )
-    }
+      if (this.props.user)
+        return (
+          <>
+            <span className="nav-link-text mr-2">Channels</span>
+            <FontAwesomeIcon icon={sign()} />
+          </>
+        );
+    };
 
     const addChannelForm = () => {
-        if(this.state.addMode){
-      return(
-                
-        <div className="form-group">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Channel Name"
-                name="channelName"
-                onChange={changeHandler}
-              />
-              <button onClick={submitHandler}>Add</button>
+      if (this.state.addMode) {
+        return (
+          <div className="form-group">
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Channel Name"
+              name="channelName"
+              onChange={changeHandler}
+            />
+            <button onClick={submitHandler}>Add</button>
           </div>
-      )
-        }
-    }
-    
+        );
+      }
+    };
+
     const changeHandler = e => {
       this.setState({ [e.target.name]: e.target.value });
     };
 
     const activateadd = () => {
       this.setState({ addMode: !this.state.addMode });
-    }
-    const submitHandler = (e) => {
+    };
+    const submitHandler = e => {
       e.preventDefault();
       this.props.addChannel(this.state.channelName);
       this.setState({ [e.target.name]: e.target.value });
@@ -108,18 +107,18 @@ class SideNav extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-   channels: state.channels.channels,
-   user:state.user
+    channels: state.channels.channels,
+    user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChannel: (name) =>
-      dispatch(actionCreators.addChannel(name)),
+    addChannel: name => dispatch(actionCreators.addChannel(name))
   };
 };
 
 export default connect(
-  mapStateToProps,mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SideNav);

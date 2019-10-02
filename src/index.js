@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import registerServiceWorker from "./registerServiceWorker";
 
 // Styling
+import "./assets/css/new.css";
 import "./assets/css/main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
