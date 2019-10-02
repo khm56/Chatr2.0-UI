@@ -1,9 +1,14 @@
 // import * as actionTypes from "../actions/actionTypes";
-import { FETCH_CHANNELS, POST_CHANNEL } from "../actions/actionTypes";
+import {
+  FETCH_CHANNELS,
+  POST_CHANNEL,
+  FILTER_CHANNELS
+} from "../actions/actionTypes";
 
 const initialState = {
   channels: [],
-  loading: true
+  loading: true,
+  filteredChannels: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -13,15 +18,16 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         channels: newChannel,
+        filteredChannels: newChannel,
         loading: false
       };
-    // case FETCH_SELECTED_CHANNELS:
-    //   const selectedChannel = payload;
-    //   return {
-    //     ...state,
-    //     channels: selectedChannel,
-    //     loading: false
-    //   };
+    case FILTER_CHANNELS:
+      return {
+        ...state,
+        filteredChannels: state.channels.filter(channel => {
+          return `${channel.name}`.toLowerCase().includes(payload);
+        })
+      };
     case POST_CHANNEL:
       const createChannel = payload;
       return {

@@ -1,4 +1,4 @@
-import { FETCH_CHANNELS, POST_CHANNEL } from "./actionTypes";
+import { FETCH_CHANNELS, POST_CHANNEL, FILTER_CHANNELS } from "./actionTypes";
 import axios from "axios";
 import { setErrors } from "./errors";
 
@@ -34,5 +34,12 @@ export const postChannel = (channel, history) => {
       console.error(error);
       dispatch(setErrors(error));
     }
+  };
+};
+
+export const filterChannels = query => {
+  return {
+    type: FILTER_CHANNELS,
+    payload: query
   };
 };

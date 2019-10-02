@@ -28,21 +28,50 @@ class FetchSelectedChannel extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+  FetchImage() {
+    const findImage = this.props.channels.find(channel => {
+      if (channel.id == this.props.match.params.channelID) {
+        return channel;
+      }
+    });
+
+    if (findImage) {
+      return findImage.image_url;
+    }
+    return "http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg";
+  }
   render() {
+    let image_url = this.FetchImage();
     // console.log(this.props.messages);
+    console.log(image_url);
     // console.log(this.props.channels);
     // console.log(this.props.user);
 
     // if (!this.props.user) return <Redirect to="/welcome" />;
+
     return (
-      <div>
+      <div
+        style={{
+          backgroundImage: `url(${image_url})`,
+          backgroundPosition: "center"
+          //   backgroundSize: "contain",
+          //   backgroundRepeat: "no-repeat"
+        }}
+      >
         {this.props.messages.map(channel => {
           return (
-            <ul class="list-group">
-              <li class="list-group-item">{channel.username}</li>
-              <li class="list-group-item">{channel.timestamp}</li>
-              <li class="list-group-item">{channel.message}</li>
-            </ul>
+            <div className="card bg-transparent">
+              <ul className="list-group bg-transparent">
+                <br></br>
+                <br></br>
+                {/* <li className="list-group-item">{channel.timestamp}</li> */}
+                <li className="list-group-item">{channel.timestamp}</li>
+                <li className="list-group-item">
+                  {" "}
+                  {channel.username}: {channel.message}
+                </li>
+              </ul>
+            </div>
           );
         })}
         <AddMessages channelID={this.props.match.params.channelID} />

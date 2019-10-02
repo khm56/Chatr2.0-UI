@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChannels } from "../../redux/actions";
+import SearchBar from "./SearchBar";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,9 +22,12 @@ class SideNav extends React.Component {
   //   this.props.fetchSelectedChannel(this.props.match.params.channelID);
   // }
   render() {
-    const channelLinks = this.props.channels.map(channel => (
+    const filteredChannels = this.props.filteredChannels.map(channel => (
       <ChannelNavLink key={channel.id} channel={channel} />
     ));
+    // const channelLinks = this.props.channels.map(channel => (
+    //   <ChannelNavLink key={channel.id} channel={channel} />
+    // ));
     if (!this.props.user) return <Redirect to="/welcome" />;
     return (
       <div>
@@ -33,8 +37,9 @@ class SideNav extends React.Component {
               <span className="nav-link-text mr-2">AddChannel</span>
               <FontAwesomeIcon icon={faPlusCircle} />
             </Link>
+            <SearchBar /> {filteredChannels}
           </li>
-          {channelLinks}
+          {/* {channelLinks} */}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
@@ -60,7 +65,8 @@ class SideNav extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    channels: state.rootChannel.channels
+    channels: state.rootChannel.channels,
+    filteredChannels: state.rootChannel.filteredChannels
   };
 };
 
