@@ -10,12 +10,14 @@ class TextingArea extends Component {
   };
 
   submitMsg = event => {
+    event.preventDefault();
+
     this.props.postMsg(
       this.props.channelID,
       this.state,
       this.props.user.username
     );
-    console.log(this.props);
+    // console.log(this.props);
   };
 
   onTextchange = event =>
@@ -25,7 +27,7 @@ class TextingArea extends Component {
     return (
       <div
         className="texted bg-dark text-center fixed-bottom  p-3 "
-        style={{ marginLeft: "15%", width: "85.75%" }}
+        style={{ marginLeft: "14.2%", width: "85.75%" }}
       >
         <form onSubmit={this.submitMsg}>
           <div className="input-group mb-3">
@@ -37,7 +39,11 @@ class TextingArea extends Component {
               onChange={this.onTextchange}
             />
             <div className="input-group-append ">
-              <input type="submit" />
+              <input
+                className="btn btn-primary rounded-pill ml-2"
+                type="submit"
+                value="Post"
+              />
             </div>
           </div>
         </form>

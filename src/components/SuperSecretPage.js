@@ -9,35 +9,53 @@ import { getChannel } from "../redux/actions";
 import MsgsBox from "./MessagesArea";
 
 class SuperSecretPage extends Component {
-  componentDidMount() {
+  state = {
+    interval: null
+  };
+  componentWillUnmount = () => {
+    clearInterval(this.state.interval);
+  };
+
+  changeInterval = () => {
+    clearInterval(this.state.interval);
     this.props.getChannel(this.props.match.params.channelID);
-  }
+    let interval = setInterval(
+      () => this.props.getChannel(this.props.match.params.channelID),
+      1000
+    );
+    this.setState({ interval: interval });
+  };
+  componentDidMount = () => {
+    this.changeInterval();
+  };
   componentDidUpdate(prevProps) {
     if (
       prevProps.match.params.channelID !== this.props.match.params.channelID
     ) {
-      setInterval(
-        this.props.getChannel(this.props.match.params.channelID),
-        3000
-      );
+      this.changeInterval();
     }
   }
+  getImg = channelID => {
+    let obj = this.props.channels.filter(channel => channel.id == channelID);
+    if (obj[0]) return obj[0].image_url;
+  };
 
   render() {
     const msgs = () => this.props.channel.map(text => <MsgsBox text={text} />);
-    console.log("dem Msgs" + msgs);
-
-    const getColor = () => {
-      if (this.props.channel) return this.props.channel.image_url;
-      else return "";
-    };
-
+    let background;
     if (!this.props.user) return <Redirect to="/login" />;
+    if (this.getImg(this.props.match.params.channelID))
+      background = this.getImg(this.props.match.params.channelID);
+    else
+      background =
+        "https://media.gettyimages.com/videos/abstract-stripes-background-loop-video-id946877514?s=640x640(12 kB)";
     return (
       <div
-        className="container ml-5 text-left "
+        className="container ml-5 text-left   "
         style={{
-          backgroundImage: getColor()
+          backgroundImage: `url(${background})`
+          // backgroundRepeat: " no-repeat"
+          // opacity: "0.5",
         }}
       >
         <div className="mesgs">
@@ -54,7 +72,8 @@ const mapDispatchToProps = dispatch => ({
 });
 const mapStateToProps = state => ({
   user: state.user,
-  channel: state.channels.channel
+  channel: state.channels.channel,
+  channels: state.channels.channels
 });
 
 export default connect(

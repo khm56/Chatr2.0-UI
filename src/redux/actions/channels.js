@@ -22,6 +22,7 @@ export const fetchChannels = () => {
 };
 
 export const getChannel = channelID => {
+  // console.log(channelID);
   return async dispatch => {
     try {
       const res = await axios.get(
