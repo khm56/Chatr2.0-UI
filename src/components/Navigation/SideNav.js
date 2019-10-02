@@ -17,54 +17,26 @@ import ChannelForm from "../ChannelForm";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
-  // componentDidUpdate(prevState) {
-  //   if (this.state.channels !== prevState.channels) {
-  //     const newchanls = this.props.channels.channels;
-  //     this.setState({ channels: newchanls });
-  //   }
-  // }
+
   render() {
-    // console.log("CHANNELS" + this.props.channels.channels);
     const channelLinks = () =>
       this.props.channels.channels.map(channel => (
         <ChannelNavLink key={channel.name} channel={channel} />
       ));
     return (
-      <div>
+      <div className="channelsList">
         {this.props.user ? (
-          <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li
-              className="nav-item"
-              data-toggle="tooltip"
-              data-placement="right"
-            >
-              <Link className="nav-link heading" to="/channels/create">
-                <span className="nav-link-text mr-2">Channels</span>
-                <FontAwesomeIcon icon={faPlusCircle} />
-              </Link>
-            </li>
-            {channelLinks()}
-          </ul>
+          <>
+            <Link className=" heading" to="/channels/create">
+              <span className=" mr-2">Channels</span>
+              <FontAwesomeIcon icon={faPlusCircle} />
+            </Link>
+
+            <> {channelLinks()}</>
+          </>
         ) : (
           <></>
         )}
-        <ul className="navbar-nav sidenav-toggler">
-          <li className="nav-item">
-            <span
-              className="nav-link text-center"
-              id="sidenavToggler"
-              onClick={() =>
-                this.setState(prevState => ({
-                  collapsed: !prevState.collapsed
-                }))
-              }
-            >
-              <FontAwesomeIcon
-                icon={this.state.collapsed ? faAngleRight : faAngleLeft}
-              />
-            </span>
-          </li>
-        </ul>
       </div>
     );
   }

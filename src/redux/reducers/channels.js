@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   channels: [],
-  channel: []
+  channel: [],
+  id: null
   // msgs: []
 };
 
@@ -14,6 +15,18 @@ const reducer = (state = initialState, action) => {
         channels: action.payload
       };
     case actionTypes.GET_CHANNEL:
+      if (action.payload.id == state.id) {
+        return {
+          ...state,
+          channel: state.channel.concat(action.payload.messages)
+        };
+      } else {
+        return {
+          ...state,
+          channel: action.payload.messages,
+          id: action.payload.id
+        };
+      }
       return {
         ...state,
         channel: action.payload

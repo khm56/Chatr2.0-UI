@@ -17,6 +17,9 @@ class TextingArea extends Component {
       this.state,
       this.props.user.username
     );
+
+    this.setState({ message: " " });
+
     // console.log(this.props);
   };
 
@@ -25,15 +28,13 @@ class TextingArea extends Component {
 
   render() {
     return (
-      <div
-        className="texted bg-dark text-center fixed-bottom  p-3 "
-        style={{ marginLeft: "14.2%", width: "85.75%" }}
-      >
+      <div className=" bg-dark   ">
         <form onSubmit={this.submitMsg}>
-          <div className="input-group mb-3">
+          <div className="input-group ">
             <input
               type="text"
               name="message"
+              value={this.state.message}
               className="form-control rounded-pill "
               placeholder="Type a message..."
               onChange={this.onTextchange}

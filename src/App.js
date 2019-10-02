@@ -6,6 +6,8 @@ import main from "./assets/js/main";
 
 // Components
 import NavBar from "./components/Navigation/NavBar";
+import SideNav from "./components/Navigation/SideNav";
+
 import Footer from "./components/Footer";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
@@ -19,18 +21,30 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content-wrapper">
+      <>
         <NavBar />
-        <Switch>
-          <Route path="/welcome" component={Welcome} />
-          <Route path="/(login|signup)" component={RegistrationForm} />
-          <Route path="/channels/create" component={ChannelForm} />
-          <Route path="/channels/:channelID?" component={SuperSecretPage} />
+        <div className="row">
+          <div className="col-3" style={{ backgroundColor: "blue" }}>
+            <SideNav />
+          </div>
+          <div
+            className=" col-9 "
+            style={{
+              backgroundColor: "red"
+            }}
+          >
+            <Switch>
+              <Route path="/welcome" component={Welcome} />
+              <Route path="/(login|signup)" component={RegistrationForm} />
+              <Route path="/channels/create" component={ChannelForm} />
+              <Route path="/channels/:channelID?" component={SuperSecretPage} />
 
-          <Redirect to="/welcome" />
-        </Switch>
-        <Footer />
-      </div>
+              <Redirect to="/welcome" />
+            </Switch>
+            <Footer className="fixed-bottom" />
+          </div>
+        </div>
+      </>
     );
   }
 }

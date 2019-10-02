@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import TextingArea from "./TextingArea";
@@ -10,25 +9,42 @@ import MsgsBox from "./MessagesArea";
 
 class SuperSecretPage extends Component {
   state = {
-    interval: null
+    interval: null,
+    timeStamp: ""
   };
   componentWillUnmount = () => {
     clearInterval(this.state.interval);
+    this.setState({ timeStamp: "" });
   };
 
   changeInterval = () => {
     clearInterval(this.state.interval);
-    this.props.getChannel(this.props.match.params.channelID);
-    let interval = setInterval(
-      () => this.props.getChannel(this.props.match.params.channelID),
-      1000
-    );
+    let interval = setInterval(() => {
+      let stamp =
+        this.props.channel.length !== 0
+          ? this.props.channel[this.props.channel.length - 1].timestamp
+          : "";
+      this.setState({
+        timeStamp: stamp
+      });
+      this.props.getChannel(
+        this.props.match.params.channelID,
+        this.state.timeStamp
+      );
+      // window.scrollBy(0, this.props.channel.length * 1000);
+    }, 1000);
     this.setState({ interval: interval });
   };
   componentDidMount = () => {
     this.changeInterval();
   };
   componentDidUpdate(prevProps) {
+    // if (prevProps.state.timeStamp !== this.state.timeStamp) {
+    //   this.changeInterval();
+    // }
+    if (prevProps.channel.length > this.props.channel.length)
+      window.scrollBy(0, this.props.channel.length * 1000);
+
     if (
       prevProps.match.params.channelID !== this.props.match.params.channelID
     ) {
@@ -36,19 +52,20 @@ class SuperSecretPage extends Component {
     }
   }
   getImg = channelID => {
-    let obj = this.props.channels.filter(channel => channel.id == channelID);
+    let obj = this.props.channels.filter(channel => channel.id === channelID);
     if (obj[0]) return obj[0].image_url;
   };
 
   render() {
-    const msgs = () => this.props.channel.map(text => <MsgsBox text={text} />);
+    const msgs = () =>
+      this.props.channel.map(text => <MsgsBox key={text.id} text={text} />);
     let background;
     if (!this.props.user) return <Redirect to="/login" />;
-    if (this.getImg(this.props.match.params.channelID))
+    if (this.getImg(this.props.match.params.channelID) !== null)
       background = this.getImg(this.props.match.params.channelID);
     else
       background =
-        "https://media.gettyimages.com/videos/abstract-stripes-background-loop-video-id946877514?s=640x640(12 kB)";
+        "https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg";
     return (
       <div
         className="container ml-5 text-left   "
@@ -58,8 +75,8 @@ class SuperSecretPage extends Component {
           // opacity: "0.5",
         }}
       >
-        <div className="mesgs">
-          <div className="msg_history">{msgs()}</div>
+        <div className=" ">{msgs()}</div>
+        <div className="">
           <TextingArea channelID={this.props.match.params.channelID} />
         </div>
       </div>
@@ -68,7 +85,8 @@ class SuperSecretPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getChannel: channelID => dispatch(getChannel(channelID))
+  getChannel: (channelID, timeStamp) =>
+    dispatch(getChannel(channelID, timeStamp))
 });
 const mapStateToProps = state => ({
   user: state.user,

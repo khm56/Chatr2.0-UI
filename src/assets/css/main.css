@@ -7,10 +7,6 @@ body {
   overflow-x: hidden;
 }
 
-body.sticky-footer {
-  margin-bottom: 56px;
-}
-
 body.sticky-footer .content-wrapper {
   min-height: calc(100vh - 56px - 56px);
 }
@@ -71,31 +67,6 @@ body.fixed-nav {
   max-height: 75vh;
 }
 
-#mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
-  cursor: pointer;
-}
-
-#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
-  float: right;
-  content: "\f107";
-  font-family: "FontAwesome";
-}
-
-#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse.collapsed:after {
-  content: "\f105";
-}
-
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level,
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level {
-  padding-left: 0;
-}
-
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level > li > a,
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level > li > a {
-  display: block;
-  padding: 0.5em 0;
-}
-
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level > li > a:focus,
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level > li > a:hover,
 #mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level > li > a:focus,
@@ -107,10 +78,6 @@ body.fixed-nav {
   padding-left: 1em;
 }
 
-#mainNav .navbar-collapse .navbar-sidenav .sidenav-third-level > li > a {
-  padding-left: 2em;
-}
-
 #mainNav .navbar-collapse .sidenav-toggler {
   display: none;
 }
@@ -118,34 +85,6 @@ body.fixed-nav {
 #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link {
   position: relative;
   min-width: 45px;
-}
-
-#mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
-  float: right;
-  width: auto;
-  content: "\f105";
-  border: none;
-  font-family: "FontAwesome";
-}
-
-#mainNav
-  .navbar-collapse
-  .navbar-nav
-  > .nav-item.dropdown
-  > .nav-link
-  .indicator {
-  position: absolute;
-  top: 5px;
-  left: 21px;
-  font-size: 10px;
-}
-
-#mainNav
-  .navbar-collapse
-  .navbar-nav
-  > .nav-item.dropdown.show
-  > .nav-link:after {
-  content: "\f107";
 }
 
 #mainNav
@@ -179,17 +118,9 @@ body.fixed-nav {
     margin-top: 56px;
   }
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item {
-    width: 250px;
     padding: 0;
   }
-  #mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
-    padding: 1em;
-  }
-  #mainNav .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
-  #mainNav .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-    padding-left: 0;
-    list-style: none;
-  }
+
   #mainNav
     .navbar-collapse
     .navbar-sidenav
@@ -220,31 +151,7 @@ body.fixed-nav {
     > a {
     padding: 1em;
   }
-  #mainNav
-    .navbar-collapse
-    .navbar-sidenav
-    > .nav-item
-    .sidenav-second-level
-    > li
-    > a {
-    padding-left: 2.75em;
-  }
-  #mainNav
-    .navbar-collapse
-    .navbar-sidenav
-    > .nav-item
-    .sidenav-third-level
-    > li
-    > a {
-    padding-left: 3.75em;
-  }
-  #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link {
-    min-width: 0;
-  }
-  #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
-    width: 24px;
-    text-align: center;
-  }
+
   #mainNav
     .navbar-collapse
     .navbar-nav
@@ -354,12 +261,6 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 .navbar-sidenav-tooltip.show {
   display: none;
-}
-
-@media (min-width: 992px) {
-  body.sidenav-toggled .content-wrapper {
-    margin-left: 55px;
-  }
 }
 
 body.sidenav-toggled .navbar-sidenav {
@@ -657,22 +558,21 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 footer.sticky-footer {
   position: absolute;
-  right: 0;
-  bottom: 0;
+
   width: 100%;
   height: 56px;
   background-color: #e9ecef;
   line-height: 55px;
 }
-
-@media (min-width: 992px) {
-  footer.sticky-footer {
-    width: calc(100% - 250px);
-  }
-}
-
-@media (min-width: 992px) {
-  body.sidenav-toggled footer.sticky-footer {
-    width: calc(100% - 55px);
-  }
+.channelsList {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  right: 75%;
+  z-index: 1000;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  height: 100%;
 }

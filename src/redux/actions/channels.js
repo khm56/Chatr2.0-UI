@@ -2,10 +2,6 @@ import * as actionTypes from "./actionTypes";
 
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "https://api-chatr.herokuapp.com"
-});
-
 export const fetchChannels = () => {
   return async dispatch => {
     try {
@@ -21,17 +17,21 @@ export const fetchChannels = () => {
   };
 };
 
-export const getChannel = channelID => {
+export const getChannel = (channelID, timeStamp) => {
   // console.log(channelID);
   return async dispatch => {
     try {
       const res = await axios.get(
-        `https://api-chatr.herokuapp.com/channels/${channelID}/`
+        `https://api-chatr.herokuapp.com/channels/${channelID}/?latest=${timeStamp}`
       );
-      const channel = res.data;
+      const channelObj = {
+        id: channelID,
+        messages: res.data
+      };
+
       dispatch({
         type: actionTypes.GET_CHANNEL,
-        payload: channel
+        payload: channelObj
       });
     } catch (err) {
       console.error(err);
@@ -71,6 +71,7 @@ export const postMsg = (channelID, msg, user) => {
         payload: newMsg
       });
     } catch (error) {
+      console.error(error);
       console.error(error.response.data);
     }
   };
