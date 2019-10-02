@@ -4,8 +4,10 @@ export const SET_ERRORS = "SET_ERRORS";
 
 ///channels actions ...
 export const FETCH_CHANNELS = "FETCH_CHANNELS";
+export const FILTER_CHANNELS = "FILTER_CHANNELS";
 export const ADD_CHANNEL = "ADD_CHANNEL";
 
 //messages actions ...
 export const FETCH_CHANNEL_MSG = "FETCH_CHANNEL_MSG";
 export const POST_MESSAGE = "POST_MESSAGE";
+export const SET_MSG_LOADING = "SET_MSG_LOADING";

@@ -12,8 +12,11 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import Loading from "../Loading";
 
 import { fetchChannels } from "../../redux/actions";
+
+import Searchbar from "../Searchbar";
 
 class SideNav extends React.Component {
   state = { collapsed: false };
@@ -23,10 +26,11 @@ class SideNav extends React.Component {
   }
 
   render() {
-    const channelLinks = this.props.channels.map(channel => (
+    const channelLinks = this.props.filteredChannels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     if (!this.props.user) return <Redirect to="/welcome" />;
+
     return (
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -35,9 +39,9 @@ class SideNav extends React.Component {
               <span className="nav-link-text mr-2">Channels</span>
               <FontAwesomeIcon icon={faPlusCircle} />
             </Link>
+            <Searchbar />
+            {this.props.loading ? <Loading /> : channelLinks}
           </li>
-
-          {channelLinks}
         </ul>
         <ul className="navbar-nav sidenav-toggler">
           <li className="nav-item">
@@ -63,7 +67,9 @@ class SideNav extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  channels: state.rootChannels.channels
+  channels: state.rootChannels.channels,
+  loading: state.rootChannels.loading,
+  filteredChannels: state.rootChannels.filteredChannels
 });
 
 const mapDispatchToProps = dispatch => {

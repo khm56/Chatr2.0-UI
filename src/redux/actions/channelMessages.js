@@ -1,4 +1,8 @@
-import { FETCH_CHANNEL_MSG, POST_MESSAGE } from "./actionTypes";
+import {
+  FETCH_CHANNEL_MSG,
+  POST_MESSAGE,
+  SET_MSG_LOADING
+} from "./actionTypes";
 
 import axios from "axios";
 
@@ -16,6 +20,12 @@ export const fetchChannelMsg = channelID => {
     } catch (error) {
       console.error(error);
     }
+  };
+};
+
+export const setLoading = () => {
+  return {
+    type: SET_MSG_LOADING
   };
 };
 

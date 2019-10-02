@@ -21,6 +21,7 @@ class RegistationForm extends Component {
       ? this.props.signup(this.state, type, this.props.history)
       : this.props.login(this.state, type, this.props.history);
   };
+
   render() {
     const type = this.props.match.url.substring(1);
     if (this.props.user) return <Redirect to="/private" />;
@@ -34,7 +35,9 @@ class RegistationForm extends Component {
           </h5>
           <form onSubmit={e => this.submitHandler(e, type)}>
             <div className="form-group">
-              <p>{this.props.errors ? this.props.errors : ""}</p>
+              <p className="errorMessage">
+                {this.props.errors ? this.props.errors : ""}
+              </p>
               <input
                 className="form-control"
                 type="text"
@@ -44,7 +47,6 @@ class RegistationForm extends Component {
               />
             </div>
             <div className="form-group">
-              <p>{this.props.errors ? this.props.errors : ""}</p>
               <input
                 className="form-control"
                 type="password"

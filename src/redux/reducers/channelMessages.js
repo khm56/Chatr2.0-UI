@@ -1,7 +1,12 @@
-import { FETCH_CHANNEL_MSG, POST_MESSAGE } from "../actions/actionTypes";
+import {
+  FETCH_CHANNEL_MSG,
+  POST_MESSAGE,
+  SET_MSG_LOADING
+} from "../actions/actionTypes";
 
 const initialState = {
-  messages: []
+  messages: [],
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +15,13 @@ export default (state = initialState, action) => {
       const messages = action.payload;
       return {
         ...state,
-        messages
+        messages,
+        loading: false
+      };
+    case SET_MSG_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     case POST_MESSAGE:
       const newMessage = action.payload;

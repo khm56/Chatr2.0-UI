@@ -50,9 +50,12 @@ export const auth = (userData, type, history) => {
       let user = response.data;
       dispatch(setCurrentUser(user.token));
       history.replace("/private");
+      dispatch(setErrors(""));
     } catch (error) {
       console.error(error);
-      dispatch(setErrors("Invalid Input!!"));
+      dispatch(
+        setErrors("Invalid input, please check the username and password!!")
+      );
     }
   };
 };

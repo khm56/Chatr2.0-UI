@@ -12,7 +12,6 @@ import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import AddChannel from "./components/AddChannel";
 import ChannelMsg from "./components/ChannelMsg";
-import ChannelNavLink from "./components/Navigation/ChannelNavLink";
 
 class App extends Component {
   componentDidMount() {
