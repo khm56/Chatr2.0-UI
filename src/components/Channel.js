@@ -13,50 +13,44 @@ class Channel extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      channel: this.props.channels.find(
-        chn => chn.id == this.props.match.params.channelID
-      )
-    });
     if (!this.getChannel.messages)
       this.props.fetchMessages(
         this.props.match.params.channelID,
         status => this.setLoadingFalse(status),
         () => this.scrollToBottom()
       );
-    // window.scrollTo(
-    //   0,
-    //   document.querySelector("#scrollingContainer").scrollHeight
-    // );
-    this.interval = window.setInterval(() => this.refresh(), 700);
+    // this.setState({
+    //   message: ""
+    // });
+    this.interval = window.setInterval(() => this.refresh(), 1000);
   }
   componentWillUnmount() {
-    window.clearInterval(this.interval);
-    this.props.resetMessages();
+    // this.props.resetMessages();
   }
   scrollToBottom() {
     window.scrollTo(0, document.body.scrollHeight);
   }
   refresh() {
     //let date = new Date().toISOString();
-    if (this.getChannel().messages && this.getChannel().messages.length > 0) {
-      let date = this.getChannel().messages[
-        this.getChannel().messages.length - 1
-      ].timestamp;
-      console.log(date);
-      this.props.fetchMessagesTS(this.props.match.params.channelID, date);
+    if (this.state.loading == false) {
+      if (this.getChannel().messages && this.getChannel().messages.length > 0) {
+        let date = this.getChannel().messages[
+          this.getChannel().messages.length - 1
+        ].timestamp;
+
+        this.props.fetchMessagesTS(this.props.match.params.channelID, date);
+      } else {
+        // let date = new Date().toISOString();
+        // this.props.fetchMessagesTS(this.props.match.params.channelID, date);
+        this.props.fetchMessages(this.props.match.params.channelID, null, () =>
+          this.scrollToBottom()
+        );
+        console.log(this.props.messages);
+      }
     }
     // this.props.fetchMessages(this.props.match.params.channelID);
   }
   componentDidUpdate(prevProps) {
-    // if (
-    //   prevProps.channels.find(
-    //     chn => chn.id == this.props.match.params.channelID.length
-    //   ) !== this.state.channel.messages.length
-    // ) {
-    //   window.scrollTo(0, document.body.scrollHeight);
-    // }
-
     if (prevProps.match.params.channelID != this.props.match.params.channelID) {
       if (!this.getChannel().messages) {
         this.props.fetchMessages(
@@ -64,8 +58,26 @@ class Channel extends Component {
           status => this.setLoadingFalse(status),
           () => this.scrollToBottom()
         );
-        window.scrollTo(0, document.body.scrollHeight);
       }
+      this.props.saveDraft(
+        this.state.message,
+        prevProps.match.params.channelID
+      );
+      if (this.getChannel().draft) {
+        this.setState({
+          message: this.getChannel().draft
+        });
+      } else {
+        this.setState({
+          message: ""
+        });
+      }
+      window.clearInterval(this.interval);
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+    if (this.props.newMessage) {
+      this.scrollToBottom();
+      this.props.setNewMessageToFalse();
     }
   }
   setLoadingFalse(status) {
@@ -78,15 +90,13 @@ class Channel extends Component {
       [event.target.name]: event.target.value
     });
   }
-  sendMessage() {
+  sendMessage(e) {
+    e.preventDefault();
     this.props.sendMessage(
       this.props.match.params.channelID,
       this.state.message,
       this.props.user.username
     );
-    this.setState({
-      message: ""
-    });
   }
   getChannel() {
     let channel;
@@ -105,7 +115,11 @@ class Channel extends Component {
       return (
         <div>
           {this.getChannel().messages.map(msg => (
-            <Message message={msg} user={this.props.user.username} />
+            <Message
+              message={msg}
+              user={this.props.user.username}
+              key={msg.id}
+            />
           ))}
         </div>
       );
@@ -113,39 +127,50 @@ class Channel extends Component {
       return <Loading />;
     }
   }
-  //   renderEmptyChat() {
-  //     return (
-  //       <div className="container">
-  //         <img src={sad} className="texts-center" />
-  //         <h3>This channel is empty</h3>
-  //       </div>
-  //     );
-  //   }
+
   render() {
     if (!this.props.user) return <Redirect to="/login" />;
     return (
-      <div style={{ marginLeft: "40px" }}>
+      <div
+        style={{
+          backgroundImage: `url(${this.getChannel().image_url})`,
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          backgroundSize: "1365px 1000px"
+        }}
+      >
         <div id="scrollingContainer">{this.renderMessages()}</div>
         {this.state.loading == false ? (
           <>
-            <div className="input-group mb-3" style={{ width: "97%" }}>
-              <input
-                className="form-control"
-                placeholder="Type your message here.."
-                name="message"
-                value={this.state.message}
-                onChange={e => this.handleTextChange(e)}
-              ></input>
+            <form onSubmit={e => this.sendMessage(e)}>
+              <div
+                className="input-group  mb-3 fixedInput"
+                style={{
+                  width: "75%",
+                  marginRight: "40px",
+                  height: "60px"
+                }}
+              >
+                <input
+                  className="form-control"
+                  placeholder="Type your message here.."
+                  name="message"
+                  value={this.state.message}
+                  onChange={e => this.handleTextChange(e)}
+                  style={{ height: "60px" }}
+                ></input>
 
-              <div className="input-group-append">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => this.sendMessage()}
-                >
-                  Send
-                </button>
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-danger"
+                    style={{ backgroundColor: "#d62929" }}
+                    type="submit"
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
           </>
         ) : null}
       </div>
@@ -158,11 +183,15 @@ const mapDispatchToProps = dispatch => ({
   fetchMessagesTS: (id, timestamp) => dispatch(fetchMessagesTS(id, timestamp)),
   sendMessage: (chanID, message, username) =>
     dispatch(sendMessage(chanID, message, username)),
-  resetMessages: () => dispatch({ type: "SET_MESSAGES", payload: null })
+  //   resetMessages: () => dispatch({ type: "SET_MESSAGES", payload: null }),
+  setNewMessageToFalse: () => dispatch({ type: "SET_NEW_MESSAGE_FALSE" }),
+  saveDraft: (payload, channelID) =>
+    dispatch({ type: "SAVE_DRAFT", payload: payload, channelID: channelID })
 });
 const mapStateToProps = state => ({
   channels: state.channelsReducer.channels,
-  user: state.user
+  user: state.user,
+  newMessage: state.channelsReducer.newMessage
   //   messages: state.channelReducer.messages
 });
 export default connect(

@@ -3,11 +3,13 @@ import {
   CREATE_CHANNEL,
   SET_MESSAGES,
   SET_MESSAGE,
-  SET_NEW_MESSAGES
+  SET_NEW_MESSAGES,
+  SET_SINGLE_MESSAGE
 } from "../actions/actionTypes";
 
 const initialState = {
-  channels: []
+  channels: [],
+  newMessage: false
 };
 
 const reducer = (state = initialState, { type, payload, channelID }) => {
@@ -35,7 +37,39 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
       let channelz2 = state.channels.map(chan => {
         if (chan) {
           if (chan.id == channelID) {
-            chan.messages = [...chan.messages, ...payload];
+            let channel = chan;
+            if (chan.messages.length > 0) {
+              channel.messages = [...chan.messages, ...payload];
+            } else {
+              channel.messages = [...payload];
+            }
+
+            return channel;
+          } else return chan;
+        }
+      });
+
+      return {
+        ...state,
+        channels: [...channelz2],
+        newMessage: payload.length > 0
+      };
+
+    case CREATE_CHANNEL:
+      return {
+        ...state,
+        channels: [payload, ...state.channels]
+      };
+    case "SET_NEW_MESSAGE_FALSE":
+      return {
+        ...state,
+        newMessage: false
+      };
+    case "SAVE_DRAFT":
+      let channelz5 = state.channels.map(chan => {
+        if (chan) {
+          if (chan.id == channelID) {
+            chan.draft = payload;
             return chan;
           } else return chan;
         }
@@ -43,28 +77,9 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
 
       return {
         ...state,
-        channels: [...channelz2]
-      };
-    case CREATE_CHANNEL:
-      return {
-        ...state,
-        channels: [payload, ...state.channels]
+        channels: [...channelz5]
       };
 
-    // case SET_NEW_MESSAGES:
-    //   let channelz3 = state.channels.map(chan => {
-    //     if (chan) {
-    //       if (chan.id == channelID) {
-    //         chan.messages = [...chan.messages, payload];
-    //         return chan;
-    //       } else return chan;
-    //     }
-    //   });
-
-    //   return {
-    //     ...state,
-    //     messages: [...state.messages, ...newMessages]
-    //   };
     default:
       return state;
   }

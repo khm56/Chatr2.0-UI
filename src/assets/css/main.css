@@ -21,7 +21,7 @@ body.fixed-nav {
 
 .content-wrapper {
   min-height: calc(100vh - 56px);
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
 }
 
 .scroll-to-top {
@@ -402,7 +402,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   .navbar-sidenav
   > .nav-item
   > .nav-link:hover {
-  border-left: 3px solid #800c0c;
+  border-left: 3px solid #d62929;
   color: #adb5bd;
 }
 
@@ -431,7 +431,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   .navbar-sidenav
   > .nav-item
   > .nav-link.active {
-  border-left: 3px solid #800c0c;
+  border-left: 3px solid #d62929;
   color: #fff;
 }
 
@@ -677,14 +677,9 @@ footer.sticky-footer {
   }
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: url("http://forums.crackberry.com/attachments/blackberry-10-wallpapers-f308/137432d1361639896t-z10-wallpaper-set-z10-music.jpg");
-}
-
 .speech-wrapper {
-  padding: 30px 40px;
+  padding: 0px 0px 40px 40px;
+  margin-right: 20px;
 }
 .speech-wrapper .bubble {
   width: 240px;
@@ -692,7 +687,7 @@ body {
   display: block;
   background: #f5f5f5;
   border-radius: 4px;
-  box-shadow: 2px 8px 5px #000;
+  box-shadow: 2px 4px 5px #000;
   position: relative;
   margin: 0 0 25px;
 }
@@ -704,7 +699,7 @@ body {
 }
 .speech-wrapper .bubble .txt .name {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 20px;
   margin: 0 0 4px;
   color: #3498db;
 }
@@ -716,7 +711,7 @@ body {
   color: #2ecc71;
 }
 .speech-wrapper .bubble .txt .message {
-  font-size: 12px;
+  font-size: 20px;
   margin: 0;
   color: #2b2b2b;
 }
@@ -744,7 +739,7 @@ body {
   content: "";
   position: absolute;
   border: 0 solid transparent;
-  border-top: 9px solid #f5f5f5;
+  border-top: 9px solid #d62929;
   border-radius: 0 20px 0;
   width: 15px;
   height: 30px;
@@ -752,4 +747,22 @@ body {
 }
 .speech-wrapper .bubble .bubble-arrow.alt:after {
   transform: rotate(45deg) scaleY(-1);
+  border-top: 9px solid #f5f5f5;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d62929;
+  border-radius: 10px;
+  outline: 1px solid slategrey;
+}
+.fixedInput {
+  position: fixed !important;
+  bottom: 20px;
+  right: 0;
 }

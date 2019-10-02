@@ -1,42 +1,31 @@
-import {
-  SET_CHANNELS,
-  SET_MESSAGES,
-  SET_MESSAGE,
-  SET_NEW_MESSAGES
-} from "./actionTypes";
+import { SET_CHANNELS, SET_MESSAGES, SET_MESSAGE } from "./actionTypes";
 import axios from "axios";
 export const getMessages = channel => {
   return async dispatch => {
     try {
       const res = await axios.get("https://api-chatr.herokuapp.com/channels/");
       const channels = res.data;
-      // dispatch(setCurrentUser(user.token));
-      // history.push("/");
+
       dispatch({
         type: SET_CHANNELS,
         payload: channels
       });
     } catch (err) {
       console.error(err);
-      //   dispatch({
-      //     type: SET_ERRORS,
-      //     payload: err.response.data
-      //   });
     }
   };
 };
 export const fetchMessages = (id, loadingFn, scrollFn) => {
   return async dispatch => {
     try {
-      loadingFn(true);
+      if (loadingFn) loadingFn(true);
       const res = await axios.get(
         `https://api-chatr.herokuapp.com/channels/${id}/`
       );
       const messages = res.data;
 
-      loadingFn(false);
-      // dispatch(setCurrentUser(user.token));
-      // history.push("/");
+      if (loadingFn) loadingFn(false);
+
       dispatch({
         type: SET_MESSAGES,
         payload: messages,
@@ -45,15 +34,12 @@ export const fetchMessages = (id, loadingFn, scrollFn) => {
       scrollFn();
     } catch (err) {
       console.error(err);
-      loadingFn(false);
-      //   dispatch({
-      //     type: SET_ERRORS,
-      //     payload: err.response.data
-      //   });
+      if (loadingFn) loadingFn(false);
     }
   };
 };
 export const fetchMessagesTS = (id, timestamp) => {
+  if (!timestamp) return { type: "" };
   return async dispatch => {
     try {
       const res = await axios.get(
@@ -61,25 +47,14 @@ export const fetchMessagesTS = (id, timestamp) => {
       );
 
       const messages = res.data;
-      console.log("nigger", messages);
-      // dispatch(setCurrentUser(user.token));
-      // history.push("/");
+
       dispatch({
         type: SET_MESSAGE,
         payload: messages,
         channelID: id
       });
     } catch (err) {
-      if (err.response.status == 500) {
-        console.log("No new messages");
-      } else {
-        console.error(err.response);
-      }
-
-      //   dispatch({
-      //     type: SET_ERRORS,
-      //     payload: err.response.data
-      //   });
+      console.error(err.response);
     }
   };
 };
@@ -87,6 +62,7 @@ export const sendMessage = (id, msg, username) => {
   const masg = {
     message: msg
   };
+
   return async dispatch => {
     try {
       const res = await axios.post(
@@ -94,21 +70,10 @@ export const sendMessage = (id, msg, username) => {
         masg
       );
       let message = res.data;
-      message.username = username;
 
-      // dispatch(setCurrentUser(user.token));
-      // history.push("/");
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-        channelID: id
-      });
+      dispatch({ type: "" });
     } catch (err) {
       console.error(err);
-      //   dispatch({
-      //     type: SET_ERRORS,
-      //     payload: err.response.data
-      //   });
     }
   };
 };

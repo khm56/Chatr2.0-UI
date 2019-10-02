@@ -7,14 +7,21 @@ class Message extends Component {
     if (this.props.user == this.props.message.username) {
       return (
         <div className="col">
-          <div class="speech-wrapper float-right">
-            <div class="bubble">
-              <div class="txt">
-                <p class="name">{this.props.message.username}</p>
-                <p class="message">{this.props.message.message}</p>
-                <span class="timestamp">10:20 pm</span>
+          <div className="speech-wrapper float-right">
+            <div className="bubble" style={{ backgroundColor: "#d62929" }}>
+              <div className="txt">
+                <p className="name" style={{ color: "#ffcf40" }}>
+                  {this.props.message.username}
+                </p>
+                <p className="message" style={{ color: "white" }}>
+                  {this.props.message.message}
+                </p>
+                <span className="timestamp">10:20 pm</span>
               </div>
-              <div class="bubble-arrow"></div>
+              <div
+                className="bubble-arrow"
+                style={{ borderTop: "#f5f5f5" }}
+              ></div>
             </div>
           </div>
         </div>
@@ -23,13 +30,13 @@ class Message extends Component {
       return (
         <div className="col">
           <div className="speech-wrapper">
-            <div class="bubble alt">
-              <div class="txt">
-                <p class="name alt">{this.props.message.username}</p>
-                <p class="message">{this.props.message.message}</p>
-                <span class="timestamp">10:22 pm</span>
+            <div className="bubble alt">
+              <div className="txt">
+                <p className="name alt">{this.props.message.username}</p>
+                <p className="message">{this.props.message.message}</p>
+                <span className="timestamp">10:22 pm</span>
               </div>
-              <div class="bubble-arrow alt"></div>
+              <div className="bubble-arrow alt"></div>
             </div>
           </div>
         </div>

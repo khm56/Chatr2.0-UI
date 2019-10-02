@@ -15,7 +15,10 @@ import ChannelNavLink from "./ChannelNavLink";
 class SideNav extends React.Component {
   state = { collapsed: false, channelName: "" };
   handleClick() {
+    // e.preventDefault();
+    alert("fdas");
     this.props.createChannel(this.state.channelName);
+    this.setState({ channelName: "" });
   }
   handleTextChange(e) {
     this.setState({
@@ -112,11 +115,6 @@ class SideNav extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   signup: (userData, history) => dispatch(signup(userData, history)),
-//   login: (userData, history) => dispatch(login(userData, history)),
-//   resetErrors: () => dispatch(resetErrors())
-// });
 const mapStateToProps = state => ({
   channels: state.channelsReducer.channels,
   errors: state.errors.errors,

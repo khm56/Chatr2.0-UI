@@ -11,6 +11,7 @@ import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import Channel from "./components/Channel";
+import SideNav from "./components/Navigation/SideNav";
 class App extends Component {
   componentDidMount() {
     main();
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="content-wrapper">
         <NavBar />
+
         <Switch>
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />
@@ -27,8 +29,6 @@ class App extends Component {
           <Route path="/channel/:channelID" component={Channel} />
           <Redirect to="/welcome" />
         </Switch>
-
-        <Footer />
       </div>
     );
   }
