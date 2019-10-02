@@ -1,10 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { setErrors } from "./errors";
-
-
-
 
 export const checkForExpiredToken = () => {
   return dispatch => {
@@ -27,7 +23,6 @@ export const checkForExpiredToken = () => {
   };
 };
 
-
 const setAuthToken = token => {
   if (token) {
     localStorage.setItem("token", token);
@@ -38,11 +33,13 @@ const setAuthToken = token => {
   }
 };
 
-
 export const login = (userData, history) => {
   return async dispatch => {
     try {
-      let response = await axios.post("https://api-chatr.herokuapp.com/login/", userData);
+      let response = await axios.post(
+        "https://api-chatr.herokuapp.com/login/",
+        userData
+      );
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
@@ -57,11 +54,13 @@ export const login = (userData, history) => {
   };
 };
 
-
 export const signup = (userData, history) => {
   return async dispatch => {
     try {
-      let response = await axios.post("https://api-chatr.herokuapp.com/signup/", userData);
+      let response = await axios.post(
+        "https://api-chatr.herokuapp.com/signup/",
+        userData
+      );
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
@@ -75,7 +74,6 @@ export const signup = (userData, history) => {
     }
   };
 };
-
 
 export const logout = () => {
   setAuthToken();

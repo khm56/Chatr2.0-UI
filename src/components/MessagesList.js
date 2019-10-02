@@ -1,126 +1,157 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionCreators from "../redux/actions";
 
-
 class MessagesList extends Component {
-    state = { 
-        message: "",
-        };
+  state = { message: "" };
 
-        componentDidMount() {
-            setTimeout(function() { //Start the timer
-                 this.props.fetchLatestMessages(this.props.match.params.ChannelID);
-               
-            }.bind(this), 1)
-            }
+  // componentWillMount() {
+  //   const channel = this.props.match.params.ChannelID;
+  //   const channelTimes = this.props[`times.${channel}`];
+  //   const channelMessages = this.props[`messages.${channel}`];
+  //   if (channelMessages) {
+  //     this.setState({ loading: false });
+  //     if (channelMessages.length) {
+  //       console.log("UPDATE");
+  //       // if there is a draft for this channel
+  //       const ts = channelTimes[channelTimes.length - 1]; // get timestamp of latest message in draft
+  //       console.log(ts);
+  //       console.log(channelTimes);
+  //       this.props.updateDraft(channel, ts); // fetch messages after timestamp of 'ts' and concatenate them to draft of this channel
+  //     } else {
+  //       console.log("MAKE");
+  //       // if there is no draft for this channel, make a new draft
+  //       this.props.makeDraft(channel);
+  //     }
+  //   } else {
+  //     this.setState({ loading: false });
+  //   }
+  // }
 
+  componentDidMount() {
+    const channel = this.props.match.params.ChannelID;
+    this.props.makeDraft(channel);
+  }
 
-componentDidUpdate() {
-setTimeout(function() { //Start the timer
-     this.props.fetchLatestMessages(this.props.match.params.ChannelID,"2019-09-30T20:17:46.384Z");
-}.bind(this), 5000)
-}
-
-
-
-    render(){
-        const addMessageForm = () => {
-          return(   
-            <div className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Type Message Here"
-                    name="message"
-                    onChange={changeHandler}
-                  />
-                  <button onClick={submitHandler}>Send</button>
-              </div>
-          )        
+  componentDidUpdate() {
+    //
+    const channel = this.props.match.params.ChannelID;
+    const channelTimes = this.props[`times.${channel}`];
+    const channelMessages = this.props[`messages.${channel}`];
+    clearTimeout(this.timerHandle);
+    this.timerHandle = 0;
+    this.timerHandle = setTimeout(() => {
+      if (channelMessages) {
+        this.props.setLoading(false);
+        if (channelMessages.length) {
+          console.log("UPDATE");
+          // if there is a draft for this channel
+          const ts = channelTimes[channelTimes.length - 1]; // get timestamp of latest message in draft
+          console.log(ts);
+          console.log(channelTimes);
+          this.props.updateDraft(channel, ts); // fetch messages after timestamp of 'ts' and concatenate them to draft of this channel
+        } else {
+          console.log("MAKE");
+          // if there is no draft for this channel, make a new draft
+          this.props.makeDraft(channel);
         }
-        
+      }
+    }, 5000);
+  }
 
-        const changeHandler = e => {
-            this.setState({ [e.target.name]: e.target.value });
-          };
-          var today = new Date();
-          console.log(today.getFullYear())
-
-
-          const submitHandler = (e) => {
-            e.preventDefault();
-            this.props.postMessage(this.state.message,this.props.match.params.ChannelID);
-            this.setState({ [e.target.name]: e.target.value });
-          };
-
-
-        let messages = this.props.messages.map((x, i) =>{
-        return (
-        [x, this.props.users[i],
-        `${this.props.time[i].substr(8,2)}-${this.props.time[i].substr(5,2)}-${this.props.time[i].substr(0,4)}
-         - ${this.props.time[i].substr(11,5)}`]
-        );
-        })
-        let messagesPrettier = messages.map (message => {
-            return(
-                <>
-                {message[0]}
-                <br/>
-                ----------------------------
-                <br/>
-                {message[1]}
-                <br/>
-                ----------------------------
-                <br/>
-                {message[2]}
-                <br/>
-                ----------------------------
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                </>
-
-  
-            )
-        })
-    
-    return(
+  render() {
+    if (this.props.loading) {
+      return (
         <>
-        <h1 className="my-2 mx-5"> Messages </h1>
-        <button onClick={() => this.props.fetchMessages(this.props.match.params.ChannelID)}>View all</button>
-            <div className="mx-5">
-                <p>{messagesPrettier}</p>
-                {addMessageForm()}
-            </div>
-        
+          <h1>Messages</h1>
+          <p className="mx-5"> fetching messages........</p>
         </>
-    )
+      );
     }
-    
+    const channelMessages = this.props[
+      `messages.${this.props.match.params.ChannelID}`
+    ];
+    const channelUsers = this.props[
+      `users.${this.props.match.params.ChannelID}`
+    ];
+    const channelTimes = this.props[
+      `times.${this.props.match.params.ChannelID}`
+    ];
+
+    const addMessageForm = () => {
+      return (
+        <div className="form-group">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Type Message Here"
+            name="message"
+            value={this.state.message}
+            onChange={changeHandler}
+          />
+          <button onClick={submitHandler}>Send</button>
+        </div>
+      );
+    };
+
+    const changeHandler = e => {
+      this.setState({ [e.target.name]: e.target.value });
+    };
+    var today = new Date();
+
+    const submitHandler = e => {
+      e.preventDefault();
+      this.props.postMessage(
+        this.state.message,
+        this.props.match.params.ChannelID
+      );
+      this.setState({ [e.target.name]: e.target.value, message: "" });
+    };
+    if (this.props[`messages.${this.props.match.params.ChannelID}`]) {
+      return (
+        <>
+          <h1 className="my-2 mx-5"> Messages </h1>
+          {channelMessages}
+          <div className="mx-5">{addMessageForm()}</div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h1 className="my-2 mx-5"> Messages </h1>
+        </>
+      );
+    }
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-     messages: state.channel.messages,
-     users: state.channel.users,
-     time: state.channel.time,
-    };
+const mapStateToProps = (state, ownProps) => {
+  return {
+    [`messages.${ownProps.match.params.ChannelID}`]: state.channel[
+      `messages${ownProps.match.params.ChannelID}`
+    ],
+    [`users.${ownProps.match.params.ChannelID}`]: state.channel[
+      `users${ownProps.match.params.ChannelID}`
+    ],
+    [`times.${ownProps.match.params.ChannelID}`]: state.channel[
+      `time${ownProps.match.params.ChannelID}`
+    ],
+    loading: state.channel.loading
   };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        fetchMessages: ChannelID => dispatch(actionCreators.fetchMessages(ChannelID)),
-        fetchLatestMessages: (ChannelID,timestamp) => dispatch(actionCreators.fetchLatestMessages(ChannelID,timestamp)),
-        postMessage: (message,ChannelID) => dispatch(actionCreators.postMessage(message,ChannelID)),
-    };
+  return {
+    updateDraft: (ChannelID, timestamp) =>
+      dispatch(actionCreators.updateDraft(ChannelID, timestamp)),
+    postMessage: (message, ChannelID) =>
+      dispatch(actionCreators.postMessage(message, ChannelID)),
+    makeDraft: ChannelID => dispatch(actionCreators.makeDraft(ChannelID)),
+    setLoading: loading => dispatch(actionCreators.setLoading(loading))
   };
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MessagesList);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MessagesList);

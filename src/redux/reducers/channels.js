@@ -20,9 +20,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredChannels: state.channels.filter(channel => {
-          return channel.name
-            .toLowerCase()
-            .includes(action.payload);
+          return channel.name.toLowerCase().includes(action.payload);
         })
       };
     case actionTypes.ADD_CHANNEL:
