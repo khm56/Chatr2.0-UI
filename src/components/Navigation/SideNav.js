@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
   faAngleRight,
-  faPlusCircle
+  faCommentMedical
 } from "@fortawesome/free-solid-svg-icons";
 
 // Components
@@ -21,19 +21,27 @@ class SideNav extends React.Component {
   render() {
     const channelLinks = () =>
       this.props.channels.channels.map(channel => (
-        <ChannelNavLink key={channel.name} channel={channel} />
+        <tr className="table-hover channels" key={channel.name}>
+          <th scope="row" key={channel.name}>
+            <ChannelNavLink key={channel.name} channel={channel} />
+          </th>
+        </tr>
       ));
     return (
       <div className="channelsList">
         {this.props.user ? (
-          <>
-            <Link className=" heading" to="/channels/create">
-              <span className=" mr-2">Channels</span>
-              <FontAwesomeIcon icon={faPlusCircle} />
-            </Link>
+          <table class="table table-hover mt-2">
+            <tbody>
+              <th scope="col" key>
+                <Link className=" heading" to="/channels/create">
+                  <span className=" mr-2">New Channel...</span>
+                  <FontAwesomeIcon icon={faCommentMedical} />
+                </Link>
+              </th>
 
-            <> {channelLinks()}</>
-          </>
+              <tr class="table-active">{channelLinks()}</tr>
+            </tbody>
+          </table>
         ) : (
           <></>
         )}

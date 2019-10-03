@@ -28,7 +28,7 @@ class TextingArea extends Component {
 
   render() {
     return (
-      <div className=" bg-dark   ">
+      <div className=" bg-dark" style={{ padding: "20px", fontSize: "1.3em" }}>
         <form onSubmit={this.submitMsg}>
           <div className="input-group ">
             <input

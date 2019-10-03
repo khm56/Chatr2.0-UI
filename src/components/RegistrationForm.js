@@ -42,13 +42,13 @@ class RegistationForm extends Component {
     // </>;
 
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
+      <div className="card col-6 mx-auto p-0" style={{ marginTop: "20%" }}>
         <div className="card-body">
-          <h5 className="card-title mb-4">
+          <h4 className="card-title mb-5 mt-1 text-center font-weight-bold ">
             {type === "login"
-              ? "Login to send messages"
-              : "Register an account"}
-          </h5>
+              ? "Login to view the channels"
+              : "Register a user with us!"}
+          </h4>
           <form onSubmit={this.submitHandler}>
             <div className="form-group">
               <input
@@ -75,7 +75,7 @@ class RegistationForm extends Component {
             </div>
 
             <input
-              className="btn btn-primary"
+              className="btn btn-primary btn-m rounded-pill"
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
@@ -89,8 +89,8 @@ class RegistationForm extends Component {
             className="btn btn-small btn-link"
           >
             {type === "login"
-              ? "register an account"
-              : "login with an existing account"}
+              ? "Register an account"
+              : "Login with an existing account"}
           </Link>
         </div>
       </div>

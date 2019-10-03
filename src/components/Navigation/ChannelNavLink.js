@@ -3,25 +3,18 @@ import { NavLink } from "react-router-dom";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 const ChannelNavLink = ({ channel }) => {
   return (
-    <li
-      className="nav-item"
-      data-toggle="tooltip"
-      data-placement="right"
-      title={channel.name}
+    <NavLink
+      className="nav-link"
+      to={`/channels/${channel.id}`}
+      channel={channel}
     >
-      <NavLink
-        className="nav-link"
-        to={`/channels/${channel.id}`}
-        channel={channel}
-      >
-        <FontAwesomeIcon icon={faHashtag} />
-        <span className="nav-link-text"> {channel.name}</span>
-      </NavLink>
-    </li>
+      <FontAwesomeIcon icon={faComments} />
+      <span className="nav-link-text"> {channel.name}</span>
+    </NavLink>
   );
 };
 

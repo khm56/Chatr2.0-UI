@@ -20,35 +20,45 @@ class ChannelForm extends Component {
 
   render() {
     return (
-      <div className="mt-5 p-2">
-        <form onSubmit={this.submitChannel}>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">Channel Name</span>
+      <div className="card col-6 mx-auto p-0 mt-5 jumbotron">
+        <div className="card-body">
+          <h4 className="card-title mb-5 mt-1 text-center font-weight-bold ">
+            Adding a new channel...
+          </h4>
+          <form onSubmit={this.submitChannel}>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text">Channel Name</span>
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                onChange={this.onTextchange}
+              />
             </div>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              onChange={this.onTextchange}
-            />
-          </div>
 
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                Channel Background Image URL
-              </span>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  Channel's Background Image URL
+                </span>
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="https://example.com"
+                name="imageUrl"
+                onChange={this.onTextchange}
+              />
             </div>
             <input
-              type="text"
-              className="form-control"
-              name="imageUrl"
-              onChange={this.onTextchange}
+              className="btn btn-outline-success rounded-pill"
+              value="Add Channel"
+              type="submit"
             />
-          </div>
-          <input type="submit" />
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

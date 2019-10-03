@@ -1,5 +1,4 @@
 import $ from "jquery";
-import "./jquery.easing.min";
 
 const fn = () => {
   // Configure tooltips for collapsed side navigation

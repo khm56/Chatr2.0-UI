@@ -75,8 +75,10 @@ class SuperSecretPage extends Component {
           // opacity: "0.5",
         }}
       >
-        <div>{msgs()}</div>
-        <div className="">
+        <div className="messages">
+          <ul>{msgs()}</ul>
+        </div>
+        <div className="message-input ">
           <TextingArea channelID={this.props.match.params.channelID} />
         </div>
       </div>

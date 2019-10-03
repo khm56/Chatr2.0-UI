@@ -7,12 +7,18 @@ const Welcome = ({ user }) => {
   return (
     <header className="masthead d-flex">
       <div className="container text-center my-auto z-1">
-        <h1 className="mb-5 mt-5">WELCOME TO CHATR</h1>
+        <img
+          src="https://cdn.dribbble.com/users/2322685/screenshots/6221645/welcome-dribbble.gif"
+          className=""
+          style={{ marginTop: "-20%" }}
+        />
 
-        <h3 className="mb-5">
-          <em>You're gonna need to login to see the messages</em>
-        </h3>
-        <Link to="/login" className="btn btn-primary btn-lg">
+        <h3 className="" style={{ marginTop: "-15%", marginBottom: "3%" }}></h3>
+
+        <Link
+          to="/login"
+          className=" col-7 btn btn-info rounded-pill btn-lg botn"
+        >
           Login
         </Link>
       </div>

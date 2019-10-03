@@ -1,24 +1,25 @@
 body {
   overflow-y: hidden;
   overflow-x: hidden;
+  font-family: "Bitter", serif;
+}
+
+html {
+  font-family: "Bitter", serif;
 }
 
 .channelsList {
   position: fixed;
-  top: 51px;
+  top: 31px;
   bottom: 0;
   left: 0;
   right: 75%;
-  margin-top: 2.3%;
-
+  margin-top: 2.8%;
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  height: 100%;
-}
-
-.siteBg {
-  background-image: linear-gradient(blue, white);
+  height: 88%;
+  font-size: 1.3em;
 }
 
 #content {
@@ -31,6 +32,156 @@ body {
   padding: 0;
   z-index: 1000;
   overflow-y: auto;
-  height: 100%;
+  height: 90%;
   /* Scrollable contents if viewport is shorter than content. */
+}
+
+.channels {
+  transition: all 0.5s;
+}
+.channels:hover {
+  box-shadow: 5px 5px 10px rgb(138, 138, 138);
+}
+
+.masthead {
+  margin-top: 20%;
+}
+
+.botn {
+  position: relative;
+}
+
+.messages {
+  height: auto;
+  min-height: calc(100% - 93px);
+  max-height: calc(100% - 93px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-left: -15%;
+}
+@media screen and (max-width: 735px) {
+  .messages {
+    max-height: calc(100% - 105px);
+  }
+}
+.messages::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+.messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.messages ul li {
+  display: inline-block;
+  clear: both;
+  margin: 15px 15px 5px 15px;
+  width: 70%;
+  font-size: 0.9em;
+}
+.messages ul li:nth-last-child(1) {
+  margin-bottom: 100px;
+}
+.messages ul li.sent img {
+  margin: 6px 8px 0 0;
+}
+.messages ul li.sent p {
+  background: #9689d1;
+  color: #f5f5f5;
+  width: 100%;
+}
+.messages ul li.replies img {
+  float: right;
+  margin: 6px 0 0 8px;
+}
+.messages ul li.replies p {
+  background: #dfdede;
+  float: right;
+  width: 100%;
+  padding: 20px 120px;
+  text-align: end;
+}
+
+.messages ul li.replies {
+  transform: translateX(40%);
+}
+.messages ul li img {
+  width: 80px;
+  border-radius: 50%;
+  float: left;
+  transform: translate(-25%, 60%);
+}
+
+.messages ul li p {
+  display: inline-block;
+  padding: 20px 90px;
+  border-radius: 20px;
+  line-height: 130%;
+  font-size: 1.7em;
+}
+
+.message-input {
+  position: fixed;
+  bottom: 0;
+  width: 74.1%;
+  z-index: 99;
+  float: left;
+  margin-bottom: 1% !important;
+  transform: translateX(-11%);
+  font-size: 1.3em;
+}
+
+.message-input .wrap input {
+  float: left;
+  border: none;
+
+  padding: 11px 32px 10px 8px;
+  font-size: 0.8em;
+  color: #32465a;
+}
+@media screen and (max-width: 735px) {
+  .message-input .wrap input {
+    padding: 15px 32px 16px 8px;
+  }
+}
+.message-input .wrap input:focus {
+  outline: none;
+}
+.message-input .wrap .attachment {
+  position: absolute;
+  right: 60px;
+  z-index: 4;
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #435f7a;
+  opacity: 0.5;
+  cursor: pointer;
+}
+@media screen and (max-width: 735px) {
+  .message-input .wrap .attachment {
+    margin-top: 17px;
+    right: 65px;
+  }
+}
+.message-input .wrap .attachment:hover {
+  opacity: 1;
+}
+.message-input .wrap button {
+  float: right;
+  border: none;
+  width: 50px;
+  padding: 12px 0;
+  cursor: pointer;
+  background: #32465a;
+  color: #f5f5f5;
+}
+@media screen and (max-width: 735px) {
+  .message-input .wrap button {
+    padding: 16px 0;
+  }
+}
+.message-input .wrap button:hover {
+  background: #435f7a;
+}
+.message-input .wrap button:focus {
+  outline: none;
 }

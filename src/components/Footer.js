@@ -2,13 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer
-      className="sticky-footer "
-      style={{ backgroundColor: "green", padding: "10px" }}
-    >
+    <footer className="fixed-bottom  navbar-dark bg-dark">
       <div className="container">
-        <div className="text-center">
-          <small>Copyright © CODED Chatr 2019</small>
+        <div className="text-center text-light">
+          <large>Copyright © CODED Chatr 2019</large>
         </div>
       </div>
     </footer>

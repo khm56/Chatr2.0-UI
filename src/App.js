@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
+import { connect } from "react-redux";
 // Scripts
 import main from "./assets/js/main";
 
@@ -24,24 +24,50 @@ class App extends Component {
       <>
         <NavBar />
         <div className="row siteBg">
-          <div className="col-3">
-            <SideNav />
-          </div>
-          <div className=" col-9 " id="content">
-            <Switch>
-              <Route path="/welcome" component={Welcome} />
-              <Route path="/(login|signup)" component={RegistrationForm} />
-              <Route path="/channels/create" component={ChannelForm} />
-              <Route path="/channels/:channelID?" component={SuperSecretPage} />
+          {this.props.user ? (
+            <>
+              <div className="col-3">
+                <SideNav />
+              </div>
+              <div className=" col-9 " id="content">
+                <Switch>
+                  <Route path="/welcome" component={Welcome} />
+                  <Route path="/(login|signup)" component={RegistrationForm} />
+                  <Route path="/channels/create" component={ChannelForm} />
+                  <Route
+                    path="/channels/:channelID?"
+                    component={SuperSecretPage}
+                  />
 
-              <Redirect to="/welcome" />
-            </Switch>
-            <Footer className="fixed-bottom" />
-          </div>
+                  <Redirect to="/welcome" />
+                </Switch>
+                <Footer className="fixed-bottom" />
+              </div>
+            </>
+          ) : (
+            <div className="container">
+              <Switch>
+                <Route path="/welcome" component={Welcome} />
+                <Route path="/(login|signup)" component={RegistrationForm} />
+                <Route path="/channels/create" component={ChannelForm} />
+                <Route
+                  path="/channels/:channelID?"
+                  component={SuperSecretPage}
+                />
+
+                <Redirect to="/welcome" />
+              </Switch>
+              <Footer className="fixed-bottom" />
+            </div>
+          )}
         </div>
       </>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(App);
