@@ -13,7 +13,7 @@ const ChannelNavLink = ({ channel }) => {
       data-placement="right"
       title={channel.name}
     >
-      <NavLink className="nav-link" to={`/msgs/${channel.id}`}>
+      <NavLink className="nav-link channels" to={`/msgs/${channel.id}`}>
         <FontAwesomeIcon icon={faHashtag} />
         <span className="nav-link-text"> {channel.name}</span>
       </NavLink>

@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 // Scripts
 import main from "./assets/js/main";
 
+// CSS
+// import maincss from "./assets/css/main";
+
 // Components
 import NavBar from "./components/Navigation/NavBar";
 import Footer from "./components/Footer";

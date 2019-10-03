@@ -5,3 +5,4 @@ export const FETCH_CHANNEL = "FETCH_CHANNEL";
 export const FETCH_CHANNEL_DETAIL = "FETCH_CHANNEL_DETAIL";
 export const FETCH_MSGS = "FETCH_MSGS";
 export const ADD_MSG = "ADD_MSG";
+export const FILTER_CHANNELS = "FILTER_CHANNELS";

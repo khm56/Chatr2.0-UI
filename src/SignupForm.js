@@ -27,15 +27,22 @@ class Signup extends Component {
         </div>
       );
     return (
-      <div className="col-6 mx-auto">
-        <div className="card my-5">
+      <div
+        className="col-6 mx-auto"
+        style={{ borderRadius: "50px", backgroundColor: "black" }}
+      >
+        <div
+          className="card my-5"
+          style={{ borderRadius: "50px", backgroundColor: "black" }}
+        >
           <div className="card-body">
             <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
+              <div className="form-group change_color">
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
                   className="form-control"
+                  style={{ borderRadius: "50px", textColor: "white" }}
                   id="username"
                   value={username}
                   name="username"
@@ -44,11 +51,12 @@ class Signup extends Component {
                 />
                 {this.props.errors ? this.props.errors : ""}
               </div>
-              <div className="form-group">
+              <div className="form-group change_color">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   className="form-control"
+                  style={{ borderRadius: "50px", textColor: "white" }}
                   id="email"
                   value={email}
                   name="email"
@@ -57,11 +65,12 @@ class Signup extends Component {
                 />
                 {this.props.errors ? this.props.errors : ""}
               </div>
-              <div className="form-group">
+              <div className="form-group change_color">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   className="form-control"
+                  style={{ borderRadius: "50px" }}
                   id="password"
                   value={password}
                   name="password"
@@ -69,13 +78,20 @@ class Signup extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-
-              <button type="submit" className="btn btn-primary">
-                Signup
-              </button>
-              <Link to="/login" className="btn btn-link my-2 my-sm-0">
-                I already have an account
-              </Link>
+              <br />
+              <center>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ borderRadius: "50px", fontWeight: "bold" }}
+                >
+                  Signup
+                </button>
+                <Link to="/login" className="btn btn-link my-2 my-sm-0">
+                  I already have an account
+                </Link>
+              </center>
+              <br />
             </form>
           </div>
         </div>

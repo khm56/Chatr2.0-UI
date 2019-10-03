@@ -1,25 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import giphya from "../giphya.gif";
+import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
+// import { url } from "inspector";
 
 const Welcome = ({ user }) => {
   return (
-    <header className="masthead d-flex">
-      <div className="container text-center my-auto z-1">
-        <h1 className="mb-1">WELCOME TO CHATR</h1>
-        {!user && (
-          <div>
-            <h3 className="mb-5">
-              <em>You're gonna need to login to see the messages</em>
-            </h3>
-            <Link to="/login" className="btn btn-primary btn-lg">
-              Login
-            </Link>
-          </div>
-        )}
+    <div
+      className="p-4"
+      // className="masthead d-flex"
+      style={
+        {
+          // backgroundImage: `url(${giphya})`,
+          // backgroundPosition: "center",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
+          // backgroundAttachment: "fixed",
+          // height: "50vh"
+          // paddingBottom: 400
+          // height: "550px"
+        }
+      }
+    >
+      <div>
+        <h1
+          className="mb-1 text-center change_font2"
+          // style={{
+          //   fontFamily: "Acme"
+          //   // letterSpacing: 3
+          // }}
+        >
+          Welcome To CODED Chatr
+        </h1>
       </div>
-      <div className="overlay z-0" />
-    </header>
+      <img
+        src="https://media.giphy.com/media/5WILqPq29TyIkVCSej/giphy.gif"
+        style={{
+          display: "inline",
+          paddingLeft: "20%",
+          width: "75%"
+          //height: "400px"
+          //paddingBottom: "5px"
+        }}
+      ></img>
+    </div>
   );
 };
 const mapStateToProps = state => ({

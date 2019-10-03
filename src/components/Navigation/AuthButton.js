@@ -13,13 +13,13 @@ import {
 
 const AuthButton = ({ user, logout }) => {
   let buttons = [
-    <li key="loginButton" className="nav-item">
-      <Link to="/login" className="nav-link">
+    <li key="loginButton" className="nav-item nav">
+      <Link to="/login" className="nav-link nav change_font3">
         <FontAwesomeIcon icon={faSignInAlt} /> Login
       </Link>
     </li>,
-    <li key="signupButton" className="nav-item">
-      <Link to="/signup" className="nav-link">
+    <li key="signupButton" className="nav-item nav">
+      <Link to="/signup" className="nav-link nav change_font3">
         <FontAwesomeIcon icon={faUserPlus} /> Signup
       </Link>
     </li>
@@ -29,7 +29,11 @@ const AuthButton = ({ user, logout }) => {
     buttons = (
       <>
         <li className="nav-item">
-          <Link to="/" className="nav-link" onClick={() => logout()}>
+          <Link
+            to="/"
+            className="nav-link nav change_font3"
+            onClick={() => logout()}
+          >
             <FontAwesomeIcon icon={faSignOutAlt} /> Logout {user.username}
           </Link>
         </li>

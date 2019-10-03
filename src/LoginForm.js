@@ -26,17 +26,24 @@ class Login extends Component {
         </div>
       );
     return (
-      <div className="col-6 mx-auto">
-        <div className="card my-5">
+      <div
+        className="col-6 mx-auto"
+        style={{ borderRadius: "50px", backgroundColor: "black" }}
+      >
+        <div
+          className="card my-5"
+          style={{ borderRadius: "50px", backgroundColor: "black" }}
+        >
           <div className="card-body">
             <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
+              <div className="form-group change_color">
                 <label htmlFor="username">Username</label>
                 <br></br>
 
                 <input
                   type="text"
                   className="form-control"
+                  style={{ borderRadius: "50px", textColor: "white" }}
                   id="username"
                   value={username}
                   name="username"
@@ -45,11 +52,12 @@ class Login extends Component {
                 />
                 {this.props.errors ? this.props.errors : ""}
               </div>
-              <div className="form-group">
+              <div className="form-group change_color">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   className="form-control"
+                  style={{ borderRadius: "50px", textColor: "white" }}
                   id="password"
                   value={password}
                   name="password"
@@ -58,13 +66,20 @@ class Login extends Component {
                 />
                 {this.props.errors ? this.props.errors : ""}
               </div>
-
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-              <Link to="/signup" className="btn btn-link my-2 my-sm-0">
-                Signup for an account
-              </Link>
+              <br />
+              <center>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ borderRadius: "50px", fontWeight: "bold" }}
+                >
+                  Login
+                </button>
+                <Link to="/signup" className="btn btn-link my-2 my-sm-0">
+                  Signup for an account
+                </Link>{" "}
+              </center>
+              <br />
             </form>
           </div>
         </div>

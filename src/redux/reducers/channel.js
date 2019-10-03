@@ -3,17 +3,26 @@ import {
   FETCH_CHANNEL,
   FETCH_CHANNEL_DETAIL,
   FETCH_MSGS,
-  ADD_MSG
+  ADD_MSG,
+  FILTER_CHANNELS
 } from "../actions/actionTypes";
 
 const initialState = {
   channel: null,
   channels: [],
-  msgs: []
+  msgs: [],
+  filteredChannels: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case FILTER_CHANNELS:
+      return {
+        ...state,
+        filteredChannels: state.channels.filter(channel => {
+          return `${channel.name}`.toLowerCase().includes(payload);
+        })
+      };
     case ADD_CHANNEL:
       //const cannel = payload;
       return {
@@ -23,7 +32,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case FETCH_CHANNEL:
       return {
         ...state,
-        channels: payload
+        channels: payload,
+        filteredChannels: payload
       };
     case FETCH_CHANNEL_DETAIL:
       return {

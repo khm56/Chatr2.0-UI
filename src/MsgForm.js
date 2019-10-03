@@ -20,29 +20,42 @@ class MsgForm extends Component {
 
   render() {
     return (
-      <div className="col-6 mx-auto">
-        <div className="card my-5">
-          <div className="card-body">
-            <form onSubmit={event => this.handleSubmit(event)}>
-              <div className="form-group">
-                <label htmlFor="title">Message</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={this.state.message}
-                  name="message"
-                  placeholder="message"
-                  onChange={event => this.handleChange(event)}
-                />
-              </div>
+      <div className="col-12 mx-auto ">
+        {/* <div className="card my-5 border-0"> */}
+        <div className="card-body ">
+          <form onSubmit={event => this.handleSubmit(event)}>
+            <div
+              className="form-group input-group mb-3  "
+              style={{
+                width: "100%"
+              }}
+            >
+              {/* <label htmlFor="title">Add Message</label> */}
 
-              <button type="submit" className="btn btn-primary">
-                Send Message
-              </button>
-            </form>
-          </div>
+              <input
+                type="text"
+                className="form-control "
+                value={this.state.message}
+                name="message"
+                placeholder="message"
+                onChange={event => this.handleChange(event)}
+              />
+              <div class="input-group-append">
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary"
+                  style={{
+                    width: "100%"
+                  }}
+                >
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+      // </div>
     );
   }
 }

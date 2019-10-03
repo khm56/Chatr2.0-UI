@@ -74,17 +74,40 @@ class ChannelPage extends Component {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed"
+          backgroundAttachment: "fixed",
+          padding: "3%"
         }}
         // className="img-fluid"
       >
         <div>
-          <h1>hiiiiiiiiiiii</h1>
+          {/* <div
+            className="alert alert-primary"
+            role="alert"
+            style={{
+              paddingTop: "5px"
+            }}
+          >
+            <h1>Welcome to our Chat Page ...</h1>
+          </div> */}
 
           {this.props.msgs.map(msg => {
             return (
-              <div>
-                {msg.username}-{msg.message}-{msg.timestamp}
+              <div
+                // className="alert alert-light"
+                className="alert alert-secondary"
+                role="alert"
+                style={{
+                  paddingTop: "5px",
+                  borderRadius: "35px"
+                }}
+              >
+                <p>
+                  <p className="rounded float-left">
+                    {msg.username}
+                    <strong> : {msg.message}</strong>
+                  </p>
+                  <small class="rounded float-right">{msg.timestamp}</small>
+                </p>
               </div>
             );
           })}

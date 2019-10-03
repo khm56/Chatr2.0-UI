@@ -8,10 +8,11 @@ import AuthButton from "./AuthButton";
 const NavBar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+      className="navbar navbar-expand-lg fixed-top nav"
       id="mainNav"
+      style={{ height: 56 }}
     >
-      <Link className="navbar-brand" to="/welcome">
+      <Link className="navbar-brand nav change_font4" to="/welcome">
         Chatr2.0
       </Link>
       <button

@@ -1,3 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Acme&display=swap");
+.T1 {
+  font-family: "Acme", sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Acme|Luckiest+Guy&display=swap");
+.T2 {
+  font-family: "Acme", sans-serif;
+  font-family: "Luckiest Guy", cursive;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Acme|Cookie|Luckiest+Guy|Pacifico&display=swap");
+.T3 {
+  font-family: "Acme", sans-serif;
+  font-family: "Luckiest Guy", cursive;
+  font-family: "Cookie", cursive;
+  font-family: "Pacifico", cursive;
+}
+
+.nav {
+  background-color: rgb(22, 22, 22);
+  color: #fff;
+}
+
+.side {
+  background-color: rgb(22, 22, 22);
+}
+
+.channels {
+  color: #fff;
+}
+
+.change_font1 {
+  font-family: "Acme", sans-serif;
+  font-size: 130%;
+}
+
+.change_font2 {
+  font-family: "Acme", sans-serif;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 60px;
+}
+
+.change_font3 {
+  font-family: "Acme", sans-serif;
+}
+
+.change_font4 {
+  font-family: "Acme", sans-serif;
+  font-family: "Luckiest Guy", cursive;
+  font-family: "Cookie", cursive;
+  font-family: "Pacifico", cursive;
+}
+
+.change_color {
+  color: white;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -33,7 +91,7 @@ body.fixed-nav {
   height: 50px;
   text-align: center;
   color: white;
-  background: rgba(52, 58, 64, 0.5);
+  background: white;
   line-height: 45px;
 }
 
@@ -135,7 +193,7 @@ body.fixed-nav {
   > .nav-link
   .indicator {
   position: absolute;
-  top: 5px;
+  top: 500px;
   left: 21px;
   font-size: 10px;
 }

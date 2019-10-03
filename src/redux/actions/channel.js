@@ -3,7 +3,8 @@ import {
   FETCH_CHANNEL,
   FETCH_MSGS,
   ADD_MSG,
-  FETCH_CHANNEL_DETAIL
+  FETCH_CHANNEL_DETAIL,
+  FILTER_CHANNELS
 } from "./actionTypes";
 import axios from "axios";
 // import jwt_decode from "jwt-decode";
@@ -11,6 +12,13 @@ import axios from "axios";
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
+
+export const filterChannels = query => {
+  return {
+    type: FILTER_CHANNELS,
+    payload: query
+  };
+};
 
 export const addChannel = (channel, history) => {
   return async dispatch => {
