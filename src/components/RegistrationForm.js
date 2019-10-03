@@ -33,11 +33,11 @@ class RegistationForm extends Component {
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
-          <h5 className="card-title mb-4">
+          <h1 className="card-title mb-5 mt-4 text-light text-center">
             {type === "login"
               ? "Login to send messages"
               : "Register an account"}
-          </h5>
+          </h1>
           {!!errors.length && (
             <div className="alert alert-danger" role="alert">
               {errors.map(error => (
@@ -49,37 +49,39 @@ class RegistationForm extends Component {
           <form onSubmit={this.submitHandler}>
             <div className="form-group">
               <input
-                className="form-control"
+                className="form-control mb-2"
                 type="text"
                 placeholder="Username"
                 name="username"
                 onChange={this.changeHandler}
+                style={{ fontSize: "20px" }}
               />
             </div>
             <div className="form-group">
               <input
-                className="form-control"
+                className="form-control mb-5"
                 type="password"
                 placeholder="Password"
                 name="password"
                 onChange={this.changeHandler}
+                style={{ fontSize: "20px" }}
               />
             </div>
             <input
-              className="btn btn-primary"
+              className="btn btn-primary btn-block"
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
           </form>
         </div>
-        <div className="card-footer">
+        <div className="mb-5 ml-3">
           <Link
             to={type === "login" ? "/signup" : "/login"}
-            className="btn btn-small btn-link"
+            className="btn btn-large btn-link"
           >
             {type === "login"
-              ? "register an account"
-              : "login with an existing account"}
+              ? "Register an account"
+              : "Login with an existing account"}
           </Link>
         </div>
       </div>

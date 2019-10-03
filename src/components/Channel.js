@@ -32,12 +32,12 @@ class Channel extends Component {
         () => this.scrollToBottom()
       );
 
-    if (this.props.match.params.channelID)
+    if (this.props.match.params.channelID) {
+      alert(this.props.match.params.channelID);
       this.interval = window.setInterval(() => this.refresh(), 1000);
+    }
   }
-  componentWillUnmount() {
-    // this.props.resetMessages();
-  }
+
   scrollToBottom() {
     this.refs.msgs_body.scrollTo(0, this.refs.msgs_body.scrollHeight);
   }
@@ -48,7 +48,7 @@ class Channel extends Component {
         let date = this.getChannel().messages[
           this.getChannel().messages.length - 1
         ].timestamp;
-
+        console.log(date);
         this.props.fetchMessagesTS(this.props.match.params.channelID, date);
       } else {
         // let date = new Date().toISOString();
@@ -59,6 +59,9 @@ class Channel extends Component {
       }
     }
     // this.props.fetchMessages(this.props.match.params.channelID);
+  }
+  componentWillUnmount() {
+    window.clearInterval(this.interval);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.channelID != this.props.match.params.channelID) {
@@ -153,8 +156,10 @@ class Channel extends Component {
 
   FilterMSG() {
     if (this.getChannel().messages) {
-      let filtered = this.getChannel().messages.filter(chn =>
-        chn.message.toLowerCase().includes(this.state.query.toLowerCase())
+      let filtered = this.getChannel().messages.filter(
+        chn =>
+          chn.message.toLowerCase().includes(this.state.query.toLowerCase()) ||
+          chn.username.toLowerCase().includes(this.state.query.toLowerCase())
       );
       return filtered;
     }
