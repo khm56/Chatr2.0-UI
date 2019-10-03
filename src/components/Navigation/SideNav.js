@@ -22,8 +22,6 @@ class SideNav extends React.Component {
     loading: true
   };
   handleClick() {
-    // e.preventDefault();
-    alert("fdas");
     this.props.createChannel(this.state.channelName);
     this.setState({ channelName: "" });
   }

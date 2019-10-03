@@ -77,3 +77,24 @@ export const sendMessage = (id, msg, username) => {
     }
   };
 };
+
+export const CheckMessagesTS = (id, oldLength) => {
+  return async dispatch => {
+    try {
+      const res = await axios.get(
+        `https://api-chatr.herokuapp.com/channels/${id}/`
+      );
+
+      const messages = res.data;
+      const newLength = messages.length - oldLength;
+      console.log("from ", id, "got diff = ", newLength);
+      dispatch({
+        type: "SET_LENGTH",
+        payload: newLength,
+        channelID: id
+      });
+    } catch (err) {
+      console.error(err.response);
+    }
+  };
+};

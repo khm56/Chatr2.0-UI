@@ -9,7 +9,8 @@ import {
 
 const initialState = {
   channels: [],
-  newMessage: false
+  newMessage: false,
+  visited: []
 };
 
 const reducer = (state = initialState, { type, payload, channelID }) => {
@@ -28,10 +29,11 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
           } else return chan;
         }
       });
-
+      console.log(state.visited);
       return {
         ...state,
-        channels: [...channelz]
+        channels: [...channelz],
+        visited: [...state.visited, channelID]
       };
     case SET_MESSAGE:
       let channelz2 = state.channels.map(chan => {
@@ -78,6 +80,20 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
       return {
         ...state,
         channels: [...channelz5]
+      };
+    case "SET_LENGTH":
+      let channelz6 = state.channels.map(chan => {
+        if (chan) {
+          if (chan.id == channelID) {
+            chan.unread = payload;
+            return chan;
+          } else return chan;
+        }
+      });
+
+      return {
+        ...state,
+        channels: payload > 0 ? [...channelz6] : state.channels
       };
 
     default:

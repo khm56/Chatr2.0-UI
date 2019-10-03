@@ -33,7 +33,6 @@ class Channel extends Component {
       );
 
     if (this.props.match.params.channelID) {
-      alert(this.props.match.params.channelID);
       this.interval = window.setInterval(() => this.refresh(), 1000);
     }
   }
@@ -135,7 +134,7 @@ class Channel extends Component {
             <Message
               message={msg}
               user={this.props.user.username}
-              key={msg.id + idx}
+              key={msg.id + idx + Math.random() * 1111}
             />
           ))}
         </div>
@@ -282,8 +281,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   channels: state.channelsReducer.channels,
   user: state.user,
-  newMessage: state.channelsReducer.newMessage
-  //   messages: state.channelReducer.messages
+  newMessage: state.channelsReducer.newMessage,
+  visited: state.channelsReducer.visited
 });
 export default connect(
   mapStateToProps,
