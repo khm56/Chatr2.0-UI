@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import moment from "moment";
 import PostMessage from "./PostMessage";
 import MessageCard from "./MessageCard";
 import Loading from "./Loading";

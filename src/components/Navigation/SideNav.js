@@ -29,8 +29,7 @@ class SideNav extends React.Component {
     const channelLinks = this.props.filteredChannels.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
-    if (!this.props.user) return <Redirect to="/welcome" />;
-
+    // if (!this.props.user) return <Redirect to="/welcome" />;
     return (
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">

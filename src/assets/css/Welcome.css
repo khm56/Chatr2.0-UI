@@ -1,0 +1,57 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+}
+h1 {
+  font-weight: 900;
+  font-family: Impact, fantasy;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+h3 {
+  font-weight: 900;
+  font-size: 40px;
+  position: relative;
+  top: 15px;
+  letter-spacing: 5px;
+  margin-top: 400px;
+  font-family: Impact, fantasy;
+}
+
+.bgimg {
+  background-image: url("https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80");
+  height: 100%;
+  widows: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.secret {
+  margin-left: 285px;
+}
