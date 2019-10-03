@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     // if (!this.props.user) return <Redirect to="/welcome" />;
     return (
-      <div className="content-wrapper">
+      <div className={!!this.props.user ? "content-wrapper" : ""}>
         <NavBar />
         <Switch>
           {!this.props.user && <Route path="/welcome" component={Welcome} />}

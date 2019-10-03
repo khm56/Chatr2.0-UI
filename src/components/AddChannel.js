@@ -16,9 +16,13 @@ class AddChannel extends Component {
   };
   render() {
     return (
-      <div className="mt-5 p-2">
+      <div
+        className="mt-5 p-2 card col-8 bg-dark text-light"
+        style={{ marginLeft: "150px" }}
+      >
         {!!this.props.user && (
           <form onSubmit={this.submitChannel}>
+            <p className="font">Create Channel</p>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text">Name</span>
@@ -41,7 +45,7 @@ class AddChannel extends Component {
                 onChange={this.textChange}
               />
             </div>
-            <input type="submit" />
+            <input type="submit" className="btn btn-success" />
           </form>
         )}
       </div>

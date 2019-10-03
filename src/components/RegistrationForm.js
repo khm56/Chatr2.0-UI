@@ -25,8 +25,11 @@ class RegistationForm extends Component {
   render() {
     const type = this.props.match.url.substring(1);
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
-        <div className="card-body bg-dark text-light">
+      <div className="card col-8 mx-auto p-0 mt-5">
+        <div
+          className="card-body bg-light text-dark"
+          // style={{ borderRadius: "10px" }}
+        >
           <h5 className="card-title mb-4">
             {type === "login"
               ? "Login to send messages"
@@ -61,17 +64,17 @@ class RegistationForm extends Component {
               {/* {this.props.errors ? this.props.errors : ""} */}
             </p>
             <input
-              className="btn btn-primary"
+              className="btn btn-success col-3"
               type="submit"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
           </form>
         </div>
         {/* <p className="color">{this.props.errors ? this.props.errors : ""}</p> */}
-        <div className="card-footer">
+        <div className="bg-dark text-light ">
           <Link
             to={type === "login" ? "/signup" : "/login"}
-            className="btn btn-small btn-link"
+            className="btn btn-small btn-link "
           >
             {type === "login"
               ? "register an account"

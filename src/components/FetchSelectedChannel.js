@@ -65,7 +65,7 @@ class FetchSelectedChannel extends React.Component {
         {this.props.messages.map(channel => {
           return (
             <div className="row">
-              <div className="col-4">
+              <div className="col-8">
                 <div className="border-transparent bg-transparent ">
                   <ul className="list-group bg-transparent">
                     <br></br>

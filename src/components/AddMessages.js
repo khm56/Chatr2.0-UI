@@ -18,16 +18,17 @@ class AddMessages extends Component {
     return (
       <div className="mt-5 p-2">
         <form onSubmit={event => this.submitChannel(event)}>
-          <div className="input-group mb-3">
+          <div className="input-group mb-3 ">
             <input
               type="text"
-              className="form-control"
+              className="form-control col-10"
               name="message"
               value={this.state.message}
               onChange={event => this.textChange(event)}
             />
+
+            <input type="submit" className="btn btn-warning" />
           </div>
-          <input type="submit" />
         </form>
       </div>
     );
