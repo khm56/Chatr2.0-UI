@@ -1,19 +1,20 @@
 import React from "react";
 import moment from "moment";
-import "../assets/css/main.css";
+import "../assets/css/main.css"
+import profileIcon from "./profile2.png"
+
 const Messages = props => {
 
   console.log("props.background", props.background)
   return (
-    <div  >
+    <div id="bubbles" >
       <img
-        src="https://image.flaticon.com/icons/svg/17/17004.svg"
+        src={profileIcon}
         alt="Avatar"
         className="image"
       ></img>
       <span className="username">
-        <b>From: </b>
-        {props.messages.username}
+        <b> {props.messages.username} </b>
       </span>
       <div className="messages">
         <p>{props.messages.message}</p>
@@ -22,7 +23,7 @@ const Messages = props => {
       {/* <span className="timestamp">{props.messages.timestamp}</span> */}
 
       {/* <span className="timestamp">{moment(props.messages.timestamp).format('YYYY-MM-DD HH:mm')}</span> */}
-      <span className="timestamp">{moment(props.messages.timestamp).format('HH:mm A')}</span>
+      <span className="timestamp">{moment(props.messages.timestamp).calendar()}</span>
 
     </div>
   );

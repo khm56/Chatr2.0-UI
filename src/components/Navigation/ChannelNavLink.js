@@ -36,7 +36,7 @@ const ChannelNavLink = class Channel extends React.Component {
         data-placement="right"
         title={channel.name}
       >
-        <NavLink className="nav-link" to={`/channels/${channel.id}`}>
+        <NavLink className="nav-link sidelink" to={`/channels/${channel.id}`}>
           <FontAwesomeIcon icon={faHashtag} />
           <span className="nav-link-text"> {channel.name}</span>
         </NavLink>

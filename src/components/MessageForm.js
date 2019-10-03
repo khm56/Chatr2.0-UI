@@ -127,7 +127,7 @@ class SendMessageForm extends Component {
       if (this.state.searchIsUsed) {
         const resultedMessages = this.state.filteredMessages.map(message => (
           <Messages key={message.id} messages={message} background={background} />));
-        return <div style={{
+        return <div id="bgIMG" style={{
           backgroundImage: `url(${background})`
         }}>
           {resultedMessages}
@@ -143,7 +143,7 @@ class SendMessageForm extends Component {
       {
         const messages = channel.map(message => (
           <Messages key={message.id} messages={message} background={background} />));
-        return <div style={{
+        return <div id="bgIMG" style={{
           backgroundImage: `url(${background})`
         }}>
 
@@ -167,23 +167,13 @@ class SendMessageForm extends Component {
 
     return (
       <>
-        {/* <div style={{
-          backgroundImage: `url(${this.props.channel.image_url
-            })`
-        }}> */}
-
         <div style={{
           backgroundImage: `url(${this.props.channel.image_url
             })`
         }}>
           <SearchChannelBar onChange={this.filterMessages} />
-          <div className=" ml-5 content col-10"  >{this.myView()}</div>
+          <div id="bubble" className=" ml-5 content col-10"  >{this.myView()}</div>
 
-
-          {/* style={{
-
-backgroundImage: `url(${this.background})`
-}} */}
 
           <div style={{ textAlign: "center" }} className="mt-5 p-2">
             <form name="messageForm" onSubmit={this.submitHandler}>

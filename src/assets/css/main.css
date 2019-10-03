@@ -13,7 +13,18 @@ body {
   background-image: url("WelcomeVideo.mp4");
 
 }
-
+#bubble {
+ 
+  width: 850px;
+  border-radius: 50px;
+  opacity: 1;
+ }
+ #bubbles {
+  position: relative;
+  right: 150px;
+  opacity: 1;
+ }
+ 
 #welcome{
   color: white
 }
@@ -722,16 +733,34 @@ footer.sticky-footer {
   }
 }
 
-.messages {
-  border-radius: 25px;
-  background: #ff009d;
+#bubble {
+  position: relative;
+  left: 300px;
+
+  width: 850px;
+  border-radius: 50px;
+  opacity: 1;
+ }
+ #bubbles {
+  position: relative;
+  right: 150px;
+  opacity: 1;
+ }
+
+ 
+
+ .messages {
+  border-radius: 5px 30px 30px 30px;
+  background: rgba(85, 80, 88, 0.993);
   padding: 15px;
   width: 450px;
   height: auto;
   position: relative;
   left: 250px;
+  margin: 20px;
   color: white;
-}
+ }
+ 
 
 .container {
   background: transparent;
@@ -746,28 +775,43 @@ footer.sticky-footer {
   left: 60px;
 }
 
+
+
 .image {
   border-radius: 50%;
-  width: 70px;
+  width: 65px;
   position: relative;
-  left: 170px;
-  top: 70px;
-}
-
-.timestamp {
-  position: relative;
-  left: 260px;
-  padding-bottom: 15px;
-}
-
-.username {
-  position: relative;
-  left: 190px;
+  left: 220px;
   top: 20px;
-}
+  border-color: green;
+  margin-bottom: 8px;
+ }
+ .timestamp {
+  position: relative;
+  left: 550px;
+  bottom: 47px;
+  color: #b8d7f5;
+  font-size: 13px;
+ }
+ .username {
+  position: relative;
+  left: 230px;
+  top: 20px;
+  color: white
+ }
+ #bgIMG {
+  border-radius: 50px;
+  background-color: rgb(2, 0, 36);
+  opacity: 0.9;
+  position: relative;
+  right:80px;
+  top:30px;
+ }
+
+
 
 #send {
-  background: #ff0080;
+  background: rgba(255, 0, 200, 0.904);
   padding: 7px 12px;
   position: relative;
   left: 1040px;
@@ -862,15 +906,34 @@ footer.sticky-footer {
 
 #head{
   background-color: rgba(0, 0, 0, 0.658);
+ 
 
   position: relative;
   top:30px;
   padding-bottom: 30px;
 }
 
+.bgside{
+  background-color: rgba(0, 0, 0, 0.658);
+  padding-top:20px;
+  
+}
+
+.sidelink {
+  color:white;
+}
+.sidelink:hover{
+  color:#ff80dd;
+}
 .reg{
   text-align: center;
   padding-top: 20px;
+}
+#iconcolor{
+  color:white;
+}
+#iconcolor:hover{
+  color:#ff80dd;
 }
 .textlog, #textlog{
   color: white;

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 // Components
 import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
-
+import icon from "./iconC.png"
 const NavBar = (props) => {
   return (
     <nav
@@ -13,7 +13,9 @@ const NavBar = (props) => {
       id="mainNav"
     >
       <Link className="navbar-brand" to="/welcome">
-        Chatr2.0
+        <img src={icon}
+          style={{ width: "200px", height: "60px", paddingLeft: "20px" }}>
+        </img>
       </Link>
       <button
         className="navbar-toggler navbar-toggler-right"

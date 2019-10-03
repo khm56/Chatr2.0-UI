@@ -49,8 +49,8 @@ class SideNav extends React.Component {
       }
       if (this.props.user) {
         return (
-          <div>
-            <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
+          <div >
+            <ul style={{ postion: "relative", top: "30px" }} className="navbar-nav navbar-sidenav bgside" id="exampleAccordion">
 
               <SearchBar />
 
@@ -60,8 +60,8 @@ class SideNav extends React.Component {
 
 
                 <Link className="nav-link heading" to="/createChannel">
-                  <span className="nav-link-text mr-2">Channels</span>
-                  <FontAwesomeIcon icon={faPlusCircle} />
+                  <span className="nav-link-text mr-2 sidelink">Channels</span>
+                  <FontAwesomeIcon id="iconcolor" icon={faPlusCircle} />
                 </Link>
               </li>
               {channelLinks}

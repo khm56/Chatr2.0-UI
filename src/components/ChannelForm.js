@@ -37,9 +37,9 @@ class ChannelForm extends Component {
         const errors = this.props.errors;
 
         return (
-            <div className="card col-6 mx-auto p-0 mt-5">
+            <div id="loginForm" className="card col-6 mx-auto p-0 mt-5">
                 <div className="card-body">
-                    <h2 className="card-title mt-5 text-center"> Create a new Channel </h2>
+                    <h2 className="card-title mt-5 text-center text-white"> Create a new Channel </h2>
                     <div className="mt-5 p-5">
                         <form onSubmit={this.submitChannel}>
                             {!!errors.length && (
@@ -49,14 +49,15 @@ class ChannelForm extends Component {
                                     ))}
                                 </div>
                             )}
-                            <div className="input-group mb-3 border border-primary border-5 rounded-pill">
+                            <div className="input-group mb-3 border  border-5 rounded-pill">
                                 <div className="input-group-prepend ">
                                     <span className="input-group-text bg-dark text-white rounded-pill"> Channel Name</span>
                                 </div>
                                 <input
+                                    id="btnin"
                                     type="text"
                                     placeholder="Type channel name here.."
-                                    className="form-control border-0"
+                                    className="form-control border-0 text-white"
                                     style={{ backgroundColor: 'transparent' }}
                                     name="name"
                                     value={this.state.name}
@@ -67,8 +68,9 @@ class ChannelForm extends Component {
                             </div>
                             <div className="text-center">
                                 <button
+                                    id="btnlog"
                                     type="submit"
-                                    className=" btn btn-primary rounded-pill ">
+                                    className=" btn btn-primary btn-block rounded-pill ">
                                     Create
                             </button>
 
