@@ -55,7 +55,15 @@ class SuperSecretPage extends Component {
     let obj = this.props.channels.filter(channel => channel.id === channelID);
     if (obj[0]) return obj[0].image_url;
   };
-
+  noChannl = () => {
+    if (!this.props.match.params.channelID)
+      return (
+        <img
+          style={{ zIndex: "1000" }}
+          src="https://static.vecteezy.com/system/resources/previews/000/518/121/non_2x/vector-man-and-woman-with-smartphones-concept-illustration-texting-messaging-chatting-social-media-customer-assistance-dating-communication.jpg"
+        />
+      );
+  };
   render() {
     const msgs = () =>
       this.props.channel.map(text => <MsgsBox key={text.id} text={text} />);
@@ -76,6 +84,7 @@ class SuperSecretPage extends Component {
         }}
       >
         <div className="messages">
+          <div>{() => this.noChannl()}</div>
           <ul>{msgs()}</ul>
         </div>
         <div className="message-input ">

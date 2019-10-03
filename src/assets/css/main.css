@@ -10,10 +10,11 @@ html {
 
 .channelsList {
   position: fixed;
-  top: 31px;
-  bottom: 0;
+  top: 7%;
+  bottom: 5%;
   left: 0;
   right: 75%;
+
   margin-top: 2.8%;
   padding: 0;
   overflow-x: hidden;
@@ -24,15 +25,16 @@ html {
 
 #content {
   position: fixed;
-  top: 0.5%;
-  margin-top: 4.6%;
-  bottom: 0.5%;
+  top: 3.5%;
+  margin-top: 5%;
+  bottom: 100%;
   left: 25%;
   right: 0;
   padding: 0;
   z-index: 1000;
   overflow-y: auto;
   height: 90%;
+
   /* Scrollable contents if viewport is shorter than content. */
 }
 
@@ -81,7 +83,11 @@ html {
 .messages ul li:nth-last-child(1) {
   margin-bottom: 100px;
 }
+.messages ul li.sent {
+  margin-left: 15%;
+}
 .messages ul li.sent img {
+  margin-left: 20%;
   margin: 6px 8px 0 0;
 }
 .messages ul li.sent p {
@@ -133,7 +139,6 @@ html {
 .message-input .wrap input {
   float: left;
   border: none;
-
   padding: 11px 32px 10px 8px;
   font-size: 0.8em;
   color: #32465a;

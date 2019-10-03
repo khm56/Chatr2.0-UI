@@ -15,14 +15,14 @@ function MsgsBox(props) {
       ];
     } else
       return [
-        "sent",
+        "sent ",
         "https://avatar-cdn.atlassian.com/805e81b11a7b40b833c82c18cc1ca853?d=mm&s=16"
       ];
   };
 
   return (
     <li className={checkUser()[0]}>
-      <img src={checkUser()[1]} alt="" />
+      <img src={checkUser()[1]} />
       <p>
         <strong>
           {props.user.username === text.username
