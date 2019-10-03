@@ -16,10 +16,11 @@ class SearchChannelBar extends Component {
     render() {
         return (
             <div className="form-group col-lg-6 col-12 mx-auto rounded-pill border-2  "
-                style={{ backgroundColor: 'rgba(255, 0, 200, 0.904)', position: "relative", left: "50px", top: "20px", border: "1px solid transparent", margin: "20px" }}>
+                style={{ position: "relative", left: "50px", top: "20px", border: "1px solid transparent", margin: "20px" }}>
                 <div className="input-group my-3 ">
                     <input
-                        className="form-control rounded-pill"
+                        className="form-control rounded-pill text-white"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0.658)" }}
                         type="text"
                         value={this.state.query}
                         onChange={this.handleChange}
