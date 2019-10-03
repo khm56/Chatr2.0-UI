@@ -8,25 +8,10 @@ import AuthButton from "./AuthButton";
 const NavBar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-      id="mainNav"
+      className="navbar navbar-light"
+      style={{ backgroundColor: "#e3f2fd", opacity: 0.3 }}
     >
-      <Link className="navbar-brand" to="/welcome">
-        Chatr2.0
-      </Link>
-      <button
-        className="navbar-toggler navbar-toggler-right"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarResponsive"
-        aria-controls="navbarResponsive"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarResponsive">
-        <SideNav />
+      <div id="navbarResponsive">
         <AuthButton />
       </div>
     </nav>

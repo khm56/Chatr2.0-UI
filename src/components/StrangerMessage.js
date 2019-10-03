@@ -24,7 +24,7 @@ class StrangerMessage extends Component {
         >
           <div className="img_cont_msg">
             <img
-              src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+              src="https://s3.us-east-2.amazonaws.com/hda/assets/chat-icon.gif"
               className="rounded-circle user_img_msg"
             />
           </div>

@@ -1,117 +1,90 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../redux/actions";
+
+// Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faPlusCircle,
+  faMinusCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 // Components
-import SideNav from "./SideNav";
-import AuthButton from "./AuthButton";
+import ChannelNavLink from "./ChannelNavLink";
 
-const NavBar = () => {
-  return (
-    <div className="row justify-content-center h-100">
-      <div className="mx-5 chat">
-        <div
-          className="card mb-sm-3 mb-md-0 contacts_card"
-          style={{ width: 300 }}
-        >
-          <div className="card-header">
-            <div className="input-group">
-              <input
-                type="text"
-                placeholder="Search..."
-                name=""
-                className="form-control search"
-              />
-              <div className="input-group-prepend">
-                <span className="input-group-text search_btn">
-                  <i className="fas fa-search"></i>
-                </span>
+class test extends React.Component {
+  state = {
+    channelName: ""
+  };
+  render() {
+    const channelLinks = this.props.channels.map(channel => (
+      <ChannelNavLink key={channel.name} channel={channel} />
+    ));
+    const changeHandler = e => {
+      this.setState({ [e.target.name]: e.target.value });
+    };
+    const submitHandler = e => {
+      e.preventDefault();
+      this.props.addChannel(this.state.channelName);
+      this.setState({ [e.target.name]: e.target.value });
+      this.setState({ channelName: "" });
+    };
+
+    return (
+      <div className="row justify-content-center h-100 ">
+        <div className="mx-5 chat">
+          <div
+            className="card mb-sm-3 mb-md-0 contacts_card"
+            style={{ width: 300 }}
+          >
+            <div className="card-header">
+              <div className="input-group">
+                <input
+                  type="text"
+                  placeholder="Add Channel"
+                  name="channelName"
+                  className="form-control search"
+                  value={this.state.channelName}
+                  onChange={changeHandler}
+                />
+                <div className="input-group-prepend">
+                  <span className="input-group-text search_btn">
+                    <i
+                      className="fas fa-plus-circle"
+                      onClick={submitHandler}
+                    ></i>
+                  </span>
+                </div>
               </div>
             </div>
+            <div className="card-body contacts_body">
+              <ui className="contacts">{channelLinks}</ui>
+            </div>
+            <div className="card-footer"></div>
           </div>
-          <div className="card-body contacts_body">
-            <ui className="contacts">
-              <li className="active">
-                <div className="d-flex bd-highlight">
-                  <div className="img_cont">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                      className="rounded-circle user_img"
-                    />
-                    <span className="online_icon"></span>
-                  </div>
-                  <div className="user_info">
-                    <span>Khalid</span>
-                    <p>Maryam is online</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="d-flex bd-highlight">
-                  <div className="img_cont">
-                    <img
-                      src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
-                      className="rounded-circle user_img"
-                    />
-                    <span className="online_icon offline"></span>
-                  </div>
-                  <div className="user_info">
-                    <span>Taherah Big</span>
-                    <p>Taherah left 7 mins ago</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="d-flex bd-highlight">
-                  <div className="img_cont">
-                    <img
-                      src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg"
-                      className="rounded-circle user_img"
-                    />
-                    <span className="online_icon"></span>
-                  </div>
-                  <div className="user_info">
-                    <span>Sami Rafi</span>
-                    <p>Sami is online</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="d-flex bd-highlight">
-                  <div className="img_cont">
-                    <img
-                      src="http://profilepicturesdp.com/wp-content/uploads/2018/07/sweet-girl-profile-pictures-9.jpg"
-                      className="rounded-circle user_img"
-                    />
-                    <span className="online_icon offline"></span>
-                  </div>
-                  <div className="user_info">
-                    <span>Nargis Hawa</span>
-                    <p>Nargis left 30 mins ago</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="d-flex bd-highlight">
-                  <div className="img_cont">
-                    <img
-                      src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg"
-                      className="rounded-circle user_img"
-                    />
-                    <span className="online_icon offline"></span>
-                  </div>
-                  <div className="user_info">
-                    <span>Rashid Samim</span>
-                    <p>Rashid left 50 mins ago</p>
-                  </div>
-                </div>
-              </li>
-            </ui>
-          </div>
-          <div className="card-footer"></div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    channels: state.channels.channels,
+    user: state.user
+  };
 };
 
-export default NavBar;
+const mapDispatchToProps = dispatch => {
+  return {
+    addChannel: name => dispatch(actionCreators.addChannel(name))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(test);

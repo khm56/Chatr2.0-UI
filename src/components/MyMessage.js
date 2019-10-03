@@ -28,7 +28,7 @@ class MyMessage extends Component {
           </div>
           <div className="img_cont_msg">
             <img
-              src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+              src="https://media0.giphy.com/media/THIVNRmVhore0/source.gif"
               className="rounded-circle user_img_msg"
             />
           </div>

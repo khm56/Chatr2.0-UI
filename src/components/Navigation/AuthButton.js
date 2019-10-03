@@ -13,43 +13,45 @@ import {
 
 class AuthButton extends Component {
   render() {
-    if (!this.props.user)
+    if (!this.props.user) {
       return (
         <>
-          <div key="loginButton" className="nav-item">
-            <Link to="/login" className="nav-link">
-              <FontAwesomeIcon icon={faSignInAlt} /> Login
-            </Link>
-          </div>
-          <div key="signupButton" className="nav-item">
-            <Link to="/signup" className="nav-link">
-              <FontAwesomeIcon icon={faUserPlus} /> Signup
-            </Link>
+          <div
+            classname="row"
+            style={{ position: "relative", left: 1200, opacity: 1 }}
+          >
+            <div classname="col-6">
+              <div key="loginButton" className="nav-item">
+                <Link to="/login" className="nav-link">
+                  <FontAwesomeIcon icon={faSignInAlt} /> Login
+                </Link>
+              </div>
+            </div>
+            <div classname="col-6">
+              <div key="loginButton" className="nav-item">
+                <Link to="/signup" className="nav-link">
+                  <FontAwesomeIcon icon={faUserPlus} /> Signup
+                </Link>
+              </div>
+            </div>
           </div>
           <Redirect to="/Welcome" />
         </>
       );
+    }
     const logoutAndReset = () => {
       this.props.logout();
       this.props.resetChannels();
     };
 
-    if (this.props.user) {
-      return (
-        <>
-          <div key="signupButton" className="nav-item" onClick={logoutAndReset}>
-            <Link to="/signout" className="nav-link">
-              <FontAwesomeIcon icon={faSignOutAlt} /> SignOut{" "}
-              {this.props.user.username}
-            </Link>
-          </div>
-        </>
-      );
-    }
-
     return (
       <>
-        <Redirect to="/Welcome" />
+        <div key="signupButton" className="nav-item" onClick={logoutAndReset}>
+          <Link to="/signout" className="nav-link">
+            <FontAwesomeIcon icon={faSignOutAlt} /> SignOut{" "}
+            {this.props.user.username}
+          </Link>
+        </div>
       </>
     );
   }

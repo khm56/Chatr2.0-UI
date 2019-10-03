@@ -9,38 +9,36 @@ class RegistationForm extends Component {
     password: ""
   };
 
-  
   componentWillUnmount() {
-    if (this.props.errors){
+    if (this.props.errors) {
       this.props.resetErrors();
-    } 
-    this.props.fetchChannels()
+    }
+    this.props.fetchChannels();
   }
 
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = (e,type) => {
+  submitHandler = (e, type) => {
     e.preventDefault();
-    if(type==="signup")
-    this.props.signup(this.state, this.props.history);
-    else 
-    this.props.login(this.state, this.props.history)
+    if (type === "signup") this.props.signup(this.state, this.props.history);
+    else this.props.login(this.state, this.props.history);
   };
 
   render() {
-    if (this.props.user) return <Redirect to="/welcome" /> 
+    if (this.props.user) return <Redirect to="/welcome" />;
     const type = this.props.match.url.substring(1);
-  
 
-    const submit = (event) =>{
-      this.submitHandler(event,type);
-      
-    }
+    const submit = event => {
+      this.submitHandler(event, type);
+    };
 
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
+      <div
+        className=" col-6 mx-auto p-0 mt-5"
+        style={{ background: "#8086d8" }}
+      >
         <div className="card-body">
           <h5 className="card-title mb-4">
             {type === "login"
@@ -48,9 +46,11 @@ class RegistationForm extends Component {
               : "Register an account"}
           </h5>
           <form onSubmit={submit}>
-          <p style={{color: "red" }}>  {this.props.errors.username}</p>
-          <p style={{color: "red" }}>  {this.props.errors.non_field_errors}</p>
-        
+            <p style={{ color: "red" }}> {this.props.errors.username}</p>
+            <p style={{ color: "red" }}>
+              {" "}
+              {this.props.errors.non_field_errors}
+            </p>
 
             <div className="form-group">
               <input
@@ -109,7 +109,6 @@ const mapDispatchToProps = dispatch => {
     fetchChannels: () => dispatch(actionCreators.fetchChannels())
   };
 };
-
 
 export default connect(
   mapStateToProps,

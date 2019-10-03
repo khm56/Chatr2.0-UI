@@ -6,10 +6,18 @@ const SuperSecretPage = ({ user }) => {
   if (!user) return <Redirect to="/login" />;
 
   return (
-    <div>
-      <h1>this page has all the secrets</h1>
-      <p>now that you're logged in you can see this page</p>
-    </div>
+    <>
+      <div classname="my-5">
+        <img src="https://thumbs.gfycat.com/GlamorousSimilarAnt-max-1mb.gif" />
+        <img src="https://thumbs.gfycat.com/GlamorousSimilarAnt-max-1mb.gif" />
+        <img src="https://thumbs.gfycat.com/GlamorousSimilarAnt-max-1mb.gif" />
+        <img src="https://thumbs.gfycat.com/GlamorousSimilarAnt-max-1mb.gif" />
+      </div>
+      <div style={{ position: "relative", bottom: 400 }}>
+        <img src="https://en.bloggif.com/tmp/8b7b30ec6cbe93a3b9898a6ecdababfc/text.gif?1570066930" />
+        <img src="https://en.bloggif.com/tmp/cf702e1115ebbacd537ed1ec6506b4f5/text.gif?1570067185" />
+      </div>
+    </>
   );
 };
 
