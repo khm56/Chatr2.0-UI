@@ -22,7 +22,7 @@ class AddChannel extends Component {
   render() {
     if (!this.props.user) return <Redirect to="/Welcome" />;
     return (
-      <div className="mt-5 p-2">
+      <div className="mt-5 p-2 secret">
         <p className="errorMessage">
           {this.props.errors ? this.props.errors : ""} <br />
         </p>

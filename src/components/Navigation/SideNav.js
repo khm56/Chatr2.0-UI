@@ -32,7 +32,11 @@ class SideNav extends React.Component {
     // if (!this.props.user) return <Redirect to="/welcome" />;
     return (
       <div>
-        <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <ul
+          className="navbar-nav navbar-sidenav"
+          id="exampleAccordion"
+          style={{ backgroundColor: "#201612" }}
+        >
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
             <Link className="nav-link heading" to="/channels/create">
               <span className="nav-link-text mr-2">Channels</span>

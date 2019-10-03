@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { postMessage } from "../redux/actions";
+import "../assets/css/Welcome.css";
 
 class PostMessage extends Component {
   state = {
@@ -24,7 +25,7 @@ class PostMessage extends Component {
     if (!this.props.user) return <Redirect to="/Welcome" />;
     return (
       <form onSubmit={e => this.submitMessage(e)}>
-        <div className="form-group">
+        <div className="form-group secret">
           <input
             type="text"
             className="form-control"
@@ -34,7 +35,7 @@ class PostMessage extends Component {
             onChange={e => this.onTextChange(e)}
           />
         </div>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-success secret">
           Send
         </button>
       </form>

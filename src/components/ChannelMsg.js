@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import moment from "moment";
 import PostMessage from "./PostMessage";
 import MessageCard from "./MessageCard";
 import Loading from "./Loading";
@@ -53,7 +52,11 @@ class ChannelMsg extends Component {
       <div
         className="bgImage"
         style={{
-          backgroundImage: `url(${image_url})`
+          backgroundImage: `url(${image_url})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center"
         }}
       >
         {this.props.loading ? (

@@ -8,14 +8,15 @@ import AuthButton from "./AuthButton";
 const NavBar = ({ user }) => {
   let result = [
     <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+      className="navbar navbar-expand-lg navbar-dark fixed-top"
       id="mainNav"
+      style={{ backgroundColor: "#201612" }}
     >
       <Link className="navbar-brand" to="/welcome">
         Chatr2.0
       </Link>
       <button
-        className="navbar-toggler navbar-toggler-right"
+        className="navbar-toggler navbar-toggler-right "
         type="button"
         data-toggle="collapse"
         data-target="#navbarResponsive"
@@ -33,8 +34,9 @@ const NavBar = ({ user }) => {
   if (!!user) {
     result = (
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+        className="navbar navbar-expand-lg navbar-dark fixed-top"
         id="mainNav"
+        style={{ backgroundColor: "#201612" }}
       >
         <Link className="navbar-brand" to="/welcome">
           Chatr2.0
