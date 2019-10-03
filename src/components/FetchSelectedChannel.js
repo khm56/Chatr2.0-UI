@@ -36,7 +36,9 @@ class FetchSelectedChannel extends React.Component {
     });
 
     if (findImage) {
-      return findImage.image_url;
+      if (findImage.image_url) {
+        return findImage.image_url;
+      }
     }
     return "http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg";
   }
@@ -53,24 +55,38 @@ class FetchSelectedChannel extends React.Component {
       <div
         style={{
           backgroundImage: `url(${image_url})`,
-          backgroundPosition: "center"
-          //   backgroundSize: "contain",
-          //   backgroundRepeat: "no-repeat"
+          backgroundRepeat: "no-repeat",
+          backgroundSize: " cover",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          minHeight: "400px"
         }}
       >
         {this.props.messages.map(channel => {
           return (
-            <div className="card bg-transparent">
-              <ul className="list-group bg-transparent">
-                <br></br>
-                <br></br>
-                {/* <li className="list-group-item">{channel.timestamp}</li> */}
-                <li className="list-group-item">{channel.timestamp}</li>
-                <li className="list-group-item">
-                  {" "}
-                  {channel.username}: {channel.message}
-                </li>
-              </ul>
+            <div className="row">
+              <div className="col-4">
+                <div className="border-transparent bg-transparent ">
+                  <ul className="list-group bg-transparent">
+                    <br></br>
+                    <br></br>
+                    {/* <li className=“list-group-item”>{channel.timestamp}</li> */}
+                    {/* <li className=“speech-bubble sizing text-left  text-white d-inline  my-2  “>{channel.timestamp}</li> */}
+                    <li className="speech-bubble sizing text-left  text-white d-inline  my-2  ">
+                      {""}
+                      <div className="row mx-auto">
+                        {channel.username}: {channel.message}
+                      </div>
+                      <div className="row">
+                        <div className="col-3"></div>
+                        <small className="col-9 text-right">
+                          {channel.timestamp}
+                        </small>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           );
         })}

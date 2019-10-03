@@ -6,8 +6,10 @@ class AddChannel extends Component {
     name: "",
     image_url: ""
   };
-  textChange = event =>
+
+  textChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
   submitChannel = event => {
     event.preventDefault();
     this.props.postChannel(this.state, this.props.history);
@@ -35,8 +37,8 @@ class AddChannel extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="imageUrl"
-                onChange={this.textChangeHandler}
+                name="image_url"
+                onChange={this.textChange}
               />
             </div>
             <input type="submit" />

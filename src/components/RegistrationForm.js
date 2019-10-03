@@ -26,7 +26,7 @@ class RegistationForm extends Component {
     const type = this.props.match.url.substring(1);
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
-        <div className="card-body">
+        <div className="card-body bg-dark text-light">
           <h5 className="card-title mb-4">
             {type === "login"
               ? "Login to send messages"
