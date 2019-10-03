@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import PostMessage from "./PostMessage";
+import MessageCard from "./MessageCard";
 import Loading from "./Loading";
 
 class ChannelMsg extends Component {
@@ -42,41 +43,34 @@ class ChannelMsg extends Component {
     if (channel) {
       if (channel.image_url) return channel.image_url;
     }
-    return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QRkJVyHncWGDh25Zuz4yAZdEXekBmYfF2nxMqbCcao79pGDD";
+    return "https://wpamelia.com/wp-content/uploads/2019/02/4k-wallpaper-architecture-background-1308624.jpg";
   }
 
   render() {
     if (!this.props.user) return <Redirect to="/Welcome" />;
     let image_url = this.FetchImage();
-    console.log("I AM HERE");
-    console.log(image_url);
     return (
       <div
+        className="bgImage"
         style={{
-          backgroundImage: `url(${image_url})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center"
+          backgroundImage: `url(${image_url})`
         }}
       >
         {this.props.loading ? (
           <Loading />
         ) : (
-          this.props.messages.map(element => {
+          this.props.messages.map(msg => {
             return (
-              <div className="card bg-transparent">
-                <div className="card-body bg-transparent">
-                  {element.message}
-                </div>
-                <div className="card-text">{element.username}</div>
-                <div className="card-text bg-transparent">
-                  {element.timestamp}
+              <div>
+                <br />
+                <div key={msg.id}>
+                  <MessageCard msg={msg} />
                 </div>
               </div>
             );
           })
         )}
+        <br />;
         <PostMessage channelID={this.props.match.params.channelID} />
       </div>
     );

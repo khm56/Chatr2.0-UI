@@ -681,3 +681,36 @@ footer.sticky-footer {
   color: red;
   font-weight: bold;
 }
+
+.speech-bubble {
+  font-family: "Patrick Hand", cursive;
+  margin-left: 35px;
+  padding: 20px;
+  position: relative;
+  background: white;
+  border-radius: 0.8em;
+  max-width: 750px;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 34px solid transparent;
+  border-left-color: white;
+  border-right: 0;
+  border-bottom: 0;
+  margin-top: -17px;
+  margin-right: -34px;
+}
+
+.bgImage {
+  background-repeat: "no-repeat";
+  background-size: "cover";
+  background-attachment: "fixed";
+  background-position: "center";
+  min-height: 1000px;
+}
