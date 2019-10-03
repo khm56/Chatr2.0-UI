@@ -9,7 +9,9 @@ const reducer = (state = initialState, { type, payload }) => {
     case SET_ERRORS:
       return {
         ...state,
-        errors: Object.keys(payload).map(key => `${key}: ${payload[key]}`)
+        errors: payload
+          ? Object.keys(payload).map(key => `${key}: ${payload[key]}`)
+          : []
       };
 
     default:

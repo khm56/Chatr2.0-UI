@@ -2,7 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import { SET_CURRENT_USER, SET_ERRORS, SET_CHANNELS } from "./actionTypes";
-
+import { getChannels } from "./channels";
 import { setErrors } from "./errors";
 
 const instance = axios.create({
@@ -37,12 +37,13 @@ export const login = (userData, history) => {
       );
       const user = res.data;
       dispatch(setCurrentUser(user.token));
-      history.push("/");
+      dispatch(getChannels());
+      history.push("/channel/");
     } catch (err) {
       // console.error(err);
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response ? err.response.data : null
       });
     }
   };
@@ -61,12 +62,12 @@ export const signup = (userData, history) => {
       dispatch(setCurrentUser(user.token));
       //If it doesn't log you in
       dispatch(login(userData));
-      history.push("/");
+      history.push("/channel/");
     } catch (err) {
       // console.error(err.response.data);
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response ? err.response.data : null
       });
     }
   };

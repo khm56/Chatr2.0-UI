@@ -2,33 +2,44 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { fetchMessages, sendMessage, fetchMessagesTS } from "../redux/actions";
+import { emojify } from "react-emojione";
 import Loading from "./Loading";
 import Message from "./Message";
+import SideNav from "../components/Navigation/SideNav";
+import empty from "../empty.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationArrow,
+  faEllipsisV,
+  faSmile
+} from "@fortawesome/free-solid-svg-icons";
+
+import EmojiPicker from "emojione-picker";
 // import sad from "../sad.png";
 class Channel extends Component {
   state = {
     message: "",
     loading: true,
-    channelID: this.props.match.params.channelID
+    channelID: this.props.match.params.channelID,
+    query: ""
   };
 
   componentDidMount() {
-    if (!this.getChannel.messages)
+    if (!this.getChannel().messages && this.props.match.params.channelID)
       this.props.fetchMessages(
         this.props.match.params.channelID,
         status => this.setLoadingFalse(status),
         () => this.scrollToBottom()
       );
-    // this.setState({
-    //   message: ""
-    // });
-    this.interval = window.setInterval(() => this.refresh(), 1000);
+
+    if (this.props.match.params.channelID)
+      this.interval = window.setInterval(() => this.refresh(), 1000);
   }
   componentWillUnmount() {
     // this.props.resetMessages();
   }
   scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight);
+    this.refs.msgs_body.scrollTo(0, this.refs.msgs_body.scrollHeight);
   }
   refresh() {
     //let date = new Date().toISOString();
@@ -45,7 +56,6 @@ class Channel extends Component {
         this.props.fetchMessages(this.props.match.params.channelID, null, () =>
           this.scrollToBottom()
         );
-        console.log(this.props.messages);
       }
     }
     // this.props.fetchMessages(this.props.match.params.channelID);
@@ -59,6 +69,7 @@ class Channel extends Component {
           () => this.scrollToBottom()
         );
       }
+
       this.props.saveDraft(
         this.state.message,
         prevProps.match.params.channelID
@@ -72,8 +83,10 @@ class Channel extends Component {
           message: ""
         });
       }
+
       window.clearInterval(this.interval);
-      window.scrollTo(0, document.body.scrollHeight);
+      this.interval = window.setInterval(() => this.refresh(), 1000);
+      this.refs.msgs_body.scrollTo(0, this.refs.msgs_body.scrollHeight);
     }
     if (this.props.newMessage) {
       this.scrollToBottom();
@@ -97,6 +110,9 @@ class Channel extends Component {
       this.state.message,
       this.props.user.username
     );
+    this.setState({
+      message: ""
+    });
   }
   getChannel() {
     let channel;
@@ -110,15 +126,13 @@ class Channel extends Component {
   }
   renderMessages() {
     if (!this.state.loading && this.getChannel().messages) {
-      //   window.scrollTo(0, document.body.scrollHeight);
-
       return (
         <div>
-          {this.getChannel().messages.map(msg => (
+          {this.FilterMSG().map((msg, idx) => (
             <Message
               message={msg}
               user={this.props.user.username}
-              key={msg.id}
+              key={msg.id + idx}
             />
           ))}
         </div>
@@ -127,58 +141,128 @@ class Channel extends Component {
       return <Loading />;
     }
   }
+  emojieClicked(data) {
+    // e.stopPropagation();
+    // emojify("Easy! :wink: :D ^__^", { output: "unicode" });
+    let newInputText =
+      this.state.message + emojify(data.shortname, { output: "unicode" });
+    this.setState({
+      message: newInputText
+    });
+  }
+
+  FilterMSG() {
+    if (this.getChannel().messages) {
+      let filtered = this.getChannel().messages.filter(chn =>
+        chn.message.toLowerCase().includes(this.state.query.toLowerCase())
+      );
+      return filtered;
+    }
+  }
+  handleSearchMSG(e) {
+    this.setState({ query: e.target.value });
+  }
 
   render() {
+    let isThereAnID;
     if (!this.props.user) return <Redirect to="/login" />;
+    if (this.props.match.params.channelID) isThereAnID = true;
+    else isThereAnID = false;
+    const channel = this.getChannel();
+    let usernames;
+    if (channel.messages) {
+      usernames = channel.messages.map(msg => {
+        return msg.username;
+      });
+      usernames = [...new Set(usernames)];
+    }
     return (
-      <div
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${
-            this.getChannel().image_url
-          })`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundSize: "1365px 1000px"
-        }}
-      >
-        <div id="scrollingContainer">{this.renderMessages()}</div>
-        {this.state.loading == false ? (
-          <>
-            <form onSubmit={e => this.sendMessage(e)}>
-              <div
-                className="input-group  mb-3 fixedInput"
-                style={{
-                  width: "75%",
-                  marginRight: "40px",
-                  height: "60px"
-                }}
-              >
-                <input
-                  className="form-control"
-                  placeholder="Type your message here.."
-                  name="message"
-                  value={this.state.message}
-                  onChange={e => this.handleTextChange(e)}
-                  style={{ height: "60px" }}
-                ></input>
+      <div className="row justify-content-center">
+        <SideNav channelID={this.props.match.params.channelID} />
+        {isThereAnID && (
+          <div className="col-8 chat">
+            <div className="card">
+              <div className="card-header msg_head">
+                <div className="d-flex bd-highlight">
+                  <div className="img_cont">
+                    <img
+                      src={channel.image_url ? channel.image_url : empty}
+                      className="rounded-circle user_img"
+                    />
+                  </div>
+                  <div className="user_info">
+                    <span>{channel.name}</span>
 
-                <div className="input-group-append">
-                  <button
-                    className="btn btn-danger"
-                    style={{ backgroundColor: "#d62929" }}
-                    type="submit"
+                    <p style={{ fontSize: "15px", width: "200px" }}>
+                      {channel.messages
+                        ? `${channel.messages.length} messages from ${usernames.length} users`
+                        : null}
+                    </p>
+                  </div>
+                  <div
+                    className="input-group"
+                    style={{ width: "250px", marginLeft: "200px" }}
                   >
-                    Send
-                  </button>
+                    <input
+                      type="text"
+                      placeholder="Search for messages.."
+                      onChange={e => this.handleSearchMSG(e)}
+                      className="form-control search rounded-pill"
+                    />
+                  </div>
                 </div>
               </div>
-            </form>
-          </>
-        ) : null}
+              <div className="card-body msg_card_body" ref="msgs_body">
+                {this.renderMessages()}
+              </div>
+              <div className="card-footer">
+                <form onSubmit={e => this.sendMessage(e)}>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <div class="btn-group dropup">
+                        <span
+                          className="input-group-text send_btn3 "
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <FontAwesomeIcon icon={faSmile} />
+                        </span>
+                        <div class="dropdown-menu">
+                          <EmojiPicker
+                            onChange={data => this.emojieClicked(data)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="message"
+                      className="form-control type_msg"
+                      placeholder="Type your message..."
+                      value={this.state.message}
+                      onChange={e => this.handleTextChange(e)}
+                    ></input>
+
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text send_btn"
+                        onClick={e => this.sendMessage(e)}
+                      >
+                        <input type="submit" hidden />{" "}
+                        <FontAwesomeIcon icon={faLocationArrow} />
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 }
+
 const mapDispatchToProps = dispatch => ({
   fetchMessages: (id, loadingFn, scrollFn) =>
     dispatch(fetchMessages(id, loadingFn, scrollFn)),

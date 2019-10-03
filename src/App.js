@@ -5,13 +5,13 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import main from "./assets/js/main";
 
 // Components
-import NavBar from "./components/Navigation/NavBar";
+
 import Footer from "./components/Footer";
 import Welcome from "./components/Welcome";
 import RegistrationForm from "./components/RegistrationForm";
 import SuperSecretPage from "./components/SuperSecretPage";
 import Channel from "./components/Channel";
-import SideNav from "./components/Navigation/SideNav";
+
 class App extends Component {
   componentDidMount() {
     main();
@@ -19,15 +19,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="content-wrapper">
-        <NavBar />
-
+      <div className="container" style={{ marginTop: "75px" }}>
         <Switch>
           <Route path="/welcome" component={Welcome} />
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/private" component={SuperSecretPage} />
-          <Route path="/channel/:channelID" component={Channel} />
-          <Redirect to="/welcome" />
+          <Route path="/channel/:channelID?" component={Channel} />
+          <Redirect to="/login" />
         </Switch>
       </div>
     );

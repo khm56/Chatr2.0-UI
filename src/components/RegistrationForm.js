@@ -29,7 +29,7 @@ class RegistationForm extends Component {
     const type = this.props.match.url.substring(1);
     const errors = this.props.errors;
     console.log(errors);
-    if (this.props.user) return <Redirect to="/private" />;
+    if (this.props.user) return <Redirect to="/channel" />;
     return (
       <div className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">

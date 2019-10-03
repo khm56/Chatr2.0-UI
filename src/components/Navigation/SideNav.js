@@ -1,22 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { logout } from "../../redux/actions";
+import ChannelRow from "./ChannelRow";
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
-  faAngleRight,
+  faSignOutAlt,
   faPlusCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { createChannel } from "../../redux/actions";
+import Loading from "../Loading";
 // Components
-import ChannelNavLink from "./ChannelNavLink";
 
 class SideNav extends React.Component {
   state = {
     collapsed: false,
     channelName: "",
-    filteredChannels: this.props.channels
+    filteredChannels: this.props.channels,
+    loading: true
   };
   handleClick() {
     // e.preventDefault();
@@ -29,33 +32,47 @@ class SideNav extends React.Component {
       channelName: e.target.value
     });
   }
-  componentDidMount() {}
+  setLoading(state) {
+    this.setState({
+      loading: state
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.channels.length != prevProps.channels.length) {
-      console.log("inside did upudate");
       this.setState({ filteredChannels: this.props.channels });
+      if (this.props.channels) {
+        this.setLoading(false);
+      } else {
+        this.setLoading(true);
+      }
+
+      // if (this.props.channels.length != prevProps.channels.length || ) {
+    }
+  }
+  componentDidMount() {
+    if (this.props.channels.length > 0) {
+      this.setLoading(false);
+    } else {
+      this.setLoading(true);
     }
   }
   renderCreateField() {
     if (this.props.user) {
       return (
-        <div class="row">
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-              <input
-                className="form-control mb-1"
-                type="text"
-                onChange={e => this.handleTextChange(e)}
-                value={this.state.channelName}
-              ></input>
-              <button
-                className="btn btn-success btn-block"
-                onClick={() => this.handleClick()}
-              >
-                Create
-              </button>
-            </div>
-          </div>
+        <div className="collapse multi-collapse" id="multiCollapseExample1">
+          <input
+            className="form-control mb-1"
+            type="text"
+            onChange={e => this.handleTextChange(e)}
+            value={this.state.channelName}
+          ></input>
+          <button
+            className="btn btn-success btn-block"
+            onClick={() => this.handleClick()}
+          >
+            Create
+          </button>
         </div>
       );
     }
@@ -66,74 +83,106 @@ class SideNav extends React.Component {
     );
     this.setState({ filteredChannels: filtered });
   }
+  getLogOutButton() {
+    if (this.props.user) {
+      return (
+        <>
+          <span className=" float-right" onClick={() => this.props.logout()}>
+            <FontAwesomeIcon
+              icon={faSignOutAlt}
+              className="OnClick"
+              style={{
+                color: "#d0e6ff",
+                fontSize: "20px",
+                marginBottom: "20px",
+                backgroundColor: "transparent"
+              }}
+            />
+          </span>
+        </>
+      );
+    } else {
+      return null;
+    }
+  }
   render() {
     let channelLinks;
     if (this.props.user) {
       channelLinks = this.state.filteredChannels.map(channel => (
-        <ChannelNavLink key={channel.name} channel={channel} />
+        <ChannelRow
+          key={channel.name}
+          channel={channel}
+          channelID={this.props.channelID}
+        />
       ));
     }
-    const buttonText = this.props.user
-      ? "Create Channel"
-      : "Login to create channels";
+    let logout = this.getLogOutButton();
+
     return (
-      <div>
-        <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li className="nav-item" data-toggle="tooltip" data-placement="right">
-            <Link
-              className="nav-link heading"
-              to={!this.props.user ? "/login" : null}
-            >
-              <p>
-                {this.props.user ? (
-                  <>
+      <div className="col-4" style={{ width: "100%" }}>
+        <div className="">
+          <div className="row justify-content-center h-100">
+            <div className="card mb-sm-3 mb-md-0 contacts_card">
+              <div className="card-header">
+                <div>
+                  <p>
+                    {logout}
                     <a
-                      className="btn btn-secondary"
                       data-toggle="collapse"
-                      href="#multiCollapseExample1"
+                      href="#collapseExample"
                       role="button"
                       aria-expanded="false"
-                      aria-controls="multiCollapseExample1"
+                      aria-controls="collapseExample"
+                      style={{ color: "#d0e6ff" }}
                     >
-                      <span className="nav-link-text mr-2">{buttonText}</span>
-                      {this.props.user && (
-                        <FontAwesomeIcon icon={faPlusCircle} />
-                      )}
+                      <FontAwesomeIcon
+                        icon={faPlusCircle}
+                        style={{
+                          marginBottom: "10px",
+                          fontSize: "20px"
+                        }}
+                      />
                     </a>
-                  </>
-                ) : (
-                  <p>Login please</p>
-                )}
-              </p>
-              {this.renderCreateField()}
-            </Link>
-          </li>
-          <div className="container mb-3">
-            <input
-              className="form-control rounded-pill border border-danger"
-              placeholder="Search for channels.."
-              onChange={e => this.handleSearch(e)}
-            ></input>
+                  </p>
+                  <div
+                    className="collapse border-bottom mb-2"
+                    id="collapseExample"
+                  >
+                    <input
+                      className="form-control mb-2 search  rounded-pill"
+                      type="text"
+                      onChange={e => this.handleTextChange(e)}
+                      value={this.state.channelName}
+                      placeholder="Add Channel"
+                    ></input>
+                    <button
+                      className="btn btn-success btn-block mb-2 rounded-pill"
+                      onClick={() => this.handleClick()}
+                    >
+                      Create
+                    </button>
+                  </div>
+                </div>
+
+                <div className="input-group">
+                  <input
+                    type="text"
+                    placeholder="Search for channels.."
+                    onChange={e => this.handleSearch(e)}
+                    className="form-control search rounded-pill"
+                  />
+                </div>
+              </div>
+              {!this.state.loading ? (
+                <div className="card-body contacts_body">
+                  <ul className="contacts">{channelLinks}</ul>
+                </div>
+              ) : (
+                <Loading />
+              )}
+            </div>
           </div>
-          {channelLinks}
-        </ul>
-        <ul className="navbar-nav sidenav-toggler">
-          <li className="nav-item">
-            <span
-              className="nav-link text-center"
-              id="sidenavToggler"
-              onClick={() =>
-                this.setState(prevState => ({
-                  collapsed: !prevState.collapsed
-                }))
-              }
-            >
-              <FontAwesomeIcon
-                icon={this.state.collapsed ? faAngleRight : faAngleLeft}
-              />
-            </span>
-          </li>
-        </ul>
+        </div>
       </div>
     );
   }
@@ -145,6 +194,7 @@ const mapStateToProps = state => ({
   user: state.user
 });
 const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
   createChannel: name => dispatch(createChannel(name))
 });
 export default connect(
