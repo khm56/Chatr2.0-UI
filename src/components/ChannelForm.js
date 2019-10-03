@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import * as actionCreators from "../redux/actions";
 import { connect } from "react-redux";
-
+import newchannelSound from "./newchannelSound.mp3"
 
 class ChannelForm extends Component {
     state = {
@@ -27,6 +27,8 @@ class ChannelForm extends Component {
     submitChannel = event => {
         event.preventDefault();
         this.props.postChannel(this.state, this.resetForm, this.props.history);
+        let sound = new Audio(newchannelSound);
+        sound.play();
     };
 
     render() {

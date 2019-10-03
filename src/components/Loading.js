@@ -6,7 +6,7 @@ class Loading extends Component {
     render() {
         return (
             <div className="container m-4 p-5">
-                <div className="spinner mx-auto text-center">
+                <div className="spinner mx-auto text-center ">
                     <FontAwesomeIcon icon={faSpinner} spin size="4x" />
                 </div>
             </div>

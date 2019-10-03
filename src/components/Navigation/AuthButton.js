@@ -13,12 +13,12 @@ import {
 const AuthButton = ({ user }) => {
   let buttons = [
     <li key="loginButton" className="nav-item">
-      <Link to="/login" className="nav-link">
+      <Link to="/login" className="nav-link nav">
         <FontAwesomeIcon icon={faSignInAlt} /> Login
       </Link>
-    </li>,
+    </li >,
     <li key="signupButton" className="nav-item">
-      <Link to="/signup" className="nav-link">
+      <Link to="/signup" className="nav-link nav">
         <FontAwesomeIcon icon={faUserPlus} /> Signup
       </Link>
     </li>

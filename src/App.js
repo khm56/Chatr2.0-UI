@@ -17,38 +17,20 @@ import ChannelForm from "./components/ChannelForm";
 import SendMessageForm from "./components/MessageForm";
 
 class App extends Component {
-  // state = {
-  //   channel: this.props.match.params.channelID,
-  //   changed: false
-  // }
 
   componentDidMount() {
     main();
     this.props.fetchChannels();
-    // this.props.fetchChannelDetail(this.props.match.params.channelID);
 
   }
-  // componentDidUpdate(prevProps) {
-  //   const channelID = this.props.match.params.channelID;
-  //   if (prevProps.match.params.channelID !== channelID) {
-  //     this.props.fetchChannelDetail(channelID);
-  //   }
-
-  // }
 
 
-
-  // componentDidUpdate(prevState) {
-  //   if (this.state.channel !== prevState.channel) {
-  //     this.setState({ changed: true, channel: this.state.channel })
-
-  //   }
-  // }
 
 
   render() {
     return (
-      <div >
+      // style={{ backgroundColor: "red"
+      <div className="uglydiv">
         <NavBar />
         <Switch>
           <Route path="/welcome" component={Welcome} />
@@ -60,7 +42,7 @@ class App extends Component {
 
           <Redirect to="/welcome" />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

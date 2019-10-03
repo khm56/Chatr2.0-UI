@@ -7,7 +7,8 @@ import {
 import Messages from "./Messages";
 import SearchChannelBar from "./SearchChannelBar"
 import "../assets/css/main.css";
-import AddMessage from "./AddMessage";
+import sendSound from "./sendSound.mp3"
+// import AddMessage from "./AddMessage";
 import Loading from "./Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -87,6 +88,9 @@ class SendMessageForm extends Component {
       this.props.user,
       this.resetForm
     );
+    let sound = new Audio(sendSound);
+    sound.play();
+
     this.setState({
       message: "",
     })
@@ -180,11 +184,17 @@ class SendMessageForm extends Component {
 
 backgroundImage: `url(${this.background})`
 }} */}
+
           <div style={{ textAlign: "center" }} className="mt-5 p-2">
             <form name="messageForm" onSubmit={this.submitHandler}>
               <div className="row" id="scroller">
-                <div className="col-12">
-                  <input
+                <div className="col-12"
+                >
+                  <input style={{
+                    borderColor: '#e30090',
+                    borderWidth: "0px",
+                    hight: "100px"
+                  }}
                     name="message"
                     value={this.state.message}
                     placeholder="Write your message..."

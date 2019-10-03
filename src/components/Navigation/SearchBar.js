@@ -9,18 +9,16 @@ import * as actionCreators from "../../redux/actions/";
 class SearchBar extends Component {
     render() {
         return (
-            <div className="form-group col-lg-6 col-12 mx-auto">
-                <div className="input-group my-3">
+            <div className="form-group rounded-pill border-2  " style={{ backgroundColor: '#e30090', border: "1px solid transparent" }}>
+                <div className="input-group my-2">
                     <input
-                        className="form-control"
+                        className="form-control ml-2 mr-2 rounded-pill"
                         type="text"
+                        placeholder=" 🔎 Find Channel..."
+
                         onChange={event => this.props.filterChannels(event.target.value)}
                     />
-                    <div className="input-group-append">
-                        <span className="input-group-text">
-                            <FontAwesomeIcon icon={faSearch} />
-                        </span>
-                    </div>
+
                 </div>
             </div>
         );

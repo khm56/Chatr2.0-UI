@@ -1,10 +1,48 @@
 html {
   position: relative;
   min-height: 100%;
+  background-color: transparent;
+  
+
+
 }
 
 body {
   overflow-x: hidden;
+  background-color: transparent;
+  background-image: url("WelcomeVideo.mp4");
+
+}
+
+#welcome{
+  color: white
+}
+#loginForm{
+  background: rgba(0, 0, 0, 0.466);
+  border-radius: 20px;
+  padding:20px;
+
+  
+position: relative;
+/* background-repeat: no-repeat;
+background-size: 800px 600px; */
+  top:50px
+}
+#root,
+.all {
+  background-color:transparent;
+  
+
+}
+
+#header {
+  background-color: #004985;
+  background-image: url("undraw_Group_chat_unwm.svg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom right;
+  background-size: 600px 500px;
+  height: 600px;
 }
 
 body.sticky-footer {
@@ -185,6 +223,7 @@ body.fixed-nav {
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
     padding: 1em;
   }
+
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
     padding-left: 0;
@@ -204,6 +243,7 @@ body.fixed-nav {
     > li {
     width: 250px;
   }
+
   #mainNav
     .navbar-collapse
     .navbar-sidenav
@@ -284,7 +324,9 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
-  background-color: #212529;
+  background-color: transparent; 
+
+  /* important anfal  */
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
@@ -339,7 +381,6 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 .content-wrapper {
   overflow-x: hidden;
-  background: white;
 }
 
 @media (min-width: 992px) {
@@ -402,7 +443,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   .navbar-sidenav
   > .nav-item
   > .nav-link:hover {
-  border-left: 3px solid #800c0c;
+  border-left: 3px solid #ff0080;
   color: #adb5bd;
 }
 
@@ -497,7 +538,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
     color: white !important;
-    background-color: #495057;
+    background-color: #49574b;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:focus,
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:hover {
@@ -683,7 +724,7 @@ footer.sticky-footer {
 
 .messages {
   border-radius: 25px;
-  background: #435f7a;
+  background: #ff009d;
   padding: 15px;
   width: 450px;
   height: auto;
@@ -693,7 +734,7 @@ footer.sticky-footer {
 }
 
 .container {
-  background: #e7edf3;
+  background: transparent;
 }
 
 .input {
@@ -726,12 +767,143 @@ footer.sticky-footer {
 }
 
 #send {
-  background: #435f7a;
+  background: #ff0080;
   padding: 7px 12px;
   position: relative;
-  left: 1070px;
-  bottom: 51px;
-  border-color: white;
+  left: 1040px;
+  bottom: 52px;
+  border-color: transparent;
+  border-radius: 3rem;
+
   color: white;
 }
 
+#text {
+  position: relative;
+  bottom: 90px;
+  color: white;
+  border-color: transparent;
+
+
+}
+
+#text2 {
+  position: relative;
+  bottom: 80px;
+  color: white;
+}
+
+#logout {
+  cursor: pointer;
+}
+
+#login {
+  background-color: #853b71;
+  border-color: wheat;
+  position: relative;
+  bottom: 100px;
+}
+#login:hover {
+  background-color: #b44195;
+}
+
+.create {
+  background-color: #473843;
+}
+
+#createbtn {
+  background-color: #853b71;
+  border-color: wheat;
+}
+
+#createbtn:hover {
+  background-color: #b44195;
+}
+
+#side {
+  position: relative;
+  bottom: 400px;
+  color: white;
+}
+
+#search {
+  position: relative;
+  top: 40px;
+}
+
+#sidecolor {
+  color: white;
+}
+
+#sidecolor:hover {
+  color: #e025ae;
+}
+
+#headerdiv {
+  background-color: transparent;
+}
+
+#loginbtn,
+#registerbtn {
+  background-color: #853b71;
+  border-color: wheat;
+}
+#loginbtn:hover,
+#registerbtn:hover {
+  background-color: #b44195;
+}
+
+
+.uglydiv{
+  background-color: transparent;
+  /* background-image: url("WelcomeVideo.mp4"); */
+
+}
+
+#head{
+  background-color: rgba(0, 0, 0, 0.658);
+
+  position: relative;
+  top:30px;
+  padding-bottom: 30px;
+}
+
+.reg{
+  text-align: center;
+  padding-top: 20px;
+}
+.textlog, #textlog{
+  color: white;
+  padding-bottom: 20px;
+  padding-left:20px;
+}
+#welcomelogin{
+  color: white;
+  width:300px;
+  font-weight: bold;
+  font-size: 18px;
+  background-color:rgb(245, 104, 209)
+}
+
+#welcomelogin:hover{
+  background-color:rgb(157, 73, 236)
+}
+
+#btnin{
+  border-radius: 50px;
+}
+#btnlog{
+  border-color:transparent;
+  border-radius: 50px;
+  background-color:rgb(245, 4, 185)
+}
+#btnlog:hover{
+  background-color:rgb(172, 27, 135)
+}
+.nav {
+  background-color: black;
+  color: white;
+}
+.nav:hover {
+  color:rgb(245, 104, 209)
+}

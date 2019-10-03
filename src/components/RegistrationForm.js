@@ -55,9 +55,9 @@ class RegistationForm extends Component {
 
 
     return (
-      <div className="card col-6 mx-auto p-0 mt-5">
+      <div id="loginForm" className="card col-6 mx-auto p-0 mt-5">
         <div className="card-body">
-          <h5 className="card-title mb-4">
+          <h5 className="card-title mb-4 textlog reg">
             Register an account
           </h5>
           <form onSubmit={this.submitHandler}>
@@ -74,6 +74,7 @@ class RegistationForm extends Component {
               <input
                 className="form-control"
                 type="text"
+                id="btnin"
                 placeholder="Username"
                 name="username"
                 onChange={this.changeHandler}
@@ -87,6 +88,7 @@ class RegistationForm extends Component {
               <input
                 className="form-control"
                 type="password"
+                id="btnin"
                 placeholder="Password"
                 name="password"
                 onChange={this.changeHandler}
@@ -96,8 +98,9 @@ class RegistationForm extends Component {
               {/* {this.handlePasswordError()} */}
             </div>
             <input
-              className="btn btn-primary"
+              className="btn btn-primary btn-block btn-rounded"
               type="submit"
+              id="btnlog"
               value={type.replace(/^\w/, c => c.toUpperCase())}
             />
           </form>
@@ -105,6 +108,7 @@ class RegistationForm extends Component {
         <div className="card-footer">
           <Link
             to="/login"
+            id="textlog"
             className="btn btn-small btn-link">
 
             Already have an account? Login

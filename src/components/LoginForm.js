@@ -34,9 +34,9 @@ class LoginForm extends Component {
         const errors = this.props.errors;
 
         return (
-            <div className="card col-6 mx-auto p-0 mt-5">
+            <div id="loginForm" className="card col-6 mx-auto p-0 mt-5  ">
                 <div className="card-body">
-                    <h5 className="card-title mb-4">
+                    <h5 className="card-title mb-4 textlog reg">
                         Login
           </h5>
                     <form onSubmit={this.submitHandler}>
@@ -53,6 +53,7 @@ class LoginForm extends Component {
                         <div className="form-group">
                             <input
                                 className="form-control"
+                                id="btnin"
                                 type="text"
                                 placeholder="Username"
                                 name="username"
@@ -63,6 +64,7 @@ class LoginForm extends Component {
                             <input
                                 className="form-control"
                                 type="password"
+                                id="btnin"
                                 placeholder="Password"
                                 name="password"
                                 onChange={this.changeHandler}
@@ -70,16 +72,19 @@ class LoginForm extends Component {
 
                         </div>
                         <input
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-block btn-rounded"
+                            id="btnlog"
                             type="submit"
                             value={type.replace(/^\w/, c => c.toUpperCase())}
                         />
                     </form>
                 </div>
-                <div className="card-footer">
+                <div>
                     <Link
                         to="/signup"
+                        id="textlog"
                         className="btn btn-small btn-link">
+
 
                         Create an account
                     </Link>
