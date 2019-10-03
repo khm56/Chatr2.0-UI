@@ -9,18 +9,22 @@ class SuperSecretPage extends Component {
     }
     if (!this.props.user) return <Redirect to="/login" />;
     return (
-      <div
-        style={{
-          backgroundImage: `url(
+      <div>
+        <div
+          style={{
+            backgroundImage: `url(
           "https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
         )`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: " cover",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-          minHeight: "600px"
-        }}
-      ></div>
+            backgroundRepeat: "no-repeat",
+            backgroundSize: " cover",
+            backgroundAttachment: "fixed",
+            backgroundPosition: "center",
+            minHeight: "600px"
+          }}
+        >
+          <p className="font2">Are You Ready To Chat?. . . </p>
+        </div>
+      </div>
     );
   }
 }

@@ -30,7 +30,7 @@ class RegistationForm extends Component {
           className="card-body bg-light text-dark"
           // style={{ borderRadius: "10px" }}
         >
-          <h5 className="card-title mb-4">
+          <h5 className="card-title mb-4 ">
             {type === "login"
               ? "Login to send messages"
               : "Register an account"}
@@ -71,7 +71,7 @@ class RegistationForm extends Component {
           </form>
         </div>
         {/* <p className="color">{this.props.errors ? this.props.errors : ""}</p> */}
-        <div className="bg-dark text-light ">
+        <div className="bg-ligh text-dark ">
           <Link
             to={type === "login" ? "/signup" : "/login"}
             className="btn btn-small btn-link "

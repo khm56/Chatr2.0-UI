@@ -758,3 +758,10 @@ footer.sticky-footer {
   font-family: Georgia, serif;
   margin-left: 5px;
 }
+.font2 {
+  font-family: Impact, fantasy;
+  color: white;
+  font-size: 60px;
+  padding-top: 150px;
+  padding-left: 120px;
+}

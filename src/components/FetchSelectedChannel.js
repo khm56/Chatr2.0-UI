@@ -3,6 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchSelectedChannel } from "../redux/actions";
 import AddMessages from "./AddMessages";
+import Loading from "./Navigation/Loading";
+
 class FetchSelectedChannel extends React.Component {
   state = { collapsed: false };
 
@@ -43,6 +45,9 @@ class FetchSelectedChannel extends React.Component {
     return "http://www.rangerwoodperiyar.com/images/joomlart/demo/default.jpg";
   }
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
     let image_url = this.FetchImage();
     // console.log(this.props.messages);
     console.log(image_url);
@@ -99,7 +104,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     channels: state.rootChannel.channels,
-    messages: state.rootMessages.messages
+    messages: state.rootMessages.messages,
+    loading: state.rootChannel.loading
   };
 };
 
