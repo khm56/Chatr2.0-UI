@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import icon from "./iconC.png"
 
 // import main from "../assets/js/main";
 
@@ -18,10 +19,13 @@ class Welcome extends Component {
             <header id="head" className="masthead  d-flex"
             >
               <div id="head" className="container text-center  text-dark my-auto z-1">
-                <h1 id="welcome" className="m-5 animated infinite bounceOut slower delay-2s">WELCOME TO CHATR</h1>
+                <img src={icon} className="m-5 animated infinite zoomInDown slower delay-1s"
+                  style={{ height: "200px" }}
+
+                ></img>
 
                 <h3 className="mb-5">
-                  <em id="welcome"  >Login to see the messages</em>
+                  <p id="welcome"  >Login to see the messages</p>
                 </h3>
                 <Link id="welcomelogin" to="/login" className="btn rounded-pill">
                   Login
