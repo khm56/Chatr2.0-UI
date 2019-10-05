@@ -1,5 +1,7 @@
 import { SET_CHANNELS, SET_MESSAGES, SET_MESSAGE } from "./actionTypes";
 import axios from "axios";
+
+//This function is defined somewhere else to fetch all channels, dont understand why its defined here again
 export const getMessages = channel => {
   return async dispatch => {
     try {
@@ -15,6 +17,9 @@ export const getMessages = channel => {
     }
   };
 };
+
+//You dont need a function to fetch all messages and a function to fetch them with a timestamp
+//You can use the timestamp api and not send a timestamp, it will get you all messages
 export const fetchMessages = (id, loadingFn, scrollFn) => {
   return async dispatch => {
     try {
@@ -78,6 +83,7 @@ export const sendMessage = (id, msg, username) => {
   };
 };
 
+// This could have been done in the reducer or anywhere else in your project, you don't have to fetch again its redundant
 export const CheckMessagesTS = (id, oldLength) => {
   return async dispatch => {
     try {

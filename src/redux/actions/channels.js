@@ -1,5 +1,6 @@
 import { SET_CHANNELS, SET_ERRORS, CREATE_CHANNEL } from "./actionTypes";
 import axios from "axios";
+
 export const getChannels = () => {
   return async dispatch => {
     try {

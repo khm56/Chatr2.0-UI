@@ -5,6 +5,8 @@ import { SET_CURRENT_USER, SET_ERRORS, SET_CHANNELS } from "./actionTypes";
 import { getChannels } from "./channels";
 import { setErrors } from "./errors";
 
+//Clean code practitces dont import or define something you wont use
+
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
@@ -74,12 +76,15 @@ export const signup = (userData, history) => {
 };
 
 export const logout = () => setCurrentUser();
+
 const setCurrentUser = token => {
   let user;
   if (token) {
     localStorage.setItem("token", token);
     axios.defaults.headers.common.Authorization = `jwt ${token}`;
     user = jwt_decode(token);
+
+    // my suggestion would be fetching channels should be called here so you'd be sure that axios headers are set
   } else {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;

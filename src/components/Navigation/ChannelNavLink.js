@@ -1,3 +1,5 @@
+// If a file/component is not used anymore, please delete it
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 

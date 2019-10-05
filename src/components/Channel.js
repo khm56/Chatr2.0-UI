@@ -166,7 +166,7 @@ class Channel extends Component {
   handleSearchMSG(e) {
     this.setState({ query: e.target.value });
   }
-
+  // Clean code but this component is doing way too much
   render() {
     let isThereAnID;
     if (!this.props.user) return <Redirect to="/login" />;

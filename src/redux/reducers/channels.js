@@ -22,6 +22,7 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
       };
     case SET_MESSAGES:
       let channelz = state.channels.map(chan => {
+        //why are you checking if chan exists in a map it only goes over objects in the array that do exist
         if (chan) {
           if (chan.id == channelID) {
             chan.messages = payload;
@@ -29,6 +30,7 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
           } else return chan;
         }
       });
+      //Delete your console.logs when you're done debugging
       console.log(state.visited);
       return {
         ...state,
@@ -36,6 +38,7 @@ const reducer = (state = initialState, { type, payload, channelID }) => {
         visited: [...state.visited, channelID]
       };
     case SET_MESSAGE:
+      // as mentioned in the actions earlier you could have done both fetching with and without a timestamp with one action
       let channelz2 = state.channels.map(chan => {
         if (chan) {
           if (chan.id == channelID) {

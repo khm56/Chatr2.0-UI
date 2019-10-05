@@ -12,5 +12,8 @@ const store = createStore(
 
 //After defining the store use the following code to call checkForExpiredToken
 store.dispatch(checkForExpiredToken());
+
+//Review
+//Fetching channels here would sometimes show you that you're unauthorized because the headers wont be set yet
 store.dispatch(getChannels());
 export default store;
