@@ -19,6 +19,7 @@ class ChannelMsg extends Component {
   componentDidUpdate(prevProps) {
     let channelID = this.props.match.params.channelID;
     if (channelID !== prevProps.match.params.channelID) {
+      //Clearing the interval and setting a new one should happen here not in the else
       this.props.setLoading();
       this.props.fetchMessages(channelID);
     } else {

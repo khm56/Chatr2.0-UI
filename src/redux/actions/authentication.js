@@ -5,6 +5,7 @@ import { SET_CURRENT_USER } from "./actionTypes";
 
 import { setErrors } from "./errors";
 
+//Delete any thing u are not using
 const instance = axios.create({
   baseURL: "https://api-chatr.herokuapp.com/"
 });
@@ -15,6 +16,7 @@ const setCurrentUser = token => {
     localStorage.setItem("token", token);
     axios.defaults.headers.common.Authorization = `jwt ${token}`;
     user = jwt_decode(token);
+    //Fetching channels should happen here
   } else {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;
