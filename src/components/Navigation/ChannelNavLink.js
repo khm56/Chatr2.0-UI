@@ -32,6 +32,7 @@ class ChannelNavLink extends Component {
       }
     };
     return (
+      //Delete any code that is unused
       <>
         {/* <li
           className="nav-item"
