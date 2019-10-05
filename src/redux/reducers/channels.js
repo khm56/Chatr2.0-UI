@@ -27,6 +27,8 @@ const reducer = (state = initialState, action) => {
           id: action.payload.id
         };
       }
+
+      //This last return will never run for clean code you should delete anything that is redundant
       return {
         ...state,
         channel: action.payload

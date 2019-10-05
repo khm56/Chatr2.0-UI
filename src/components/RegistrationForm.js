@@ -25,6 +25,9 @@ class RegistationForm extends Component {
     if (this.props.user) return <Redirect to="/channels/" />;
     const type = this.props.match.url.substring(1);
     const errors = this.props.errors;
+
+    //For clean code purposes delete any code you are not using
+
     // console.log("Broken things " + errors);
 
     // errors = {
