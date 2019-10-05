@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../redux/actions";
-
+// For clean code Delete anything that is defined but never used
 import { css } from "glamor";
 import ScrollToBottom from "react-scroll-to-bottom";
 
@@ -26,7 +26,7 @@ let channelImage;
 let tempMsgs = [];
 class MessagesList extends Component {
   state = { message: "", temp: [] };
-
+  // Remove your console logs after you finish debugging
   componentDidMount() {
     const channel = this.props.match.params.ChannelID;
     this.props.makeDraft(channel);

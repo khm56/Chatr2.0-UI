@@ -27,6 +27,7 @@ const setAuthToken = token => {
   if (token) {
     localStorage.setItem("token", token);
     axios.defaults.headers.common.Authorization = `jwt ${token}`;
+    //Fetching channels should happen here
   } else {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;

@@ -14,6 +14,7 @@ import SuperSecretPage from "./components/SuperSecretPage";
 import MessagesList from "./components/MessagesList";
 import { connect } from "react-redux";
 
+// If interested ask me for a better solution to this project, your data structure made it more confusing for you
 class App extends Component {
   componentDidMount() {
     main();
