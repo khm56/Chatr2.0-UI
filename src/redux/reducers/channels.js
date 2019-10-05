@@ -14,6 +14,7 @@ const initialState = {
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_CHANNELS:
+      //You dont need to store it in a variable
       const newChannel = payload;
       return {
         ...state,

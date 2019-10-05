@@ -6,6 +6,8 @@ import { fetchChannels } from "./channels";
 // import { fetchSelectedChannel } from "./channels";
 import { setErrors } from "./errors";
 
+// Please delete any unused code practice of clean code
+
 // const instance = axios.create({
 //   baseURL: "https://api-chatr.herokuapp.com/"
 // });

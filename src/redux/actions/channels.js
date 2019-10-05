@@ -6,6 +6,7 @@ import {
 } from "./actionTypes";
 import axios from "axios";
 import { setErrors } from "./errors";
+
 export const fetchChannels = () => {
   return async dispatch => {
     // console.log(“hello”);

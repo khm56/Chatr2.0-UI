@@ -16,6 +16,7 @@ class FetchSelectedChannel extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.match.params.channelID != prevProps.match.params.channelID)
+      //Clear and setInterval should happen in this part of the condition when the ID Changes
       this.props.fetchSelectedChannel(this.props.match.params.channelID);
     else {
       clearInterval(this.interval);
